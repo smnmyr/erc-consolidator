@@ -137,9 +137,17 @@ organizational server infrastructure (ISPs, employers) that already
 existed for other reasons, not on a VC growth story. ActivityPub/Mastodon
 shows the same pattern more recently: imperfect, but federated social
 infrastructure can exist without financialization if hosting economics
-stay manageable. Solid's **"last mile" problem** is that it lacks email's
-free ride — most people don't run their own mail servers, but Solid pods
-still need someone with an independent reason to host them.
+stay manageable. Wikipedia is a related but distinct case: it stayed open
+by never adopting an ad-funded, engagement-maximizing business model in
+the first place — non-commercial, ad-free, funded by donations rather
+than advertising, so its content isn't shaped by the same
+click-optimizing incentives as most of what people see online. It's a
+useful limit case for the stakeholder analysis below: an information
+commons that avoided the platform trap through funding model rather than
+through protocol architecture. Solid's **"last mile" problem** is that it
+lacks email's free ride — most people don't run their own mail servers,
+but Solid pods still need someone with an independent reason to host
+them.
 
 Six mechanisms for keeping Solid on the open-protocol path, relevant to
 where this proposal's "islands" could plausibly sit institutionally:
@@ -272,3 +280,45 @@ Each has different incentives around coordination cost, control over
 identity/addressing, and monetization of persistent references; the
 proposal should articulate which of these the "islands" are meant to
 serve, and why the trade-off favors them specifically.
+
+## Team: how it fits together
+
+**Luka Bekavac** is a team member, and his existing publication record
+with Mayer supplies the empirical/regulatory counterpart to the
+architectural argument above — evidence for how platform control over
+information actually manifests, rather than treating it as a purely
+theoretical concern:
+
+- Bekavac, Garcia, Strecker, Mayer, Tamo-Larrieux, *From Walls to
+  Windows: Creating Transparency to Understand Filter Bubbles in Social
+  Media* (CEUR-WS Vol. 3898, Oct 2024) — measures how platform
+  algorithms narrow the information people are exposed to. Direct
+  empirical grounding for the "social media platform" and "hyperscaler"
+  stakeholder cases above.
+- Bekavac, Mayer, *Auditing Meta and TikTok Research API Data Access
+  under Article 40(12) of the Digital Services Act* (arXiv:2601.12390,
+  Jan 2026) — tests whether regulator-mandated data-access APIs actually
+  let researchers audit platform behavior. The DSA-era, empirical
+  version of the RFC 9518 argument above: a legal requirement for
+  openness does not by itself prevent practical centralization of
+  control.
+- Strecker, Bekavac, Bektaş, Mayer, *Change Your Perspective, Widen Your
+  Worldview! Societally Beneficial Perceptual Filter Bubbles in
+  Personalized Reality* (arXiv:2504.10271, Apr 2025) — proposes
+  deliberately engineered, disclosed filter bubbles, which resonates
+  with this proposal's "islands" framing: a smaller, explicitly bounded
+  information space with known trade-offs, chosen rather than imposed.
+- Bekavac, Mayer, Strecker, *QR-Code Integrity by Design* (CHI EA 2024)
+  — integrity/provenance guarantees for a physical-to-digital reference
+  mechanism; a narrow but concrete precedent for the kind of
+  addressable, tamper-evident referencing this proposal wants at Web
+  scale.
+
+Team fit: Bekavac's line of work supplies the empirical/regulatory half
+of the argument (how platform control over information actually plays
+out, and where mandated openness does or doesn't fix it); the
+Xanadu/Solid/RFC 9518 material above supplies the architectural half
+(what a system could look like if it didn't have to route around those
+incentives). The stakeholder analysis above should draw on this existing
+empirical work rather than treating platform incentives as purely
+theoretical.
