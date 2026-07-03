@@ -204,6 +204,58 @@ question above: a Xanadu-like "islands" architecture faces the identical
 choice between public-institutional hosting and commercial
 platformization, and should state upfront which path it assumes.
 
+## RFC 9518: a framework for the centralization risk
+
+Mark Nottingham, *Centralization, Decentralization, and Internet
+Standards*, RFC 9518 (IETF, September 2023),
+<https://datatracker.ietf.org/doc/draft-nottingham-avoiding-internet-centralization/14/>.
+Directly relevant to the "platform trap" discussion above and to the
+stakeholder analysis below: it is the standards-track articulation of
+the same problem — what a protocol's technical design can and cannot
+do to keep power distributed once the protocol succeeds.
+
+Its core move is to define the terms precisely rather than treat
+"decentralized" as a self-evident virtue:
+
+- **Centralization** is "the state in which a single entity or a small
+  group of entities can observe, capture, control, or extract rent
+  from the operation or use of an Internet function exclusively."
+- **Decentralization** is necessary but not sufficient to prevent this
+  — a function can be nominally decentralized (open protocol, many
+  implementers) while still centralizing in practice through market
+  dynamics. This is exactly the Solid/Inrupt and XMPP/Google Talk
+  pattern described above: an open spec did not stop the practical
+  capture.
+
+RFC 9518 attributes centralization mostly to forces standards cannot
+reach directly — economies of scale, network effects, switching costs,
+and the purely voluntary nature of standards adoption — which means a
+Xanadu-leaning "islands" design faces the same limits Solid does: the
+protocol can make centralization *harder*, not prevent it. Where it
+gives more direct traction is its list of design-level mitigations,
+which map onto this proposal's own six mechanisms above:
+
+- Standardizing functions that would otherwise stay proprietary (→
+  parallels keeping the Community Solid Server, mechanism 3, healthy
+  as a genuinely open reference implementation).
+- Designing explicitly for switching between providers/implementations
+  (→ parallels resisting ACP winning by default, mechanism 4, since a
+  simpler access-control model is also a lower switching-cost one).
+- Constraining intermediary power through protocol design and
+  layer boundaries, rather than assuming goodwill (→ parallels
+  separating commons from services, mechanism 6).
+- Reusing proven decentralization mechanisms instead of inventing new
+  coordination points (→ an argument for building the "islands" idea
+  on Git/CDN primitives, as in the "why now" section above, rather
+  than a bespoke registry).
+
+For the proposal, RFC 9518 is useful less as a source of new mitigations
+and more as an independent, standards-body-level confirmation that
+"open protocol" and "resistant to centralization" are different
+properties — reinforcing that the stakeholder analysis below needs to
+ask, for each actor, whether the islands architecture changes their
+*incentive* to centralize, not just whether the spec is open.
+
 ## Open questions / stakeholder analysis (to develop further)
 
 Whether a Xanadu-like system helps or hurts depends heavily on which
