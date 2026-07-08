@@ -1,0 +1,511 @@
+Timestamp:  2026-07-08T07:06:13.510354+00:00
+Subject:    [consolidator]
+========================================================================
+REQUEST BODY
+------------------------------------------------------------------------
+Fold this into the proposal. It outlines interesting paths towards the
+hybrid system that I am thinking of.
+
+
+
+Format: 3 exams (one per student), each with one **Easy** (recall/explain),
+one **Medium** (analyze/evaluate), and one **Hard** (analyze/evaluate)
+question. Each exam draws one question from each of the three topic areas
+(Hypermedia & REST APIs / History of Hypertext & the Web / Distributed
+Protocols, Eventing & Modern AI Integration), so every student is examined
+across the full breadth of the Systems part, and the three questions
+within each exam are ordered to form a deliberate narrative arc (not just
+an Easy→Medium→Hard difficulty ramp). All questions are grounded in the
+"Advanced Systems Engineering" part of `ASSE_Exam_HS25.pdf` (Section 2,
+Tasks 2.1–2.14), the primary source, and in the point-value oral-exam
+style used previously (`2022-02-15-OralExam-IoannisKatis.pptx`,
+`2023-01-27-OralExam-SandroGoessi.pptx`).
+
+--------------------------------------------------------------------------
+EXAM A — "From Today's Web to Tomorrow's Agents"
+--------------------------------------------------------------------------
+Narrative arc: present-day REST/hypermedia design → the historical road
+not taken (Xanadu) → how those same ideas resurface at the cutting edge of
+LLM/agent integration. The student builds up a vocabulary (HATEOAS,
+addressable/stable references) in the first two questions that they must
+then redeploy to evaluate a modern AI-systems design problem.
+
+## A.1 [Easy — 100 points] — Hypermedia & REST APIs
+
+In the lecture, you encountered **HATEOAS** (Hypermedia as the Engine of
+Application State). Explain what HATEOAS means and why it is considered
+part of REST's *uniform interface* constraint.
+
+### Reference Solution
+
+- **Definition:** HATEOAS means that a client interacts with an application
+  purely through hypermedia (links, forms/affordances) that the server
+  supplies dynamically inside each representation, rather than through
+  prior, out-of-band knowledge of a fixed URI scheme.
+- **Why it belongs to the uniform interface:** The uniform interface
+  constraint requires (among other sub-constraints) that resources be
+  manipulated through representations, that messages be self-descriptive,
+  and that application state transitions be driven by hypermedia contained
+  in those representations (HATEOAS). Together these sub-constraints ensure
+  a client only needs a generic understanding of the media type and link
+  semantics — not of the server's specific URI structure.
+- **Consequence:** Servers can change URIs, workflows, or add new states
+  without breaking clients, because clients follow links/affordances at
+  runtime instead of hard-coding paths. This is what enables independent
+  evolvability of client and server.
+- Award full points for: correct definition + explicit link to uniform
+  interface / self-descriptive messages + at least one consequence
+  (decoupling / evolvability).
+
+--------------------------------------------------------------------------
+
+## A.2 [Medium — 200 points] — History of Hypertext & the Web (Xanadu)
+
+"Immutable versioning and addressable spans give transclusion referential
+guarantees that the Web cannot natively provide."
+
+a) Explain how addressable spans and immutability jointly enable stable,
+verifiable references. b) Explain why the WWW's architecture leads to
+"link rot" and content drift. c) Give one concrete real-world example of
+link rot or content drift, and explain what a Xanadu-style addressing
+scheme would have prevented in that example.
+
+### Reference Solution
+
+a) **Addressable spans + immutability:** transclusion requires that
+*specific portions* of a document (byte spans), not just whole documents,
+be addressable, so that precise fragments can be reused/cited. Immutable
+versioning guarantees that once a version of a document is created, it
+never changes — so a reference to a given span of a given version remains
+stable and verifiable forever; content integrity can be checked because
+the referenced bytes cannot silently change under the reference.
+
+b) **Why the Web is unstable:** the WWW addresses resources by *location*
+(URLs) rather than by content or fixed version, and resources are
+mutable — the same URL can be edited, replaced, or removed at any time.
+There is also no native mechanism for stable *fragment* identifiers tied
+to immutable versions. This causes "link rot" (URLs stop resolving) and
+"content drift" (the URL still resolves, but to different content than
+what was originally referenced).
+
+c) **Example:** a citation in an academic paper or news article links to
+a web page that is later edited (the argument being cited is changed or
+removed) or taken offline entirely (404). A Xanadu-style scheme —
+addressing an immutable version and byte span rather than a mutable
+location — would have kept the exact cited content permanently
+retrievable and unchanged, regardless of what happens to the "current"
+page at that location.
+
+- Grading: 2 pts each for (a) and (b) if clearly explained and connected
+  to transclusion/integrity respectively (partial credit for
+  vague/incomplete answers); 2 pts for a concrete, well-connected example
+  in (c).
+
+--------------------------------------------------------------------------
+
+## A.3 [Hard — 400 points] — Distributed Protocols, Eventing & Modern AI
+Integration
+
+Your team runs a SaaS with 80+ REST endpoints, already documented via an
+OpenAPI specification. Management proposes letting LLM agents use the API
+directly by ingesting the full OpenAPI spec as one large tool list, rather
+than building a Model Context Protocol (MCP) layer.
+
+a) Explain two reasons this is problematic for LLM clients.
+
+b) Describe two concrete features an MCP layer could add to mitigate
+these problems, and give a recommendation — (i) MCP layer, (ii) OpenAPI
+only, or (iii) hybrid — with justification.
+
+c) Now connect this back to the hard-coding and stable-reference ideas
+from earlier in the exam: is an MCP tool list just a new form of
+"hard-coding" for LLM agents, analogous to a CRUD-over-HTTP client being
+hard-coded against fixed endpoints? What would a more hypermedia-like
+(HATEOAS-style) MCP design look like, and what would it change?
+
+### Reference Solution
+
+a) **Problems with raw OpenAPI for LLM agents:**
+- With 80+ endpoints, the agent faces a "paradox of choice" and context-
+  window/overflow problems — too many tool definitions to reliably reason
+  about or fit in context.
+- The agent cannot reliably infer the *correct* tool/endpoint for a given
+  task from a flat, low-level spec; there is no runtime discovery
+  mechanism, and OpenAPI provides no shared workflow context across
+  multi-step tasks (each endpoint is described in isolation).
+
+b) **MCP features:**
+- A curated set of higher-level *capabilities/tools* instead of raw
+  endpoints (reducing choice overload and aligning with the task
+  granularity an LLM reasons about).
+- Dynamic tool discovery at runtime (e.g., `list_tools`), and a protocol
+  designed to carry context/state and LLM-friendly semantics across a
+  multi-step interaction, rather than one-shot, stateless calls.
+  **Recommendation:** a **hybrid** approach — keep the OpenAPI spec for
+  human developers and conventional client tooling, while adding an MCP
+  gateway that exposes a curated, agent-friendly capability layer. This
+  gives easier agent reasoning and safer capability exposure (the gateway
+  can restrict/shape what agents can do) while allowing incremental
+  adoption without rewriting the existing API.
+
+c) **Connecting back to hard-coding and stable references:** Yes — in its
+basic form, an MCP tool list is itself a fixed, enumerated set of
+"actions" that the LLM agent must be given (in its context/system prompt)
+ahead of time, which is structurally analogous to a CRUD-over-HTTP client
+being hard-coded against a fixed set of endpoints/methods: the *level of
+abstraction* is higher (curated tools vs. raw HTTP endpoints), but the
+*coupling pattern* is the same — the agent has no way to discover what it
+can do next except from a static, out-of-band list, much like a Web
+client without HATEOAS.
+A more **hypermedia-like MCP design** would make available tools/resources
+*state-dependent and dynamically discoverable*: e.g., after invoking one
+tool, the response would expose only the next *valid* tools/actions
+(analogous to HATEOAS affordances appearing/disappearing based on
+resource state), annotated with semantics akin to link relations (why
+this tool is relevant now) and interpreted via a shared "media type"-like
+schema for tool descriptions. This would let the agent's available action
+space evolve with server-side state and business rules, mirroring the
+same *decoupling and evolvability* benefits semantic hypermedia APIs
+provide over CRUD-over-HTTP APIs — instead of needing to be re-configured
+with a new static tool list whenever the underlying API changes.
+
+- Grading: 1 pt each for two valid problems in (a), 1 pt each for two
+  valid MCP features in (b), 1 pt for a well-justified recommendation in
+  (b), up to 3 pts in (c) for correctly identifying the hard-coding
+  analogy and 2 pts for a coherent description of a more hypermedia-
+  style/state-dependent MCP design (state-dependent availability +
+  semantic annotation + shared schema/media-type analogue).
+
+--------------------------------------------------------------------------
+EXAM B — "From Xanadu's Vision to Modern API Craftsmanship"
+--------------------------------------------------------------------------
+Narrative arc: start from the historical alternative to the Web
+(transclusion) → descend into the modern transport-layer trade-offs that
+shape how today's distributed systems actually move data (gRPC/HTTP
+ordering) → finish with a deep, integrative dive into present-day
+hypermedia API design, the discipline that grew out of the very
+tensions between "Web-like" and "Xanadu-like" thinking raised in the
+first question.
+
+## B.1 [Easy — 100 points] — History of Hypertext & the Web (Xanadu)
+
+Ted Nelson's Xanadu envisioned **transclusion** as a core mechanism for
+reusing content. Explain what transclusion is and how it fundamentally
+differs from the World Wide Web's default hyperlinking model.
+
+### Reference Solution
+
+- **Transclusion:** including or reusing a specific, precisely addressable
+  *span* of a source document by reference inside another document, such
+  that the content appears "physically" included while remaining owned,
+  attributed, and version-locked to the original (with potential
+  royalty/attribution mechanisms in Nelson's original vision).
+- **WWW hyperlinking:** a hyperlink merely *points to a location* (a URI)
+  which is dereferenced to whatever content currently resides there. There
+  is no guarantee that a specific span is stably addressed, no automatic
+  inclusion/rendering of the referenced content in place, and no built-in
+  attribution or versioning mechanism.
+- **Key contrast:** transclusion = stable, span-level reuse with
+  provenance; Web hyperlinking = a mutable, whole-document, location-based
+  pointer with no reuse guarantee.
+- Full credit requires explicitly contrasting *span-level, persistent
+  reference* (transclusion) against *location-based, mutable pointer*
+  (Web link).
+
+--------------------------------------------------------------------------
+
+## B.2 [Medium — 200 points] — Distributed Protocols, Eventing & Modern AI
+Integration
+
+"gRPC is faster than HTTP!"
+
+a) Critically evaluate this statement. b) In the lecture we also discussed
+FIFO ordering guarantees in HTTP/1.1. Give one example scenario where
+enforced FIFO ordering *helps*, and one where it *hurts*. c) Explain what
+happens to FIFO ordering in HTTP/2 (which gRPC uses) and who becomes
+responsible for handling ordering issues that result from dropping it.
+
+### Reference Solution
+
+a) **Critique:** the statement is imprecise. gRPC *runs on top of* HTTP/2
+— it is not an alternative to HTTP, but a specific way of using it (binary
+framing/multiplexing) combined with Protocol Buffers for compact, typed
+serialization. Its typical speed advantage over "classic" REST/JSON-over-
+HTTP/1.1 APIs comes from HTTP/2 features (multiplexed streams, header
+compression, binary framing) and compact binary payloads, not from being
+"not HTTP." Whether it is actually faster depends on workload (RPC-style
+calls vs. cacheable resource retrieval), payload size, and whether
+streaming is used; for cacheable, coarse-grained resource access, plain
+HTTP with caching can outperform gRPC's point-to-point calls.
+
+b) **FIFO helps:** a sequence of dependent requests that must be applied
+in order, e.g., `PATCH` requests updating the same order record — later
+edits must be applied after earlier ones, or the final state is wrong.
+**FIFO hurts:** independent, unrelated requests (e.g., loading several
+images on a page) get needlessly serialized behind a single slow earlier
+request — head-of-line blocking — even though there is no logical
+dependency between them.
+
+c) **HTTP/2 and gRPC:** HTTP/2 introduces multiplexed streams over a
+single connection, so responses (and by extension gRPC calls) may
+complete out of the order they were sent — strict FIFO ordering is no
+longer guaranteed by the protocol. Advantage: independent requests are no
+longer blocked behind each other (mitigating head-of-line blocking at the
+HTTP layer). Responsibility for correct ordering, where it matters (as in
+the dependent-PATCH example), now shifts to the **application/client (and
+possibly server) layer** — e.g., via sequence numbers, idempotency keys,
+versioning (optimistic concurrency), or explicit application-level
+coordination — since the transport no longer guarantees it.
+
+- Grading: 2 pts for a correctly nuanced critique in (a) (full marks
+  require noting gRPC uses HTTP/2, not "not-HTTP"), 1.5 pts each for valid
+  FIFO helps/hurts examples in (b), 3 pts for (c) (1 pt ordering is
+  dropped/multiplexing, 1 pt resulting advantage, 1 pt correctly naming
+  where responsibility shifts).
+
+--------------------------------------------------------------------------
+
+## B.3 [Hard — 400 points] — Hypermedia & REST APIs
+
+You are given a semantic hypermedia API for hotel bookings. A generic
+client's goal is to **cancel a reservation** that is still inside its free
+cancellation window.
+
+a) Using the four aspects discussed in the lecture — **HTTP idioms,
+HATEOAS, link relations, and media types** — explain how the client
+achieves this goal without any prior out-of-band knowledge of the API.
+
+b) Now critically evaluate: what happens if the representation is plain
+JSON with no affordance/control vocabulary (no link relations)? Discuss
+the resulting coupling, and relate it to the CRUD-over-HTTP hard-coding
+problem.
+
+### Reference Solution
+
+a) **How the four aspects work together:**
+- *Media type* — tells the client *what the resource is about* and how
+  to parse affordances/controls out of the representation (e.g., a
+  hypermedia-aware media type such as Siren, HAL-FORMS, or Hydra defines
+  how "actions"/links are structurally encoded).
+- *HATEOAS* — the reservation's representation includes a "cancel"
+  affordance/link **only while cancellation is still free**; the server
+  encodes the business rule (the cancellation window) as the
+  presence/absence of that link, so the client never needs to evaluate
+  the rule itself — it only needs to check whether the affordance exists.
+- *Link relations* — give the *semantic reason* to follow that
+  particular link/affordance (e.g., a `cancel` relation), letting the
+  client recognize its purpose without knowing the target URI in advance.
+- *HTTP idioms* — once the client decides to follow the "cancel"
+  affordance, it must invoke it correctly per HTTP semantics (e.g., an
+  idempotent `DELETE`, correct use of status codes for success/conflict).
+- **Together:** the client parses the representation using the media
+  type, looks for a link/control with "cancel" semantics (link relation),
+  whose very presence already reflects the current, correct application
+  state (HATEOAS), and executes it using proper HTTP idioms.
+
+b) **Without link relations/affordances (plain JSON):** the client can
+no longer discover *whether* and *how* to cancel at runtime. It must be
+hard-coded with: the URI/endpoint for cancellation, the business rule
+for the cancellation window (re-implemented client-side), and the
+expected request/response shape. This re-creates exactly the
+CRUD-over-HTTP hard-coding problem: clients are coupled to URIs, methods,
+and a bespoke representation format instead of a shared, evolvable
+semantic vocabulary. Any change to the cancellation policy or endpoint
+now requires coordinated client updates, and clients risk taking invalid
+actions (e.g., attempting a cancellation the server would reject) because
+the state-dependent affordance is no longer communicated by the server.
+
+- Grading: 1 pt per aspect in (a) correctly explained and applied to the
+  scenario (4 pts), 2 pts for correctly identifying the resulting tight
+  coupling in (b), 2 pts for explicitly relating it back to
+  CRUD-over-HTTP hard-coding (URIs/methods/representation format).
+
+--------------------------------------------------------------------------
+EXAM C — "From Protocol to Principle to Big Picture"
+--------------------------------------------------------------------------
+Narrative arc: zoom out in three steps — start from one concrete, modern
+Web protocol (WebSub) → generalize to the architectural design principle
+it embodies (loose coupling / hard-coding in hypermedia vs. CRUD APIs) →
+finish by zooming all the way out to the historical and societal question
+of what kind of Web we could have had (Xanadu) and what that means for
+different stakeholders today.
+
+## C.1 [Easy — 100 points] — Distributed Protocols, Eventing & Modern AI
+Integration
+
+WebSub enables near-real-time distribution of updates on the Web. Name the
+participants of a WebSub interaction and describe the sequence of
+requests exchanged between them.
+
+### Reference Solution
+
+- **Participants:** subscriber, publisher, hub.
+- **Interaction sequence:**
+  1. Subscriber discovers the publisher's hub (e.g., via a `rel="hub"`
+     link advertised by the publisher).
+  2. Subscriber sends a subscription request (`POST`) to the hub.
+  3. Hub verifies the subscription intent via a `GET` back to the
+     subscriber.
+  4. Publisher notifies the hub when new content is available.
+  5. Hub fans out the update by `POST`-ing the content to the subscriber.
+- Full credit requires naming all three participants and correctly
+  describing the discovery + subscribe + verify + notify + fan-out
+  sequence (dynamic hub discovery via links is a key detail).
+
+--------------------------------------------------------------------------
+
+## C.2 [Medium — 200 points] — Hypermedia & REST APIs
+
+An e-commerce company runs a CRUD-over-HTTP API with endpoints such as
+`POST /addToCart` and `GET /getOrder`. Clients are hard-coded against these
+paths, the HTTP methods used, and the API's specific JSON representation
+format. The company is considering redesigning the API as a **semantic
+hypermedia API**.
+
+Contrast what clients are "hard-coded" against in each of the two designs,
+and discuss **one advantage** and **one disadvantage** of moving to the
+hypermedia design.
+
+### Reference Solution
+
+- **CRUD-over-HTTP API:** clients are hard-coded against application-layer
+  specifics: the concrete URIs (`/addToCart`), the HTTP methods/response
+  codes used for each action, and the API-specific representation format
+  (the exact JSON fields and their meaning agreed upon out-of-band).
+- **Semantic hypermedia API:** clients are instead "hard-coded" against a
+  shared vocabulary of **link relations** and a **media type's** control/
+  affordance model (e.g., which link relation means "add to cart", how
+  forms/affordances are structured) — not against specific URIs or a
+  bespoke JSON schema. The client follows links/affordances discovered at
+  runtime (HATEOAS) rather than assembling URIs itself.
+- **Advantage:** Loose coupling / evolvability — the server can change
+  URIs, add steps to the checkout workflow, or restructure the API without
+  breaking clients, as long as the shared vocabulary and media type stay
+  stable.
+- **Disadvantage:** Increased client complexity and runtime cost — the
+  client must understand and process the semantic vocabulary and follow
+  links step-by-step (multiple round trips to discover the next
+  action), which adds latency and requires more sophisticated client
+  logic; tooling/ecosystem support is also less mature than for
+  plain CRUD/JSON clients.
+- Grading: 0.5–1 pt for correct CRUD-over-HTTP hard-coding aspects, 0.5–1
+  pt for correct hypermedia hard-coding aspects, up to 1 pt for a valid,
+  well-explained advantage, up to 1 pt for a valid, well-explained
+  disadvantage.
+
+--------------------------------------------------------------------------
+
+## C.3 [Hard — 400 points] — History of Hypertext & the Web (Xanadu)
+
+Non-functional requirements for global information systems have shifted
+significantly since the early 1990s.
+
+a) Name **two** non-functional requirements that changed, and explain how
+these shifts alter the architectural trade-off between the WWW's linking
+model and a Xanadu-style linking model.
+
+b) Evaluate whether contemporary technology unavailable in the 1990s
+(e.g., content-addressed storage / IPFS, distributed version control,
+decentralized identity systems) would make a Xanadu-style Web more
+*viable* today than it was in 1990 — give at least one concrete
+mechanism-level argument.
+
+c) Now pick **one** stakeholder role from the PITAS exercises (Hyperscaler,
+Legacy Industry Company, OSS/Privacy Activist, Browser Manufacturer,
+Social Media Platform) and evaluate, with justification, whether a
+Xanadu-like system would serve that stakeholder's goals better, worse, or
+differently compared to today's WWW — including how the loose-coupling
+and hard-coding trade-offs discussed earlier in this exam would play out
+for that stakeholder at Web scale.
+
+### Reference Solution
+
+a) **Example shifted NFRs** (any two, with explanation):
+- *Persistence, integrity, and accountability* — today's Web carries
+  legally and societally consequential information (contracts, medical
+  records, evidence), which 1990s hypertext research did not anticipate
+  at scale.
+- *Intellectual property and monetization* — today there is strong
+  emphasis on copyright enforcement and content monetization/micropayments,
+  which Xanadu originally tried to solve architecturally (built-in
+  royalty tracking via transclusion).
+- *Scalability and performance* — the Web must now operate as a
+  planetary-scale, real-time information system serving billions of
+  users, far beyond 1990s traffic assumptions.
+  **Trade-off implication:** the WWW's original design favored
+  simplicity, decentralization, and low coordination overhead (no global
+  link registration or back-link consistency required), which enabled
+  explosive adoption but sacrificed stable references, built-in
+  versioning, and native bidirectional linking. As requirements shifted
+  toward durability, verifiability, and accountability, the case for
+  Xanadu-style guarantees (persistent citation, traceable reuse, integrity)
+  becomes architecturally more attractive, at the cost of the
+  coordination overhead the Web originally avoided.
+
+b) **Contemporary technology, e.g.:**
+- *Content-addressed storage (e.g., IPFS, Git objects):* natively
+  supports immutable, hash-addressed content and fine-grained versioning,
+  directly alleviating the technical barrier that made stable,
+  content-addressed transclusion impractical in 1990 (no such storage
+  model existed at scale).
+- *Distributed version control:* provides immutable commits, full
+  history, and decentralized replication without central coordination —
+  addressing Xanadu's requirement for immutable versioning without
+  requiring a single global authority (which was a major deployment
+  obstacle in Nelson's original design).
+- *Decentralized identity:* could support the persistent, verifiable
+  authorship/ownership guarantees Xanadu envisioned, without a central
+  registry.
+  A good answer explains the *mechanism* (not just "this helps") and
+  connects it back to a specific Xanadu barrier (global coordination,
+  immutability, span addressing).
+
+c) **Stakeholder evaluation (example — Social Media Platform):** a
+Xanadu-like system with mandatory transclusion/attribution and immutable
+versioning would *hurt* a Social Media Platform's typical goals: platforms
+benefit from controlling and monetizing attention within a walled garden,
+from being able to remove/moderate content unilaterally, and from
+ambiguity around content reuse/attribution (which supports current ad-
+and engagement-driven business models). Mandatory attribution and stable
+external reuse would reduce lock-in and complicate content moderation and
+monetization — note this is the mirror image of the loose-coupling
+argument from the earlier CRUD-vs-hypermedia question: here, tighter,
+stable, semantically explicit *content* coupling (Xanadu-style) reduces
+the platform's freedom to unilaterally evolve/restrict access, just as
+tight client coupling reduces a server's freedom to evolve its API.
+*(Any stakeholder is acceptable if the reasoning is internally consistent
+and tied to that role's actual incentives, e.g., an OSS/Privacy Activist
+would likely evaluate Xanadu's properties as *better* aligned with their
+goals of provenance, decentralization, and user control.)*
+
+- Grading: 1.5 pts per NFR example with clear trade-off linkage (3 pts),
+  up to 3 pts for two well-argued technology-mechanism examples in (b) with
+  partial credit for direction-only answers, up to 4 pts for a coherent,
+  well-justified stakeholder evaluation in (c) (both "better" and "worse"
+  verdicts can score full marks if the reasoning is sound and tied to the
+  chosen role's actual incentives).
+
+--------------------------------------------------------------------------
+Coverage check
+--------------------------------------------------------------------------
+| Exam | Easy (100pt)              | Medium (200pt)            | Hard
+(400pt)               |
+|------|---------------------------|----------------------------|-----------------------------|
+| A    | Hypermedia & REST (A.1)   | History/Xanadu (A.2)       | Protocols
+& AI (A.3)       |
+| B    | History/Xanadu (B.1)      | Protocols & AI (B.2)       |
+Hypermedia & REST (B.3)    |
+| C    | Protocols & AI (C.1)      | Hypermedia & REST (C.2)    |
+History/Xanadu (C.3)       |
+
+Each topic appears exactly once per exam and exactly once per difficulty
+level across the three exams.
+
+
+========================================================================
+AGENT OUTPUT (stdout)
+------------------------------------------------------------------------
+Added a new section to the proposal notes distilling the exam material's core insight — that raw OpenAPI/static MCP tool lists for LLM agents repeat the same hard-coding problem as CRUD-over-HTTP clients, and a HATEOAS-style MCP layer (plus WebSub's link-driven discovery as precedent, and a caution from the gRPC/HTTP-2 ordering trade-off) points at the hybrid architecture for agent-facing capability exposure.
+
+COMMIT_MESSAGE: Add section on hybrid agent/hypermedia system to proposal
+

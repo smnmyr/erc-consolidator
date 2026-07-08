@@ -78,6 +78,67 @@ not available in the 1980s/1990s:
   already-deployed example of this category, worth treating as a case
   study rather than just a candidate technology.
 
+## The hybrid system: agents as a new hypermedia client class
+
+The Web-vs-Xanadu hard-coding argument above (stable, addressable
+references vs. mutable, location-based pointers) turns out to have a
+direct, present-day analogue in how LLM agents are wired up to APIs — and
+it points at the concrete "hybrid" architecture worth prototyping for
+this proposal: not just a hybrid of Web- and Xanadu-style addressing, but
+a hybrid where the agent-facing layer inherits HATEOAS's dynamic-
+discovery property instead of repeating the CRUD-over-HTTP hard-coding
+mistake one level up.
+
+- **The same hard-coding problem, one abstraction level up.** A CRUD-over-
+  HTTP client is hard-coded against fixed URIs, methods, and a bespoke
+  JSON schema; a semantic hypermedia client instead follows links/
+  affordances that a server exposes dynamically, conditioned on current
+  state (HATEOAS), interpreted via link relations and a shared media
+  type. Handing an LLM agent a full OpenAPI spec (or a static MCP tool
+  list) as one large, out-of-band catalogue is structurally the same
+  hard-coding move: the agent has no way to discover what it can do next
+  except from a static list baked into its context, regardless of
+  whether the underlying business state actually permits that action.
+- **What a HATEOAS-style MCP layer would change.** Instead of a fixed
+  tool catalogue, tool/resource availability would be state-dependent and
+  discovered at runtime — after invoking one tool, the response would
+  expose only the next *valid* actions, annotated with link-relation-like
+  semantics (why this tool is relevant now) and interpreted through a
+  shared, media-type-like schema for tool descriptions. This gives agents
+  the same decoupling and evolvability benefits hypermedia APIs give human
+  -facing clients, instead of requiring a new static tool list every time
+  the underlying API changes.
+- **Recommended shape: hybrid, not replacement.** Keep the existing
+  OpenAPI surface for human developers and conventional tooling, and add
+  a curated, dynamically-discoverable MCP gateway on top for agents — the
+  gateway both reduces the "paradox of choice" a flat 80+-endpoint spec
+  creates for an LLM and lets the server shape/restrict what an agent can
+  do based on state, mirroring how a hypermedia API's affordances encode
+  business rules (e.g., a "cancel" link only appears while cancellation is
+  still free) instead of requiring the client to re-implement the rule.
+- **WebSub as an existing precedent for this kind of runtime discovery.**
+  WebSub's subscriber/publisher/hub model already demonstrates the
+  pattern at the protocol level: a subscriber discovers a publisher's hub
+  dynamically via an advertised `rel="hub"` link rather than a
+  pre-configured endpoint, then the hub handles verification and fan-out.
+  It is a working example of loosely-coupled, link-driven eventing that
+  the agent-facing MCP layer above would need to generalize from simple
+  content updates to arbitrary state-dependent tool discovery.
+- **A caution from the transport layer.** The gRPC/HTTP-2 ordering
+  discussion is a reminder that "hybrid" is not automatically better:
+  HTTP/2's multiplexing drops HTTP/1.1's FIFO guarantee to avoid head-of-
+  line blocking, but this shifts responsibility for correct ordering
+  (where it matters, e.g., dependent state-changing calls) to the
+  application layer. A HATEOAS-style MCP layer buys discoverability and
+  evolvability, but it does not remove the need to design explicitly for
+  ordering/consistency in whatever transport carries agent-tool calls.
+
+Framed this way, the "islands" architecture this proposal targets is not
+only about how *documents* are addressed (Xanadu-style spans vs. Web
+URLs), but about how *capabilities* are exposed to an increasingly
+important new class of client — autonomous agents — and the same
+loose-coupling argument applies to both.
+
 ## Solid as a relevant precedent
 
 [Solid](https://solidproject.org) (Social Linked Data) is Tim
