@@ -33,7 +33,84 @@ Together these give guarantees the Web cannot offer natively: stable
 references, provenance, and traceable reuse, at the cost of requiring
 global coordination and infrastructure the early Web could not assume.
 
-## Why the trade-off is worth revisiting now
+## Motivation: why the trade-off is worth revisiting now
+
+The WWW's original design favored simplicity, decentralization, and low
+coordination overhead, which enabled explosive adoption but sacrificed
+stable references, built-in versioning, and native bidirectional linking.
+As requirements shifted toward durability, verifiability, and
+accountability, the case for Xanadu-style guarantees (persistent
+citation, traceable reuse, integrity) becomes architecturally more
+attractive, at the cost of the coordination overhead the Web originally
+avoided.
+
+That shift is no longer hypothetical — it is visible, right now, as a
+series of very public failures of the Web's own linking model, and the
+legal system is where the failures land hardest, because law is the
+field where a reference's stability *is* the substance of the claim it
+supports. Four 2025/2026 developments make the case concretely:
+
+- **Link rot has become a documented failure mode of legal citation
+  itself.** More than 50% of URLs cited in U.S. Supreme Court opinions,
+  and over 70% of URLs in Harvard Law Review and similar journals, no
+  longer resolve to the material they cite — not a hypothetical risk but
+  a measured, ongoing erosion of the record courts and scholars build
+  precedent on. The profession's response, Harvard's Perma.cc archiving
+  service, is exactly the coordination overhead the Web avoided in 1991,
+  now being reconstructed by hand, one citation at a time, because the
+  underlying architecture never gave references a stable identity to
+  begin with.
+- **The AI-hallucinated-citation crisis of 2025/2026 is link rot's more
+  aggressive successor: citations that were never real, and no
+  architectural way to check.** By early 2026, researchers had documented
+  over 1,300 court filings containing fabricated case citations generated
+  by AI tools, roughly 500 of them submitted by licensed attorneys.
+  Sanctions have escalated sharply — from around $5,000 in 2023 to
+  $55,000+ by 2025 — and in March 2026 the Sixth Circuit sanctioned two
+  Tennessee attorneys in *Whiting v. City of Athens* over two dozen fake
+  or misrepresented citations across three appeals; a month later, the
+  Nebraska Supreme Court suspended an Omaha attorney after 57 of 63
+  citations in a single brief turned out to be defective. Courts have held
+  attorneys to a non-delegable duty to verify every citation regardless of
+  source. A citation architecture with Xanadu-style persistent,
+  verifiable transclusion — where a reference either resolves to the
+  exact cited passage of an existing, immutable document or fails
+  visibly — makes an entire category of these filings structurally
+  impossible, rather than relying on individual verification discipline
+  under professional-conduct rules.
+- **Content-provenance standards are being bolted onto hardware and law
+  because the Web has no native integrity guarantee.** With deepfake
+  volume reportedly up roughly 900% between 2023 and 2025, camera makers
+  (Sony, Canon, Nikon, Leica, Samsung) now sign images with hardware-rooted
+  keys under the C2PA standard, and the EU AI Act's provenance-disclosure
+  obligations take effect in August 2026 alongside a proposed U.S. federal
+  rule of evidence (FRE 707) governing AI-generated evidence. This is,
+  functionally, an attempt to retrofit Xanadu's integrity and provenance
+  guarantees onto Web-distributed media after the fact, at the hardware
+  and statutory layers, precisely because the transport layer never
+  provided them.
+- **Copyright and AI-training litigation is a dispute about traceable
+  reuse at civilizational scale.** *The New York Times v. OpenAI* (surviving
+  motions to dismiss since March 2025, with a November 2025 order
+  compelling production of 20 million de-identified ChatGPT logs) is one
+  of over fifty active AI-copyright suits as of late 2025, and all of them
+  turn on the same unanswered architectural question: which sources were
+  actually consumed, in what form, and with what attribution trail. That
+  question is only this expensive to litigate because nothing in the
+  original reuse — scraping Web pages — carried a persistent, traceable
+  reference back to its source; discovery is reconstructing after the
+  fact what fine-grained transclusion would have recorded natively.
+
+Across all four cases, the pattern is the same: the coordination cost the
+Web avoided in the 1990s has not disappeared, it has been deferred and
+re-billed — to archivists maintaining Perma.cc by hand, to bar
+disciplinary committees, to hardware manufacturers and legislators
+drafting provenance mandates, and to courts running years-long discovery
+disputes. A system that designs stable references, integrity, and
+traceable reuse in from the start, even only within smaller
+tightly-coordinated "islands," is a bet that paying some of that cost
+architecturally, upfront, is cheaper than continuing to pay it downstream,
+per incident, through litigation and disciplinary process.
 
 Non-functional requirements for global information systems have shifted
 substantially since the early 1990s:
