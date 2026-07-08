@@ -1,0 +1,14 @@
+Timestamp:  2026-07-08T20:19:19.690072+00:00
+Subject:    [consolidator]
+========================================================================
+REQUEST BODY
+------------------------------------------------------------------------
+Update the nottingham note with this:
+https://datatracker.ietf.org/doc/rfc9518/
+
+
+========================================================================
+AGENT OUTPUT (stdout)
+------------------------------------------------------------------------
+COMMIT_MESSAGE: Point Nottingham RFC 9518 note to published RFC URL
+

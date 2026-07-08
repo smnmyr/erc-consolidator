@@ -354,7 +354,7 @@ platformization, and should state upfront which path it assumes.
 
 Mark Nottingham, *Centralization, Decentralization, and Internet
 Standards*, RFC 9518 (IETF, September 2023),
-<https://datatracker.ietf.org/doc/draft-nottingham-avoiding-internet-centralization/14/>.
+<https://datatracker.ietf.org/doc/rfc9518/>.
 Directly relevant to the "platform trap" discussion above and to the
 stakeholder analysis below: it is the standards-track articulation of
 the same problem — what a protocol's technical design can and cannot
