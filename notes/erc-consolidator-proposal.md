@@ -62,17 +62,21 @@ supports. Four 2025/2026 developments make the case concretely:
   begin with.
 - **The AI-hallucinated-citation crisis of 2025/2026 is link rot's more
   aggressive successor: citations that were never real, and no
-  architectural way to check.** By early 2026, researchers had documented
-  over 1,300 court filings containing fabricated case citations generated
-  by AI tools, roughly 500 of them submitted by licensed attorneys.
-  Sanctions have escalated sharply — from around $5,000 in 2023 to
-  $55,000+ by 2025 — and in March 2026 the Sixth Circuit sanctioned two
-  Tennessee attorneys in *Whiting v. City of Athens* over two dozen fake
-  or misrepresented citations across three appeals; a month later, the
-  Nebraska Supreme Court suspended an Omaha attorney after 57 of 63
-  citations in a single brief turned out to be defective. Courts have held
-  attorneys to a non-delegable duty to verify every citation regardless of
-  source. A citation architecture with Xanadu-style persistent,
+  architectural way to check.** By early 2026, Charlotin's AI Hallucination
+  Cases database had documented over 1,200 court decisions worldwide in
+  which fabricated AI-generated material was submitted to courts — up from
+  roughly 200 a year earlier, and rising to ~1,490 by May 2026 (more than
+  1,000 of them in the US) — a substantial share submitted by licensed
+  attorneys. Sanctions have escalated sharply — from a $5,000 fine in 2023
+  to five-figure per-attorney penalties — and in March 2026 the Sixth
+  Circuit sanctioned two Tennessee attorneys in *Whiting v. City of
+  Athens* over two dozen fake or misrepresented citations in appellate
+  briefing ($15,000 each in punitive sanctions plus opponents' fees and
+  double costs, the stiffest penalty available under Rule 38); a month
+  later, the Nebraska Supreme Court suspended an Omaha attorney after 57
+  of 63 citations in a single brief turned out to be defective. Courts
+  have held attorneys to a non-delegable duty to verify every citation
+  regardless of source. A citation architecture with Xanadu-style persistent,
   verifiable transclusion — where a reference either resolves to the
   exact cited passage of an existing, immutable document or fails
   visibly — makes an entire category of these filings structurally
@@ -80,11 +84,14 @@ supports. Four 2025/2026 developments make the case concretely:
   under professional-conduct rules.
 - **Content-provenance standards are being bolted onto hardware and law
   because the Web has no native integrity guarantee.** With deepfake
-  volume reportedly up roughly 900% between 2023 and 2025, camera makers
-  (Sony, Canon, Nikon, Leica, Samsung) now sign images with hardware-rooted
-  keys under the C2PA standard, and the EU AI Act's provenance-disclosure
-  obligations take effect in August 2026 alongside a proposed U.S. federal
-  rule of evidence (FRE 707) governing AI-generated evidence. This is,
+  volume growing at a reported ~900% annually (an estimated 500,000
+  shared in 2023, ~8 million in 2025), camera makers now sign images
+  with hardware-rooted keys under the C2PA standard (Sony, Nikon, and
+  Leica ship C2PA-enabled models; Canon is rolling them out), and the EU
+  AI Act's Article 50 transparency/provenance obligations apply from
+  August 2026 alongside a proposed U.S. federal rule of evidence
+  (FRE 707) governing AI-generated evidence (public comment closed
+  February 2026; effective December 2027 at the earliest). This is,
   functionally, an attempt to retrofit Xanadu's integrity and provenance
   guarantees onto Web-distributed media after the fact, at the hardware
   and statutory layers, precisely because the transport layer never
@@ -253,6 +260,95 @@ for high-stakes use) and could plausibly be complementary: Solid-style
 pods as the trust/control boundary, Xanadu-style addressing/versioning
 as the reference layer within or across pods.
 
+## The cybersecurity angle: confidentiality-preserving islands
+
+The sections above frame the islands mostly around *durability* guarantees
+— persistence, integrity, provenance, traceable reuse. There is a second,
+orthogonal guarantee an island can offer that the open Web structurally
+cannot: **confidentiality of the data behind a reference, even while the
+reference is shared and computed over.** This turns out to be the property
+that decides whether high-stakes actors will actually put data into a
+tightly-coordinated island at all, and two pieces of our own group's work
+show it is buildable today, not just desirable.
+
+**The confidentiality–transparency conundrum.** In any island that spans
+more than one organization, two requirements pull against each other: the
+island only has value if members can *reference and reuse* each other's
+data (transparency, traceable reuse — the whole point of the Xanadu-style
+reference layer), but members will not *expose* that data because it
+carries competitive value (confidentiality). On the open Web this is a
+hard either/or — you publish a resource or you don't. The interesting
+claim is that inside a coordinated island the trade-off dissolves: modern
+cryptography lets a reference resolve to a *verifiable computation over*
+data that its holder never discloses. The reference layer stops being
+"pointer to bytes you can read" and becomes "pointer to a value you can
+verify was correctly derived from bytes you are not allowed to read."
+
+**A concrete, already-built instance (Grau, MSc thesis, 2025; Grau,
+Maftun, Garcia & Mayer, Solid Symposium 2026).** The group's PEP-LCA work
+implements exactly this for cross-supply-chain Life Cycle Assessment — a
+high-stakes setting where every firm's emissions data is both legally
+demanded (Scope 3 reporting) and commercially sensitive (it leaks
+production volumes, supplier relationships, margins). The design is a
+clean template for the islands architecture:
+
+- **Solid pods as the confidentiality boundary.** Each organization keeps
+  its data in its own pod as the single source of truth and never ships
+  raw values; this is the same "pod as trust/control boundary" point from
+  the Solid section above, made cryptographically load-bearing rather than
+  just access-controlled.
+- **Secure Multi-Party Computation (SMPC) as the reference-resolution
+  mechanism.** Using replicated / Shamir secret sharing under a
+  (2,3)-threshold scheme, computation servers jointly evaluate the LCA
+  result over secret-shared inputs; no single server ever reconstructs any
+  participant's data. One firm's directly-controlled (Scope 1) emissions
+  become "just a link away" from being the input to another firm's
+  footprint — traceable reuse without disclosure. Notably it scales:
+  the thesis reports calculations over ~20,000 participants in the time
+  prior methods needed for ~15, and runs to 50,000-participant networks.
+- **Security enforced at the data-access layer, not only in the compute
+  protocol.** Because share *generation* happens inside the pod and
+  Solid's access control then discloses each share to a different
+  computation server (Server A sees only Share 1, etc.), the core SMPC
+  guarantee is anchored at the reference/access layer itself — precisely
+  the layer this proposal is redesigning.
+- **WASM-sandboxed transformation plugins** (WebAssembly Component Model)
+  let each pod expose data through a narrow, host-controlled `fetch`
+  interface: a plugin can transform and retrieve *authorized* resources
+  and nothing more. This is the same capability-confinement idea as the
+  agent/HATEOAS-MCP section above — the host shapes and bounds what a
+  visiting piece of code can reach — now applied to code that runs against
+  the confidential reference layer.
+
+**Integrity without disclosure ties back to the legal motivation.** The
+thesis is explicit that its current honest-but-curious, (2,3)-threshold
+model is a floor, not a ceiling: extending to malicious adversaries via
+**verifiable secret sharing** and **zero-knowledge proofs** would let a
+participant *prove a referenced value was correctly derived* without
+revealing the source data. That is the confidentiality-preserving analogue
+of Xanadu's traceable transclusion, and it closes a gap the Motivation
+section left open — the C2PA / AI-provenance / AI-training-litigation
+cases all want integrity and traceable reuse, but several of them
+(trade-secret-laden training corpora, sealed evidence, competitive supply
+data) *also* require that the source not be openly readable. An island
+whose reference layer offers "verifiable but not disclosed" serves the
+high-stakes cases the plain-persistence framing cannot.
+
+**This sharpens the stakeholder analysis rather than sidestepping it.**
+The choice of threat model is itself a stakeholder question: honest-but-
+curious is adequate for a cooperative consortium but not for mutually
+distrustful competitors or a regulator-facing deployment, where malicious-
+secure protocols (with their added cost) become necessary. The proposal
+should state, per island and per actor, which adversary model it assumes —
+the security guarantee, like the coordination cost, is something an island
+chooses deliberately rather than inherits. Two further limitations from
+the thesis are worth carrying forward honestly: strong availability
+coupling (the protocol currently needs all N participants live, a real
+operational fragility at island scale) and the residual trust that inputs
+are *honest* (addressed only partially, via verifiable-computation
+extensions) — both are open problems the islands design inherits, not
+ones it has solved.
+
 ## Scaling Solid without hyperfinancialization
 
 A concrete risk case study for the proposal's stakeholder-incentive
@@ -402,6 +498,109 @@ properties — reinforcing that the stakeholder analysis below needs to
 ask, for each actor, whether the islands architecture changes their
 *incentive* to centralize, not just whether the spec is open.
 
+## Nanopublications: a deployed precedent for statement-level islands
+
+Source: `sources/ISWC_2026_paper_75.pdf` — *A Robust Decentralized
+Infrastructure for Trust-Aware Open Knowledge Sharing* (anonymized ISWC
+2026 submission; the Knowledge Pixels / nanopublications line of work).
+
+The paper presents a second-generation nanopublication ecosystem:
+knowledge shared as small, **immutable, uniquely identified,
+cryptographically signed RDF records** (nanopublications) whose
+identifiers are **Trusty URIs** — content-derived hashes embedded in the
+URI so every reference and retrieval is self-verifying. Architecture:
+federated **Nanopub Registries** (ingest/validate/replicate, sharded by
+signing key and by declared type) and **Nanopub Query** services
+(SPARQL/REST over materialized per-agent and per-type repositories),
+with clients like Nanodash on top. Evaluation: type-sharded replication
+roughly doubles cluster ingestion capacity and halves query latency vs.
+full replication (~6,900 queries/s at ~2.3 ms across a corpus growing to
+400k nanopubs / ~13M triples); a live deployed network exists.
+
+Two contributions matter most for this proposal:
+
+- **IDEBT trust algorithm** — seed-rooted, decay-bounded, deterministic
+  trust propagation over signed, *retractable* identity-to-key bindings
+  and endorsements (themselves nanopublications). Sybil-resistant by
+  ratio conservation; the resulting trust state is itself a
+  content-addressable artifact any peer can mirror and re-verify. This
+  fills a dimension the islands architecture had not yet named: **trust
+  and reputation *within and between* islands, computed without a
+  central operator** — a "chosen guarantee" alongside persistence,
+  integrity, and confidentiality.
+- **A sustainability model that answers RFC 9518 economically**: open
+  Registries serve the long tail under IDEBT-bounded quotas; heavy
+  institutional/commercial publishers must run or commission their own
+  coverage-restricted nodes, paying for their own capacity. Same
+  codebase serves open community nodes and self-funded private nodes —
+  a concrete mechanism for the "commons vs. services" separation
+  (mechanism 6 above) and a direct input to the funding-model analysis.
+
+Positioning for the proposal: nanopublications are a *working,
+deployed* island-like infrastructure at the granularity of individual
+semantic statements — immutability, content addressing, per-statement
+provenance, decentralized trust. What they do not provide is exactly
+what the islands architecture adds: span-level addressing over
+arbitrary (non-RDF) content, transclusion semantics, confidentiality-
+preserving resolution (SMPC), agent-facing affordance discovery, and
+the guarantee-vs-coordination-cost theory. Treat the ecosystem as a
+candidate substrate/component for the reference layer (WP2) and the
+trust layer, and cite it in prior work; the Trusty URI mechanism is the
+statement-level analogue of the span-level identifiers the proposal
+needs.
+
+## Further motivation facets (from sources/Idea.txt)
+
+- **AI as full intermediary — "controlling the front door."** The Web's
+  access pattern is shifting massively: from Read→Navigate→Read to
+  Ask→Response. AI companies increasingly control the front door to the
+  Web's content. This is a *new centralization vector* (RFC 9518's
+  vocabulary: intermediation) that neither the Web's original threat
+  model nor Solid's addresses — and it strengthens the agent-layer
+  argument: if agents are becoming the dominant client class, then the
+  architecture that exposes content and capabilities to them decides
+  who holds the front door. Islands with native agent affordances are a
+  counterweight: the island, not the intermediary, shapes what agents
+  can see and do.
+- **The archival/context problem of the AI era.** Even if old models
+  are archived, their *training context* is not: the Web they consumed
+  is unversioned and has since drifted. A Xanadu-style versioned Web
+  would have made "what did the model see?" answerable by
+  construction. This is a fifth motivation case (alongside the four
+  legal ones): reproducibility and auditability of AI systems require
+  versioned reference infrastructure that did not matter in 1990.
+- **From user-centric to societally-centric Web (UCD → SCD).** The PI's
+  research-statement argument that user-centered design misses negative
+  societal externalities scales up to Web architecture: the islands
+  proposal is architecture-level SCD — explicitly bounded information
+  spaces with *chosen*, disclosed guarantees rather than
+  platform-optimized defaults.
+- **Facets to keep visible** in the proposal narrative: (i)
+  architecture, (ii) cybersecurity & transclusion, (iii) geopolitical
+  ramifications (EU↔US: who operates reference infrastructure is a
+  sovereignty question — connects to Gaia-X/data-spaces context and to
+  the EU-regulatory motivation).
+- **Foundations to draw on**: Web architecture; economics/network
+  effects; psychology of deferral (the Web's cost-deferral pattern as a
+  behavioral, not just technical, phenomenon); VLOP empirics (Bekavac);
+  Habermas' *New Structural Transformation of the Public Sphere*
+  (platform-mediated publics) as the social-theory frame for what an
+  "island" is.
+- **Practice signal for the agent layer**: Eclipse LMOS builds on W3C
+  WoT Thing Descriptions — industrial uptake of the exact
+  affordance-description substrate WP4 extends. Interoperability theory
+  thread (Terry Payne, HyperAgents 2025): alignment aggregation /
+  repair / negotiation.
+- **Pointer**: "Hypernext" SSRN paper
+  (https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5735624) — to
+  read; possibly related work on Web successor architectures.
+- Note: Idea.txt also sketches a *different* project idea (global
+  interoperability: AI–AI, AI–human, animal–animal, with
+  neuroscience/psychology integration). Out of scope for this proposal
+  except where it already overlaps (cognitive interoperability →
+  signifier exposure across agent architectures, WP4); keep as a
+  separate candidate idea.
+
 ## Open questions / stakeholder analysis (to develop further)
 
 Whether a Xanadu-like system helps or hurts depends heavily on which
@@ -421,6 +620,27 @@ serve, and why the trade-off favors them specifically.
 
 ## Team: how it fits together
 
+**PI (Mayer)** — the EPFL application package (in `sources/`) documents
+the two lines the proposal converges: (1) the machine-usable-Web line —
+PhD at ETH (2014) on interacting with the Web of Things, contributions
+underlying the W3C WoT Thing Description standards (deployed in
+industrial products, e.g., Siemens Desigo), hypermedia multi-agent
+systems (AAMAS 2019), signifiers as first-class abstractions and
+run-time action-repertoire adaptation (AAMAS 2023/2024), founding
+member of the W3C Web Agents CG; (2) the law/technology co-design
+line — automatically processable regulation (AI & Law journal,
+2022–2025), the Routledge book *AI and Law* (2025), *Nature
+Computational Science* (2025), member of the European VLOP-auditing
+oversight board (only computer scientist), board member of UniSG's
+Research Center for Information Law. Running projects that dock onto
+the proposal: Innosuisse Flagship WISER (2022–2026; LCA/climate —
+supply-chain island), SNSF CoCoDa (2025–2029; VLOP regulation with
+Lausanne, Maastricht, and the ODI — which is also Solid's steward),
+SNSF/Innosuisse Access to Justice (2026–2030, with Caritas). Dean of
+UniSG CS until Feb 2026, stepping down to refocus on research —
+supports the ERC ≥40% commitment. Note: EPFL faculty application
+pending (Oct 2025) — host-institution decision affects the proposal.
+
 **Luka Bekavac** is a team member, and his existing publication record
 with Mayer supplies the empirical/regulatory counterpart to the
 architectural argument above — evidence for how platform control over
@@ -435,8 +655,12 @@ theoretical concern:
   stakeholder cases above.
 - Bekavac, Mayer, *Auditing Meta and TikTok Research API Data Access
   under Article 40(12) of the Digital Services Act* (arXiv:2601.12390,
-  Jan 2026) — tests whether regulator-mandated data-access APIs actually
-  let researchers audit platform behavior. The DSA-era, empirical
+  Jan 2026; peer-reviewed version: *Platforms' Research API Data Access:
+  What Users See vs. What Researchers can Retrieve*, ACM FAccT 2026) —
+  tests whether regulator-mandated data-access APIs actually
+  let researchers audit platform behavior. Findings: researchers can
+  retrieve only ~75% of TikTok For-You posts and ~50% of Instagram
+  Explore posts, with only 17%/42% of metadata parameters surviving. The DSA-era, empirical
   version of the RFC 9518 argument above: a legal requirement for
   openness does not by itself prevent practical centralization of
   control.
@@ -452,11 +676,101 @@ theoretical concern:
   addressable, tamper-evident referencing this proposal wants at Web
   scale.
 
+**Jan Grau** supplies the cryptographic-systems half — a working prototype
+of the confidentiality-preserving reference layer described above, not
+just a design. His MSc thesis and the follow-on Solid Symposium paper are
+the direct evidence that "verifiable but not disclosed" islands are
+buildable:
+
+- Grau, *Towards Decentralized Privacy-Enhancing Life Cycle Assessment*
+  (MSc thesis, University of St. Gallen, June 2025; supervised by Mayer &
+  Garcia, with Katerina Mitrokotsa and Nan Cheng on the cryptography) —
+  the PEP-LCA protocol: decentralized SMPC over replicated secret sharing,
+  a two-layer participation/computation architecture with no trusted third
+  party, scaling to 50,000-participant supply chains. The concrete
+  instance of an island whose reference layer resolves to verifiable
+  computation over undisclosed data.
+- Grau, Maftun, Garcia, Mayer, *Solid and Secure Multi-Party Computation
+  for a Circular Economy* (Solid Symposium 2026) — the same idea wired to
+  Solid pods and WASM Component-Model plugins, with per-server share
+  disclosure enforced at Solid's access-control layer. Demonstrates the
+  pod-as-cryptographic-boundary and capability-confined-plugin patterns
+  the cybersecurity section builds on.
+
+The presence of Mitrokotsa (cryptography/security) and Cheng (SMPC) on
+this line of work is also what makes the malicious-adversary, verifiable-
+secret-sharing, and zero-knowledge extensions flagged above credible as
+proposal deliverables rather than aspirations.
+
 Team fit: Bekavac's line of work supplies the empirical/regulatory half
 of the argument (how platform control over information actually plays
-out, and where mandated openness does or doesn't fix it); the
-Xanadu/Solid/RFC 9518 material above supplies the architectural half
-(what a system could look like if it didn't have to route around those
-incentives). The stakeholder analysis above should draw on this existing
-empirical work rather than treating platform incentives as purely
-theoretical.
+out, and where mandated openness does or doesn't fix it); Grau's supplies
+the cryptographic-systems half (a built, benchmarked confidentiality-
+preserving reference layer); and the Xanadu/Solid/RFC 9518 material above
+supplies the architectural half (what a system could look like if it
+didn't have to route around those incentives). The stakeholder analysis
+above should draw on this existing empirical and prototype work rather
+than treating platform incentives — or the confidentiality guarantees the
+islands can offer — as purely theoretical.
+
+## ERC application intelligence (from sources: SwissNCP webinar 13.10.2025, Indiveri euresearch talk, Idea.txt)
+
+Source inventory: `20251013_ERC Webinar_SwissNCP.pdf` (official CoG
+info session, Marilena Plesu, ERC), `Giacomo Indiveri_euresearch25.pdf`
+(NeuroAgents CoG-winner retrospective), `Idea.txt` (Mayer's distilled
+notes from both + own idea fragments), `The-Solid-Problem.txt` (source
+of the "Scaling Solid without hyperfinancialization" section above).
+
+**Administrative facts to build on:**
+
+- **PhD defense date counts: September 12, 2014. Eligibility
+  confirmed:** the CoG 2027 window is PhD **5–15 years before
+  1.1.2027** (widened from the pre-2027 7–12-year rule) → 12.3 years →
+  eligible, no extensions needed.
+- PI time commitment ≥40% (CoG); ≥50% of PI working time in EU/AC.
+- Parts: A (admin, budget) · B1 = Part I of Scientific Proposal
+  (5 pages: idea, objectives, approach/strategy) + CV & Track Record
+  (≤4 pages, one structured document, up to 10 outputs + peer
+  recognition + context for unusual paths) · **B2 = Part II (7 pages):
+  implementation & methodology incl. feasibility, risk assessment,
+  mitigation** + Funding ID. Plus host support letter and PhD
+  certificate (+ defense-date evidence if needed).
+- Host institution is **not an evaluation criterion**, and ERC grants
+  are **portable** anywhere in Europe → the pending EPFL question does
+  not affect evaluation; negotiate conditions with whichever host.
+- Team members outside EU/AC fundable if well justified. Additional
+  funding up to €1M (equipment/facilities) available; likely not
+  needed.
+- Projects shorter than 5 years are welcome (we still plan 60 months).
+- Step 2 includes an **interview**: one-page summary slide required;
+  prepare speech + answers (Indiveri: euresearch prep event crucial;
+  panic is normal).
+- Resubmissions have ~1.5× higher success rates; panel feedback is
+  useful — failing once is part of the process.
+
+**Writing advice (both talks converge):**
+
+- Primary: **focus on the ambition of the idea**; secondary: show you
+  can do it. "Impress non-experts in B1, convince peers and experts in
+  B2."
+- Step 1 asks: Is this a great idea worth pursuing? Outline current
+  state of knowledge; is the idea advancing it; original, creative,
+  ambitious? Clear scientific question and objectives; overall
+  approach/strategy. **Be concise and clear for generalists.**
+- Step 2 asks: can it be implemented realistically, as proposed?
+  Complementary to Part I, not redundant.
+- Follow ERC document instructions **to the letter**; mirror the Work
+  Programme's own language/keywords ("this is *transformative*
+  because…", "the *innovation potential* is high because…"); read the
+  evaluation questions in the WP and answer them.
+- **No unnecessary partners; do not build a consortium** — our
+  external collaborators (Tamò-Larrieux, Mitrokotsa/Cheng, Empa,
+  Siemens, ODI) stay collaborators, not beneficiaries.
+- Study the panel: learn panel members' research areas; choose the
+  panel deliberately (primary clearly CS/PE6; secondary panel
+  possible).
+- Look at funded projects in the field (ERC website search tool).
+- Indiveri's structure worth mirroring in the B1 synopsis:
+  **Vision (WHY) → Methods (HOW) → Results (WHAT) → Impact (WOW)**;
+  his team shape for a CoG: 1 PI, 2 postdocs, 3 PhD students — close
+  to our plan (2 postdocs, 3–4 PhDs, 1 engineer).

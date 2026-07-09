@@ -1,0 +1,78 @@
+By Claude
+
+  ---
+  Scaling Solid Without Hyperfinancialization
+
+  The Core Risk to Name Clearly
+
+  The danger isn't Inrupt per se — it's the platform trap: an open protocol where one commercial actor accumulates enough network
+  effects, enterprise contracts, and tooling dominance that the "open" spec becomes nominal while real control is private. This is
+  how XMPP died as a consumer protocol (Google Talk, then abandonment), and how LinkedIn captures "professional identity" while
+  nominally being a website.
+
+  ---
+  What Actually Works: Lessons From Protocols That Stayed Open
+
+  Email is the canonical success. SMTP/IMAP scales globally, nobody got hyperrich from the protocol itself, and it remains
+  federated. It scaled through: ISPs with existing infrastructure, organizations self-hosting, and a boring-but-real standards
+  process. The lesson: utility infrastructure doesn't need a VC growth story.
+
+  ActivityPub/Mastodon is a more recent example — imperfect, but it demonstrates that federated social infrastructure can exist
+  without financialization if the hosting economics are manageable.
+
+  ---
+  Specific Mechanisms for Solid
+
+  1. Public sector as the primary scaling engine
+  The Advisory Committee already voted to prioritize Health, Public Administration, and Education. This is the right instinct.
+  Municipalities, national health services, and universities can run pod infrastructure as public utility — the way they run
+  libraries or sewage systems. Belgium's Athumi (formerly Digipolis Vlaanderen) is already doing this at regional scale. Flanders
+  essentially bet on Solid as civic infrastructure. That model — state as host, citizen as owner — is the non-financialized path.
+
+  The EU context is favorable: GDPR, the Data Act, and data spaces initiatives (Gaia-X, iSHARE) create regulatory pull for exactly
+  this kind of sovereign data infrastructure.
+
+  2. Data cooperatives for consumer hosting
+  MIDATA (Switzerland) and similar cooperatives offer pod-like hosting under member governance. Users are members, not customers;
+  surplus goes back to members, not shareholders. This is the mutual/cooperative answer to "who pays for hosting?" The MyData
+  operator model that Viivi Lähteenoja's movement developed — certified operators accountable to users rather than investors —
+  could be formalized as a Solid pod operator standard.
+
+  3. Keep the Community Solid Server (CSS) healthy
+  Ruben Verborgh's team at imec/KU Leuven built the CSS as a genuinely open, modular reference implementation. This is
+  strategically critical: it prevents Inrupt's Enterprise Solid Server from becoming the de facto standard through tooling lock-in
+  even if the spec remains open. The Advisory Committee's decision to not invest €3M in an enterprise server and instead offer free
+   licenses was correct — it keeps the ecosystem from consolidating around one commercial implementation.
+
+  4. Resist ACP winning by default
+  The WAC/ACP dispute has a financialization dimension that's rarely stated explicitly: ACP is more expressive and
+  enterprise-friendly, which advantages Inrupt's commercial products (more complex access control = more need for sophisticated
+  tooling = more need for Inrupt). WAC is simpler, more accessible to community implementations, and less of a moat. Resolving this
+   in favor of genuine interoperability — rather than whichever system Inrupt implements best — matters for keeping the ecosystem
+  open.
+
+  5. Grant funding for core infrastructure, not just research
+  NLnet Foundation, EU Horizon, national research councils, and civic tech funders already support Solid-adjacent work. The gap is
+  that grants fund research but rarely fund the unglamorous ongoing maintenance of shared infrastructure (the solidcommunity.net
+  problem the minutes describe). Dedicated infrastructure grants — modeled on how the Linux Foundation or Apache Software
+  Foundation operates — would reduce the dependency on Inrupt to fill the gap by default.
+
+  6. Separate the stack: commons vs. services
+  The protocol, pod server software, and core specs are commons — they should be publicly funded and governed. Value-added services
+   (apps, analytics, enterprise integrations, convenience features) can be commercial. The problem occurs when a commercial actor
+  controls both layers. The ODI stewardship transition is an attempt to structurally separate them; it needs to be defended and
+  deepened.
+
+  ---
+  The Hard Truth
+
+  Solid has a "last mile" problem that email didn't: email piggybacked on organizational server infrastructure that already
+  existed. Most people don't run their own mail servers — ISPs and employers do it for them, for unrelated reasons. Solid needs an
+  equivalent: an institution that has other reasons to maintain the infrastructure (governments serving citizens, universities
+  serving students, health systems serving patients) so that pod hosting doesn't require a VC-funded business model to be
+  economically sustainable.
+
+  The public sector route is the most promising non-financialized scaling path — but it requires Solid to demonstrate value to
+  procurement officers, not just developers. That's a different kind of work than the community has historically done, and it's
+  probably where the tension between the grassroots contributors and the institutional actors (ODI, Inrupt) is most acute right
+  now.

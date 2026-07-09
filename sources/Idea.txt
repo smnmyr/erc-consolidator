@@ -1,0 +1,160 @@
+Interoperability as in SNF Project, but more global:
+- AI-AI interop
+- AI-human interop
+- Animal-Animal interop
+
+Needs Integration beyond what have been doing. Psychology ok, but even neuroscience (see https://haic-workshop.github.io/haic.github.io/program.html Keynote).
+
+Contributing a unique perspective to this field. This has the potential to unite Things because of its Deep roots.
+
+In MANY fields
+- software development, with the management of multiple agents by a human. See willison's Posts.
+- ecology, anyway
+- Robotics, anyway
+
+Advice
+- Primary: Focus on the Ambition of the Idea
+- Secondary: Show that you can do it
+--- Curriculum Vitae and Track Record: one document, structured.
+--- Up to 10 research outputs that demonstrate how the applicant has advanced knowledge.
+--- Selected examples of significant peer recognition.
+--- Noteworthy contributions to the research community, career breaks or unusual career paths. These will not in themselves be evaluated but are important to provide context
+- Host institution not an Evaluation criterion
+- Shorter than 5 years are welcome
+- No unnecessary Partners, do not build a consortium
+- Evaluation elements: read the evaluation questions in the Work Programme
+- Step 1 = Part 1 + CV and Track Record
+--- Is this a great idea that would be worth pursuing?
+--- Outline the current state of knowledge
+--- Is the research idea advancing it?
+--- Is the research idea original, creative, ambitious?
+--- Explain scientific question and objectives
+--- What is the overall approach/research strategy?
+--- Be concise & clear (for generalists)
+- Step 2 = Part 1 + Part 2 + Resources and Time Commitment
+--- Can that idea be implemented realistically, and if so, in the manner and with the approach that the applicant proposes?
+--- Complementary to, but not redundant with Part I
+--- Detail the implementation (including feasibility)
+--- Provide extensive methodology
+--- Detail the work plan
+--- Provide risk assessment
+--- Provide mitigation measures
+--- Justification requested budget and resources
+
+- Don’t exclude yourself from participating in ERC calls;
+- If you have an idea that you think will make a significant change in your field of research or some other area, consider writing it down and apply to ERC;
+- Be ambitious and "daring", think big;
+- Look at funded projects in your field (search tool on ERC website), testimonials, tutorials (ERC homepage);
+- Take risks, explain your project’s expected high scientific impact, and provide evidence that you can do it;
+- If youfail, tryagain! Gain experience from evaluation. Panel feedback is useful and resubmissions have higher success rate (typically 1.5 times higher).
+
+https://www.youtube.com/playlist?list=PLtv6FnsXqnXAYRk6HCErwMxwML0ZKoMcy
+
+Vision (WHY)
+➢ Deep learning and neuroscience have achieved amazing
+results
+➢ VLSI technology scaling is reaching an end
+➢ Power consumption in computing systems has become the
+most critical limiting factor.
+`
+Goal: Understand how to implement the principles of deep
+networks and computational neuroscience in low-power
+neuromorphic electronic systems for building autonomous
+agents that can interact intelligently with the environment.
+
+Methods (HOW)
+➢ Graphical models, reservoir computing, deep networks
+➢ Cortical sheet, neural dynamics, synaptic plasticity
+➢ Ultra low-power analog/digital neuromorphic electronic circuits
+➢ Multi-core scalable neuromorphic processors
+➢ Active sensing, sensory-motor integration, selective attention
+➢ Robotics, spatial navigation, collision avoidance, planning
+1 PI, 2 Postdocs, 3 PhD students, >100 enthusiastic colleagues
+
+Results (WHAT)
+➢ Fundamental understanding of cortical computing principles
+➢ New brain inspired computational paradigms
+➢ On-line continuous-time, context dependent learning
+➢ Ultra low-power non-von Neumann computing platforms
+➢ Adaptive autonomous decision making cognitive agents
+
+Impact (WOW)
+➢ Technology: fault tolerant, adaptive, more-than-Moore, in
+memory computing
+➢ Society: IoT, consumer robotics, health, precision medicine
+➢ Education: consolidate links between neuroscience and
+engineering communities, new interdisciplinary curricula, new
+strategic research and education plans at UZH and ETH.
+
+
+
+
+Follow ERC document instructions to the letter.
+2 Use same language, keywords, terminology
+▶ e.g., this is “transformative” because . . .
+▶ e.g,. the “innovation potential” is extremely high because . . .
+
+
+Impress non-experts in B1, convince peers and experts in B2.
+4 Learn about ERC panel members area of research.
+5 Know your stuff (show that you are well aware of the s-o-a, and that you are a key player in
+your domain).
+
+
+Administrative
+- Own Commitment >40%
+- PhD Defense date Counts. September 12, 2014
+- Part A: Administrative form, including requested budget and resources
+- Part B1: 
+--- Part I of the Scientific Proposal (5 pages): Overall idea, objectives and approach/research strategy
+--- CV+Track Record (up to 4 pages)
+- Part B2:
+--- Part II of the Scientific Proposal (7 pages): Implementation and Methodology (including feasibility, risk assessment and mitigating measures)
+--- Funding ID
+- Host Institution support Letter
+- PhD certificate (+ additional document to support PhD Defence date, if needed)
+
+Projects that feed into this
+- MAIA: https://www.unibo.it/en/research/projects-and-initiatives/research-projects-horizon-2020/586/687/8488
+
+Primary panel clearly CS. Secondary panel possible.
+
+Interoperability (Terry Payne, HyperAgents workshop 2025)
+- Alignment aggregation
+- Alignment repair
+- Alignment negotiation
+
+Eclipse LMOS builds on op of W3C WoT TDs as well!!
+
+AI as Full Intermediary. Access pattern to the Web is currently shifting massively. It used to be Read->Navigate->Read->Navigate. Now it is Ask->Response. And AI companies are Controlling the Front Door. 
+
+From User-Centric to Societally-Centric Web
+- Web
+- UCD / SCD
+
+Facets
+- Architecture
+- Cybersecurity and Transclusion
+- Geopolitical Ramifications / EU<->US relations
+
+Foundations
+- Web Architecture
+- Economy / Network Effects
+- Psychology / Deferral
+- VLOP / Luka
+- Philosophy / Habermas / New Structural Transformation of the Public Sphere
+
+Archival Problem: Even if old models are archived, their context is not. The Internet/Web are not versioned (but Xanadu would have been). So here is another problem that is today relevant but not in 1990.
+
+Hypernext
+- https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5735624
+
+
+"Why we need ubiquitous and pervasive computing more than ever", choudhury tanzeem - bridging Things is important, I can do that
+
+
+
+
+
+
+
