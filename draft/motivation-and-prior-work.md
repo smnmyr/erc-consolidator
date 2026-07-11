@@ -590,7 +590,8 @@ breaks.
    2027), AI Act Art. 50 from Aug 2026, Bekavac & Mayer =
    arXiv:2601.12390 + FAccT 2026. Re-check fast-moving counts
    (Charlotin, suit tally) once more at submission time.
-2. **Decide the acronym/working title** — "ISLANDS" is a placeholder.
+2. ~~Decide the acronym/working title~~ **Decided 2026-07-11 — keep
+   ISLANDS** (PI choice; evocative project name, no forced backronym).
 3. **Compress Section 1 to ≤3 pages** for the B1 extended synopsis
    (leaving ~2 pages for objectives/approach sketch); B1 must not
    cross-reference B2.
