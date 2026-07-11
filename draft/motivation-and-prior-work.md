@@ -1,7 +1,9 @@
 # ERC Consolidator Grant 2027 — Draft: Motivation & Prior Work
 
-**Working title:** ISLANDS — Bounded Information Spaces with Chosen
-Guarantees: Rebalancing the Web/Xanadu Trade-off for High-Stakes
+**Working title:** ISLANDS — A New Web: Bridging NFPs for Heterogeneous
+Requirements
+**Descriptive subtitle (retained):** Bounded Information Spaces with
+Chosen Guarantees: Rebalancing the Web/Xanadu Trade-off for High-Stakes
 Information
 
 > **How this draft maps to the ERC 2027 application structure.** From the
@@ -664,8 +666,11 @@ breaks.
    2027), AI Act Art. 50 from Aug 2026, Bekavac & Mayer =
    arXiv:2601.12390 + FAccT 2026. Re-check fast-moving counts
    (Charlotin, suit tally) once more at submission time.
-2. ~~Decide the acronym/working title~~ **Decided 2026-07-11 — keep
-   ISLANDS** (PI choice; evocative project name, no forced backronym).
+2. ~~Decide the acronym/working title~~ **Updated 2026-07-11 (PI):**
+   acronym **ISLANDS** kept; working title now *A New Web: Bridging NFPs
+   for Heterogeneous Requirements* (bridging/NFP tack), prior
+   descriptive line retained as subtitle. Later pass: propagate the
+   "New Web / NFP / heterogeneous requirements" framing into the body.
 3. **Compress Section 1 to ≤3 pages** for the B1 extended synopsis
    (leaving ~2 pages for objectives/approach sketch); B1 must not
    cross-reference B2.

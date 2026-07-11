@@ -26,9 +26,22 @@ process itself). Written to be reusable beyond ERC.
 - **Study the panel and precedent.** Learn panel members' research areas; search
   the funder's database of previously funded projects in the field. Choose the
   panel deliberately rather than by default.
+- **Map the project across the panel's descriptors deliberately.** A proposal that
+  credibly spans several sub-panel codes (here PE6_10 as core, plus PE6_2, PE6_5,
+  PE6_7) can present that spread as the contribution ("a composition no single
+  sub-field produced") rather than as lack of focus. Name the codes in the
+  cross-panel text, commit to one primary and one secondary panel, and state the
+  centre of gravity explicitly so the choice reads as deliberate.
 - Verify eligibility rules against the **current** call documents; rules change
   between calls (the ERC PhD window widened from 7–12 to 5–15 years for 2027; an
   older slide deck would have wrongly excluded the PI).
+- **Re-confirm country association / host eligibility from the current call, not
+  memory.** Association to the funding programme moves between calls: Switzerland
+  became fully associated to Horizon Europe on 10 Nov 2025 (retroactive to
+  01.01.2025), so Swiss hosts are eligible for ERC 2027 with no
+  host-in-another-country workaround, superseding the earlier "treated as
+  associated" transitional regime. A stale assumption on this axis can invalidate
+  the host choice.
 
 ## 2. Lead with ambition; anchor it in a felt problem
 
@@ -66,6 +79,13 @@ process itself). Written to be reusable beyond ERC.
 - Leave **headroom in page budgets** for a figure and the reference list: a
   synopsis that fills the limit with prose alone reads worse than one with a
   clear architecture diagram.
+- **Treat hard character/word ceilings mechanically, and measure before you
+  commit.** The ERC abstract caps at ~2,000 characters. Once a verified abstract
+  sits at the ceiling, reframing it is editing under a budget, not free writing:
+  thread new terminology by *substitution* (swap terms of similar length), offset
+  any addition with an equal trim elsewhere, and compute the resulting length
+  before writing rather than eyeballing it. A single vocabulary change ("chosen
+  guarantees" → "non-functional properties") can silently blow the limit.
 - Prior-work sections should read as a **funnel to the gap**: each lineage
   (history, remedial efforts, adjacent fields) ends by stating what it did *not*
   solve, so the gap synthesis at the end feels inevitable.
@@ -102,6 +122,14 @@ process itself). Written to be reusable beyond ERC.
 - Budget and commitment rules (≥40% PI time, residency requirements, additional
   equipment funding) are constraints to design within from day one, not
   compliance checks at the end.
+- **Know the optional-funding levers and default against them.** ERC "additional
+  funding" is up to €1M on top of the ceiling (up to €2M for a PI relocating from a
+  non-associated third country); it traditionally covers start-up, major
+  equipment, large-facility access, and major field/experimental costs, and from
+  the 2026 Work Programme may also cover personnel. It must be explicitly
+  justified and the panel decides, so an unjustified request reads as padding.
+  Default to the clean ceiling ask and reach for the top-up only when a specific
+  cost (major compute, an extra hire) is genuinely load-bearing.
 
 ## 6. Process lessons (how to run the drafting itself)
 
@@ -160,3 +188,41 @@ the following:
 - Vocabulary tells ("delve", "landscape", "tapestry", "leverage", "robust")
   were absent from these drafts, but check for them anyway; they are the
   cheapest to grep for.
+
+## 8. Naming, titles, and framing labels
+
+The acronym, title, and the one technical label the proposal turns on are
+positioning tools, not decoration. A naming iteration on this proposal
+(2026-07-11) taught the following:
+
+- **The name should encode the scientific claim, and a memorable metaphor that
+  matches the core concept beats a tortured backronym.** "ISLANDS" works because
+  the project's unit of analysis literally is an island (a bounded information
+  space); the name reminds the reader of the idea for free.
+- **Prefer an evocative name plus a descriptive subtitle over a strict
+  letter-for-letter acronym.** Funders accept evocative names. Force a backronym
+  only when the word cooperates: some letters (a terminal Y, an interior U/W) have
+  almost no natural technical fillers, and a strained expansion reads worse than
+  no expansion. Do not fight the alphabet.
+- **Let the name follow the science.** When the differentiator sharpened (from
+  "islands" to "islands *bridged* to each other and the open Web"), the name
+  search followed it (bridge/weave metaphors). If a candidate name no longer
+  matches the current pitch, that is a signal the pitch moved, not just the label.
+- **Local/host resonance is a legitimate bonus.** A metaphor that also nods to the
+  host's identity (St. Gallen's historic embroidery/textile industry → weave,
+  stitch, lace, thread) is a detail a panel registers, provided it still maps
+  cleanly onto the technical story.
+- **Put the real claim in the tagline's operative words.** "supports non-functional
+  properties" is inert; "any NFP *at once*" encodes the actual contribution (no
+  forced trade-off among properties). One or two load-bearing words (here *at
+  once*, *bridging*) can carry the whole pitch; choose the register deliberately
+  ("guarantees" is punchier, "non-functional properties / NFPs" is more precise).
+- **Introduce a precise technical label and gloss it once to unify vocabulary.**
+  Relabelling "chosen guarantees" as "non-functional properties (NFPs)" and stating
+  the equivalence a single time let the new term lead the abstract and framing
+  while the body's existing "guarantees" stayed consistent without a full rewrite.
+- **Naming is iterative and the PI's call.** Generate candidate names and taglines
+  inline, tightest-first with brief rationale, and let the PI steer the metaphor
+  family before committing; a fixed multiple-choice prompt is premature while the
+  concept is still moving. Record naming decisions (and the direction that
+  produced them) in the draft's living TODO list so later passes know the intent.
