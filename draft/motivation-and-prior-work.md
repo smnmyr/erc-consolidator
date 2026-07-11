@@ -142,7 +142,11 @@ That question is only this expensive to litigate because nothing in the
 original act of reuse (scraping Web pages) carried a persistent,
 traceable reference back to its source. Discovery is reconstructing,
 after the fact and at extraordinary cost, exactly what fine-grained
-transclusion would have recorded natively.
+transclusion would have recorded natively. Nelson's original design made
+the point sharper: transclusion was to carry not only a link back to a
+source but a basis for compensating it (transcopyright) [Nelson1999], so
+traceable and payable reuse was a designed-in property of the road not
+taken rather than an afterthought.
 
 Across all four cases the pattern is identical. The Web's avoided
 coordination cost has been reassigned: to archivists maintaining
@@ -228,7 +232,10 @@ Read→Navigate→Read to Ask→Response, with AI intermediaries
 increasingly controlling the front door to the Web's content: a new
 centralization vector (in RFC 9518's vocabulary: intermediation) that
 neither the Web's original design nor today's re-decentralization
-efforts address. And the same era adds an archival failure the 1990s
+efforts address. The current contest over AI agents makes the vector
+concrete: AI vendors are racing to own the user agent itself
+(Perplexity's Comet, OpenAI's Atlas) as the monetizable front door to
+the Web [Zard2025]. And the same era adds an archival failure the 1990s
 could not have foreseen: even where old AI models are preserved, the
 Web they were trained on is unversioned and has since drifted, so
 "what did this model actually see?" is unanswerable by construction;
@@ -296,7 +303,30 @@ through Engelbart's NLS [Engelbart1968] to Nelson's Xanadu [Nelson1981],
 hypertext research assumed rich links — typed, bidirectional, versioned,
 span-anchored. Pre-Web systems (NoteCards, Intermedia, Microcosm,
 HyperCard) and the open hypermedia community implemented many of these
-guarantees at workgroup scale. The Web [BernersLee1989] discarded them
+guarantees at workgroup scale, and the field stated its own agenda
+early. Halasz's "seven issues" [Halasz1988] identified versioning,
+virtual (computed) structures, and computational engines as capabilities
+the next generation would need, three of the guarantees the Web went on
+to omit; Bieber et al. later inventoried the same omissions from the
+Web's side as the "missing links for the World Wide Web," listing typed
+and bidirectional links, transclusion, computed structure, external link
+databases, and (anticipating this project's confidentiality dimension)
+private links and access permissions [Bieber1997]. Open hypermedia
+systems did not only name these guarantees but built them: external link
+services stored links separately from content and maintained them
+(Microcosm and its Distributed Link Service [Fountain1990, Carr1995]),
+providing bidirectional linking and referential integrity, with Davis
+showing how such systems structurally prevent the dangling-link failure
+the Web later made endemic [Davis1998, Ashman1999]. Hypertext versioning
+had a literature of its own (contextual version servers and structural
+version control [Haake1992, Osterbye1992]), and the structural-computing
+line [Nurnberg1997] went furthest, proposing structure itself as a
+first-class substrate over which different domains select different
+abstractions, a conceptual ancestor of this project's theory of chosen
+guarantees. None of it operated at the open Web's scale. These
+guarantees were demonstrated within bounded, coordinated settings and
+set aside only when the target became the whole Web, which is exactly
+the boundary this project's islands reintroduce. The Web [BernersLee1989] discarded them
 deliberately, and Fielding's REST [Fielding2000] later formalized the
 constraint set that made planetary scale possible: statelessness,
 uniform interface, hypermedia as the engine of application state.
@@ -319,7 +349,13 @@ Memento protocol [RFC7089] standardizes time-based access to them;
 "robust links" and anchoring approaches [Klein2014, VanDeSompel] attach
 archival copies and text anchors to citations. Browser-level Text
 Fragments (the `#:~:text=` syntax) show mainstream demand for span
-addressing, but they bind to mutable content, so anchors decay. All of
+addressing, but they bind to mutable content, so anchors decay. This
+mainstream re-invention has a direct ancestor: Phelps and Wilensky's
+robust intra-document locations and robust hyperlinks [Phelps2000a,
+Phelps2000b] made such anchors survive edits two decades earlier, using
+redundant content signatures and structural paths, though again as a
+mechanism layered over a mutable substrate rather than a guarantee in
+the addressing layer. All of
 these are *remedial*: they accept the mutable, location-addressed
 substrate and build compensating archives beside it. They neither
 prevent drift nor provide verifiable integrity, bidirectional links, or
@@ -418,7 +454,14 @@ RFC 9518 [Nottingham2023] provides the standards-level frame: a
 function can be nominally decentralized (open protocol, many
 implementers) yet centralize in practice through economies of scale,
 network effects, and switching costs (the XMPP/Google Talk and
-Solid/Inrupt patterns). Its design-level mitigations (standardize what
+Solid/Inrupt patterns). Recent policy analysis makes the same point
+from the browser layer, arguing that standards bodies without legal
+accountability cannot by themselves prevent capture of the
+intermediation layer and reading the emerging AI "second browser war" as
+its latest instance [Zard2025]; this project answers that diagnosis with
+an architectural instrument rather than a governance one, complementary
+to the regulatory remedies such analyses propose. Its design-level
+mitigations (standardize what
 would stay proprietary; design for switching; constrain intermediaries
 structurally; reuse proven decentralization mechanisms) directly inform
 our architecture, and its central lesson, that "open" and
@@ -493,6 +536,8 @@ breaks.
 
 - [AIAct] Regulation (EU) 2024/1689 (AI Act), transparency/provenance
   obligations applicable from August 2026.
+- [Ashman1999] Ashman. *Hypertext link integrity.* ACM Computing
+  Surveys 31(4es), 1999.
 - [Bekavac2024] Bekavac, Garcia, Strecker, Mayer, Tamo-Larrieux. *From
   Walls to Windows…* CEUR-WS Vol. 3898, 2024.
 - [BekavacMayer2026] Bekavac, Mayer. *Platforms' Research API Data
@@ -504,11 +549,17 @@ breaks.
   Design.* CHI EA 2024.
 - [Benet2014] Benet. *IPFS — Content Addressed, Versioned, P2P File
   System.* 2014.
+- [Bieber1997] Bieber, Vitali, Ashman, Balasubramanian, Oinas-Kukkonen.
+  *Fourth-Generation Hypermedia: Some Missing Links for the World Wide
+  Web.* Int. J. Human-Computer Studies 47(1):31–65, 1997.
 - [BernersLee1989] Berners-Lee. *Information Management: A Proposal.*
   CERN, 1989.
 - [Bush1945] Bush. *As We May Think.* The Atlantic, 1945.
 - [C2PA] Coalition for Content Provenance and Authenticity,
   specifications; hardware signing deployments 2024–2026.
+- [Carr1995] Carr, De Roure, Hall, Hill. *The Distributed Link Service:
+  A Tool for Publishers, Authors and Readers.* World Wide Web Journal /
+  4th Int. WWW Conference, 1995.
 - [Charlotin2026] Charlotin. *AI Hallucination Cases* database
   (damiencharlotin.com/hallucinations). ✓ verified 2026-07-09:
   ~1,227 cases by early 2026 (up from ~200 a year earlier), ~1,490 by
@@ -519,10 +570,15 @@ breaks.
 - [Ciortea2019] Ciortea, Mayer, Gandon, Boissier, Ricci, Zimmermann.
   *A Decade in Hindsight: The Missing Bridge Between Multi-Agent Systems
   and the World Wide Web.* AAMAS 2019.
+- [Davis1998] Davis. *Referential Integrity of Links in Open Hypermedia
+  Systems.* ACM Hypertext '98, 207–216, 1998.
 - [Engelbart1968] Engelbart, English. *A Research Center for Augmenting
   Human Intellect.* AFIPS 1968.
 - [Fielding2000] Fielding. *Architectural Styles and the Design of
   Network-based Software Architectures.* PhD thesis, UC Irvine, 2000.
+- [Fountain1990] Fountain, Hall, Heath, Davis. *MICROCOSM: An Open
+  Model for Hypermedia with Dynamic Linking.* European Conference on
+  Hypertext (ECHT '90), 1990.
 - [Guitton2025] Guitton, Tamò-Larrieux, Mayer. *AI and Law: How
   Automation is Changing the Law.* Routledge, 2025.
 - [Grau2025] Grau. *Towards Decentralized Privacy-Enhancing Life Cycle
@@ -534,6 +590,11 @@ breaks.
   **[TODO: replace with published citation once deanonymized/accepted]**
 - [Grau2026] Grau, Maftun, Garcia, Mayer. *Solid and Secure Multi-Party
   Computation for a Circular Economy.* Solid Symposium 2026.
+- [Haake1992] Haake. *CoVer: A Contextual Version Server for Hypertext
+  Applications.* European Conference on Hypertext (ECHT '92), 1992.
+- [Halasz1988] Halasz. *Reflections on NoteCards: Seven Issues for the
+  Next Generation of Hypermedia Systems.* Communications of the ACM
+  31(12):836–852, 1988 (presented at Hypertext '87).
 - [Klein2014] Klein, Van de Sompel, et al. *Scholarly Context Not Found:
   One in Five Articles Suffers from Reference Rot.* PLOS ONE 2014.
 - [Lemee2024] Lemée, Vachtsevanou, Mayer, Ciortea. *Signifiers for
@@ -545,9 +606,18 @@ breaks.
 - [Nelson1981] Nelson. *Literary Machines.* Mindful Press, 1981.
 - [Nelson1999] Nelson. *Xanalogical Structure, Needed Now More than
   Ever.* ACM Computing Surveys, 1999.
+- [Nurnberg1997] Nürnberg, Leggett, Schneider. *As We Should Have
+  Thought.* ACM Hypertext '97, 1997.
 - [Nottingham2023] Nottingham. *Centralization, Decentralization, and
   Internet Standards.* RFC 9518, IETF, 2023.
+- [Osterbye1992] Østerbye. *Structural and Cognitive Problems in
+  Providing Version Control for Hypertext.* European Conference on
+  Hypertext (ECHT '92), 1992.
 - [Perma] Harvard Library Innovation Lab, Perma.cc.
+- [Phelps2000a] Phelps, Wilensky. *Robust Intra-Document Locations.*
+  Computer Networks 33(1–6):105–118 (9th Int. WWW Conference), 2000.
+- [Phelps2000b] Phelps, Wilensky. *Robust Hyperlinks: Cheap, Everywhere,
+  Now.* Digital Documents and Electronic Publishing (DDEP), LNCS, 2000.
 - [PROV] W3C PROV family of specifications, 2013.
 - [RFC7089] Van de Sompel, Nelson, Sanderson. *HTTP Framework for
   Time-Based Access to Resource States — Memento.* RFC 7089, 2013.
@@ -574,6 +644,10 @@ breaks.
 - [Zittrain2014] Zittrain, Albert, Lessig. *Perma: Scoping and
   Addressing the Problem of Link and Reference Rot in Legal Citations.*
   Harvard Law Review Forum / Legal Information Management, 2014.
+- [Zard2025] Zard. *Internet Ozone Layer: A Vision for Reclaiming Human
+  Freedom in Information Civilization.* Working draft v1.0, SSRN 5735624,
+  November 2025. [policy discussion paper; cited for the user-agent
+  centralization framing, not for factual claims]
 
 ---
 
