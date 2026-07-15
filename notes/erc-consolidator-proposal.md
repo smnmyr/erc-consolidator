@@ -735,6 +735,20 @@ of the "Scaling Solid without hyperfinancialization" section above).
   implementation & methodology incl. feasibility, risk assessment,
   mitigation** + Funding ID. Plus host support letter and PhD
   certificate (+ defense-date evidence if needed).
+  - **B2 DRAFTING SEED — "fighting symptoms, not principles"** (per PI,
+    2026-07-15; already stated in B1 b.1/b.2 and motivation §2.8):
+    many services/apps/platforms today already build their own
+    non-functional-property profile on top of Web architecture
+    (Perma.cc = persistence, C2PA = provenance, DOIs/blockchains =
+    identity/notarization). These are symptom-level patches, per-silo,
+    unshared, non-composable; the underlying architectural principles go
+    unchanged. Carry this into B2 as (i) a *positioning/alternatives*
+    argument (why the architectural fix beats extending remedial infra),
+    (ii) an *impact/adoption* argument (these bespoke profiles are
+    ready-made adopters; an island subsumes several as selectable
+    Xanadu-style constraints instead of per-domain rebuilds), and (iii)
+    feasibility framing (WP2/WP5 measure symptom-cost today vs.
+    island-cost). Keep it complementary to B1, not redundant.
 - Host institution is **not an evaluation criterion**, and ERC grants
   are **portable** anywhere in Europe → the pending EPFL question does
   not affect evaluation; negotiate conditions with whichever host.

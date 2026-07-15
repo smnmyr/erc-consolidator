@@ -424,7 +424,21 @@ positioning: audits of DSA Article 40(12) data access [BekavacMayer2026]
 show that *mandated* openness does not by itself produce practical
 accountability. Architectural guarantees and legal guarantees are
 different instruments, and this project supplies the former where the
-latter demonstrably underdeliver.
+latter demonstrably underdeliver. Identity is one instrument the
+architecture can supply directly: an island's *attribution* regime,
+ranging over verified authorship, revocable pseudonymity, and
+unlinkable anonymity, sets whether an action can be traced to an
+accountable actor. The regime governs a real trade-off, since
+anonymity checks chilling effects and surveillance while inviting
+unaccountable behavior, and cryptographic constructions (anonymous
+credentials, group and traceable signatures) already let an island be
+anonymous by default yet accountable under defined conditions, which is
+exactly the kind of chosen guarantee the theory must price. The
+chilling-effect side of that trade-off is an active legal-research
+topic in the partner group: the doctoral work of Alice Palmieri (supervised by
+Tamò-Larrieux) studies chilling effects directly, grounding the
+anonymity pole of the attribution NFP in current scholarship rather
+than intuition.
 
 ### 2.5 Confidential collaboration: secure computation across organizations
 
@@ -523,7 +537,15 @@ versioning in content-addressed storage; archival persistence in the
 Memento/Perma ecosystem; provenance attestation in C2PA/PROV; access
 sovereignty in Solid and data spaces; confidential joint computation in
 SMPC systems including our own; affordance-driven interaction in
-hypermedia MAS research. **No existing system composes them into a
+hypermedia MAS research. Read together, these are not merely isolated
+research results: they are the non-functional-property profiles that
+services and platforms already build for themselves, one silo at a
+time, each assembling the guarantees it cannot operate without on top
+of Web architecture, treating its own symptom locally while the
+architectural principles that generate the symptom stay in place. Some
+of these profiles would be subsumed outright by Xanadu-style
+constraints made selectable per island rather than re-implemented per
+service. **No existing system composes them into a
 reference architecture; no existing theory says which bundle of
 guarantees an island of a given size, stake, and threat model can
 afford; and no existing infrastructure offers span-level,
