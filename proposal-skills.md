@@ -1,9 +1,19 @@
 # Proposal-Writing Skills
 
-General lessons about writing (research) grant proposals, distilled from drafting the
-ERC Consolidator 2027 "islands" proposal (sources: SwissNCP CoG webinar, Giacomo
-Indiveri's CoG-winner retrospective, official ERC documentation, and the drafting
-process itself). Written to be reusable beyond ERC.
+General lessons about writing (research) grant proposals, distilled from two drafting
+efforts. Sections 1-8 come from the ERC Consolidator 2027 "islands" proposal (sources:
+SwissNCP CoG webinar, Giacomo Indiveri's CoG-winner retrospective, official ERC
+documentation, and the drafting process itself). Sections 9-12 come from the TANDEM
+Health Forward start-up proposal (HSG/OKS, Aug 2026), which prepares a later Innosuisse
+submission and was drafted directly in Word. Written to be reusable beyond either scheme.
+
+Section numbers are stable; new material is appended rather than interleaved, so notes
+elsewhere that cite "§7" keep pointing at the same thing.
+
+1. Evaluation mechanics · 2. Ambition · 3. Structure and craft · 4. Facts and citations ·
+5. Team and institutions · 6. Process · 7. Writing like a person · 8. Naming ·
+9. Preparatory and two-stage schemes · 10. Verifying the funder's rules ·
+11. Writing for a mixed panel · 12. Editing the document programmatically
 
 ## 1. Know the evaluation mechanics before writing a word
 
@@ -104,6 +114,26 @@ process itself). Written to be reusable beyond ERC.
   counts, product announcements). Record the retrieval date next to the claim.
 - Prefer the **strongest citable version** of each reference (published venue
   over preprint) and upgrade as papers get accepted during the drafting window.
+- **Never attach a citation to a claim its source does not make.** A paper on
+  sedation practice in pediatric burn care does not support a statement about
+  cost. Either find the source that does, or drop the number and make the
+  comparison qualitative by naming the resources involved.
+- **Administrative documents are not literature.** The call text, the funder's
+  funding conditions, and internal programme provisions belong in the running
+  prose by name, not in the bibliography. Removing two such entries meant
+  renumbering 53 references; catching it earlier would have cost nothing.
+- **Check cited-versus-defined in both directions every pass.** Dangling
+  citations are the obvious failure; entries that are defined but never cited
+  are the quieter one, and usually mark text that was cut around them.
+- **When a self-citation is unusually load-bearing, say so in the sentence.**
+  That the doctoral researcher the grant would fund is first author of a
+  directly relevant paper is worth a clause in the text, not burial inside a
+  bracket.
+- **Patents count as track record for innovation-agency schemes.** Patent
+  registries (Google Patents, Espacenet, WIPO Patentscope) block scripted
+  access, so the PI's own scholar profile is the fastest reliable index. Flag
+  numbers taken that way for the PI to confirm rather than presenting them as
+  verified.
 
 ## 5. Team and institutional planning
 
@@ -150,6 +180,24 @@ process itself). Written to be reusable beyond ERC.
 - For schemes with interviews: the one-page summary slide and rehearsed answers
   are their own deliverable. Schedule preparation (mock interviews, prep
   events), and expect the stress ("panic is normal").
+- **Check file modification times before every editing session, and diff against
+  your own last snapshot.** Between sessions the author may edit a different
+  file, merge your version into theirs, or rename. Assuming the file you last
+  wrote is still the live one risks overwriting a day of their work. In this
+  project the author had migrated everything into `_v2` while the assistant was
+  still editing `_v3`.
+- **Snapshot before every destructive pass**, named for what it precedes
+  (`_preShorten`, `_preRenumber`). It makes a later Word compare possible and
+  turns "revert and redo differently" into a real option.
+- **Agree what a change mark means, and hold the line at its boundary.** "Yellow
+  marks new or rewritten text, not text merely trimmed" works until a shortening
+  pass rewords 41 of 45 spans. Compression that introduces new words is a
+  rewrite. When the rule has been applied too loosely, say so plainly and offer
+  the author the choice of remedy instead of picking one quietly.
+- **Check the layout before cutting prose.** Two rounds of trimming had been
+  paying for a table whose column widths were never applied; fixing the table
+  recovered nearly half a page. Find out where the space actually goes before
+  rewriting content to save it.
 
 ## 7. Write like a person, not like a language model
 
@@ -226,3 +274,148 @@ positioning tools, not decoration. A naming iteration on this proposal
   family before committing; a fixed multiple-choice prompt is premature while the
   concept is still moving. Record naming decisions (and the direction that
   produced them) in the draft's living TODO list so later passes know the intent.
+
+## 9. Preparatory and two-stage schemes
+
+Schemes that fund work *towards* a later submission (here: HSG Health Forward
+start-up financing preparing an Innosuisse innovation project; seed and
+proof-of-concept instruments elsewhere) are judged on whether the preparatory
+work makes the target submission competitive. That imposes a structure most
+drafts get wrong on the first pass.
+
+- **Two projects must be specified, and the boundary between them has to be
+  visible at a glance.** Describe the target project and the preparatory project
+  as separate parts, and never let an activity appear in both.
+- **Diagnostic for a broken boundary**: the same items show up as objectives in
+  the target part and again as work packages in the preparatory part. In this
+  draft, three "project objectives" in Part A were literally the first three
+  items of Part B's list of preliminary work. The fix was to rename Part A's
+  objectives as target-project objectives, move every preparatory bullet into
+  Part B, and give Part B its own work packages.
+- **Use a readiness table with one column per point in time.** Rows are the
+  workstreams; columns are *today*, *at submission of the target proposal*, and
+  *at the end of the preparatory grant*. A reviewer then sees in one glance what
+  the money buys and where the follow-on begins. Define the readiness scale once
+  (R1 argued from the literature, no artifact, through R5 running in the real
+  setting without the research team present) and use it in every cell.
+- **The funded period and the submission milestone are different dates.** An
+  18-month grant that submits at month 12 has six months left afterwards; those
+  months need stated content, and the column headed "at submission" must not be
+  labelled as though it were the end of the grant.
+- **State what the preparatory project deliberately does not deliver** (no
+  clinical outcome, no certified device, no product; a measured readiness gain
+  per workstream instead). It pre-empts the assumption of an over-claim and
+  draws the boundary to the follow-on for free.
+- **Name the decision the preparatory grant exists to settle.** If the scope of
+  the target proposal is genuinely still open (one workstream, or all of them),
+  say so and make the scope decision a dated deliverable with the evidence that
+  will drive it. Uncertainty presented as a planned decision reads as
+  competence; the same uncertainty left implicit reads as vagueness.
+
+## 10. Verifying the funder's rules from primary sources
+
+- **The agency's web pages are marketing; the rules are in the ordinance, the
+  law, and the implementation provisions.** For Innosuisse the answers sat in
+  the Beitragsverordnung (SR 420.231), the FIFG, and the agency's
+  Vollzugsbestimmungen, none of which the overview pages summarize accurately.
+  Budget an hour on the legal texts before writing the partner and budget
+  sections.
+- **Settle the structural questions first, because they can invert the design.**
+  "Can our clinical partner receive money from this scheme?" decided whether an
+  industrial partner was optional or mandatory, who could draw a salary, and
+  which of two instruments to target. Answering it after the partner section was
+  written meant rewriting that section twice.
+- **Who is a partner and who receives money are different questions.** Many
+  schemes pay only one class of participant. Putting an organisation in the
+  wrong class silently defunds people the proposal names.
+- **Check the independence rules between partner classes.** They constrain which
+  named individuals may sit on which side, and therefore who can be paid.
+- **Establish whether an eligibility question is scored or gating.** Recognition
+  as an eligible research institution was decided inside the application itself,
+  re-assessed each time, and a negative finding meant the application was not
+  evaluated at all. A gating criterion deserves preparation effort out of all
+  proportion to its word count.
+- **Look for the agency's own published lists.** A list of institutions that had
+  actually received contributions settled in one page what the legal definition
+  left ambiguous: hospitals qualify, several of them non-university, and the
+  applicant's own hospital was absent and would need first-time recognition.
+- Agency PDFs frequently 403 or 404 against scripted fetches, and search-engine
+  links to them are often stale. Take download URLs from the live page's own
+  document list.
+
+## 11. Writing for a mixed or non-expert panel
+
+Interdisciplinary panels (here: clinicians, computer scientists, and a
+research-funding office) punish the ordering a specialist would choose.
+
+- **Order each background subsection by consequence, not by technology.** A
+  subsection opening on foundation-model acronyms and speckle artefacts was
+  reordered to lead with why the imaging method suits the patient, what goes
+  wrong in practice, and how small the effect to be detected is. Only then the
+  unfinished technical lines. Same content, different entry point.
+- **Gloss each piece of jargon once, inline, in a clause.** "NFC, the
+  short-range radio already familiar from contactless payment cards";
+  "segmentation, outlining the nerve automatically in every frame". A
+  parenthetical gloss costs a line and buys the paragraph.
+- **Close each background subsection with one italic take-home sentence.**
+  Reviewers skim; the sentence they land on should be the claim, not the last
+  technical detail.
+- **Answer "is this achievable?" explicitly**, by naming assets already in hand:
+  annotated cohorts, a working sensor board, infrastructure already running.
+  "The project advances assets in hand; it does not start three lines of work
+  from zero."
+- **Say what is tested, in what order, with what instrument.** "Characterize the
+  system against reference instruments" says nothing. Naming the two things that
+  change when a laboratory board becomes a wearable, and the measurement for
+  each, turns an activity into evidence.
+- **Distinguish welcome additions from dependencies.** For a collaboration not
+  yet secured: "an addition we would welcome rather than one the project depends
+  on: no work package rests on it". That removes a risk the reviewer would
+  otherwise infer.
+- **A team section reads as a credential list unless it opens with the division
+  of labour.** One sentence naming what each side brings (clinic: the question,
+  the patients, the reference data; university: the hardware, the algorithms,
+  the study methods) reframes the same names as a working arrangement.
+- **Anchor cost claims on one real number and keep the rest honestly bounded.** A
+  quoted price for a hundred circuit boards supports both a per-unit estimate
+  and a per-iteration budget line. An invented bill of materials would have
+  looked more precise and been less defensible.
+
+## 12. Editing the document programmatically
+
+When the deliverable is a Word file the author also edits by hand, the tooling
+constraints shape what is safe to attempt.
+
+- **Without a renderer you cannot know the page count, so build a calibrated
+  estimator and calibrate it against a number the author reads off their
+  screen.** A characters-per-line and line-height model ran 12% high until the
+  author reported the true figure; one constant fixed it and made every later
+  trim decision quantitative rather than hopeful.
+- **Table column widths must be set on both the grid and every cell.** In
+  python-docx, `table.columns[i].width` writes the `tblGrid` entry and
+  `cell.width` writes each `tcW`. Word reads the grid, so setting only cell
+  widths silently does nothing.
+- **Runs are fragmented, so never match against a single run's text.** Once
+  tracked changes have been accepted, a sentence typically spans a dozen runs
+  and a phrase can split mid-word. Operate on the paragraph's concatenated text,
+  locate a character span, then rewrite only the runs overlapping it.
+- **Table cells are not in `document.paragraphs`.** Every document-wide
+  operation needs a separate pass over tables. A reference renumbering that
+  skipped them left a citation pointing silently at four different papers.
+- **Make edit scripts atomic.** Assert the expected number of matches before
+  writing anything, so a failed assertion leaves the document untouched instead
+  of half-edited.
+- **Verify a global transformation by reconstruction, not by inspection.** For a
+  renumbering: apply the mapping to the previously extracted text and require
+  character-identical equality with the newly extracted text, then check that
+  each reference entry's content moved as the mapping predicts.
+- **Keep an extraction script that dumps paragraph text with highlight markers
+  and table contents.** It is the only practical way to review a document you
+  cannot open, and it doubles as the input to the reference and length checks.
+- **Style ids are not style names.** In a German template the ids are
+  ASCII-stripped ("berschrift2") while python-docx addresses styles by name
+  ("Heading 2"); build on a copy of the original file so styles and section
+  setup survive.
+- Adding a footnote to a document that has never had one means building the part
+  from scratch: content-type override, relationship, `footnotes.xml` with the
+  separator entries, and the two footnote styles.

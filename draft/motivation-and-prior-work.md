@@ -146,9 +146,13 @@ traceable reference back to its source. Discovery is reconstructing,
 after the fact and at extraordinary cost, exactly what fine-grained
 transclusion would have recorded natively. Nelson's original design made
 the point sharper: transclusion was to carry not only a link back to a
-source but a basis for compensating it (transcopyright) [Nelson1999], so
-traceable and payable reuse was a designed-in property of the road not
-taken rather than an afterthought.
+source but a basis for compensating it, and transcopyright
+[Nelson1997] specified how. Reuse of any length was permitted in
+advance, on the condition that the bytes be delivered from the
+rightsholder's own server, so every act of reuse remained a metered,
+traceable event instead of an untracked copy. Traceable and payable
+reuse was a designed-in property of the road not taken rather than an
+afterthought.
 
 Across all four cases the pattern is identical. The Web's avoided
 coordination cost has been reassigned: to archivists maintaining
@@ -192,6 +196,18 @@ coherent reference layer with explicitly chosen guarantees, and the
 theory of which guarantees an island can afford at which coordination
 cost.
 
+*The economic case for non-copyable references is being made
+independently.* Work on personal-data exchange now argues that raw data
+cannot sustain a marketplace at all, because a copyable good spawns
+unlimited supply, and proposes trading purpose-specific derivations
+carried in envelopes that constrain their shelf life and permitted use
+[Verborgh2025]. The argument arrives from data protection rather than
+from copyright, but it reaches Nelson's conclusion: value survives when
+a reference is resolved fresh from its origin under stated terms, and
+collapses when the underlying asset is handed over. What that literature
+does not supply is a reference layer able to carry such terms, which is
+the gap this project addresses.
+
 ### 1.4 Beyond Xanadu: references into data that must stay confidential
 
 Durability guarantees (persistence, integrity, provenance) are only
@@ -226,6 +242,19 @@ unreadable source. To our knowledge, no existing architecture treats
 such verifiable-but-undisclosed references as a first-class addressing
 primitive; making them one is a central scientific ambition of this
 proposal.
+
+Confidentiality has a companion guarantee that must be kept distinct
+from it. Secure computation settles whether a recipient may see the
+bytes; it says nothing about what the recipient may do with the result
+once resolution has succeeded. High-stakes islands need both, because
+the terms that make a party willing to answer a reference at all
+(this derivation is for this recipient, for this purpose, for this
+window) are constraints that must survive release rather than gate
+access to it. Access control ends at the moment of disclosure, and the
+open Web offers nothing after it. An island can do better, because a
+reference resolved inside one can carry its own terms and be resolved
+again when they lapse. Section 2.9 develops this as a distinct class of
+reference.
 
 ### 1.5 A new client class forces the architectural question again
 
@@ -410,7 +439,16 @@ and stewarded by the Open Data Institute since 2024, with
 production civic deployments (Flanders' Athumi). Solid is an "islands"
 strategy for *control and access*, not for *addressability*: it
 retains location-addressed, mutable resources, so link rot, content
-drift, and provenance remain out of scope. European data-space
+drift, and provenance remain out of scope. Recent work in the same
+line has moved past raw-resource exchange altogether, arguing that
+transferring raw data cannot sustain a market and proposing instead
+that parties trade purpose-specific derivations wrapped in envelopes
+that bound their shelf life and permitted use [Verborgh2025]. This
+sharpens rather than displaces the positioning above: it accepts that
+handing over the resource is the wrong primitive, while the semantics
+needed to name a derivation, pin it to a version, and carry its terms
+are precisely what a location-addressed store does not provide.
+European data-space
 initiatives (Gaia-X, iSHARE, sectoral spaces under the Data Act) and
 exchange frameworks such as WBCSD PACT similarly relocate governance
 and contracts, not reference semantics; federated social protocols
@@ -502,6 +540,27 @@ piggybacking, Wikipedia's non-commercial model, public-sector Solid
 hosting, data cooperatives) supply the comparative cases for which
 institutional homes can sustain islands without platformization.
 
+A third instrument belongs beside the architectural and the legal one.
+Some guarantees cannot be technically enforced once a reference has
+resolved, yet they can be priced: an island that makes requesting a
+fresh, purpose-bound derivation cheaper than storing and reusing a
+stale one obtains in practice a constraint it cannot obtain by
+construction. Transcopyright is the earliest worked example, granting
+reuse permission in advance while keeping delivery, and therefore
+settlement, at the origin [Nelson1997]; the insight-economy argument
+reaches the same design from data protection three decades later,
+explicitly declining to prevent misuse and instead making freshness the
+cheaper path [Verborgh2025]. Both accept that the compliant path has to
+be the least expensive one for the party who might defect. This gives
+O1 a second currency: guarantee bundles are priced not only in
+coordination cost but in the margin by which compliance undercuts
+defection, and that margin varies by actor. It also sharpens the WP5
+question. For each actor class the analysis asks not merely whether an
+island changes the incentive to centralize, but whether the island can
+be configured so that the guarantee-respecting path is the cheapest one
+available to that actor. Where it cannot, the guarantee is aspirational
+and the theory should say so.
+
 ### 2.7 Agents as hypermedia clients
 
 Research on Web-based multi-agent systems has long argued that agents
@@ -553,6 +612,163 @@ version-pinned, verifiable (and, where required,
 confidentiality-preserving) references as the default addressing
 primitive, for human and agent clients alike.** That composition and that theory are the ground this proposal
 breaks.
+
+### 2.9 A taxonomy of link classes: naming the chosen-guarantee lattice
+
+Sections 2.1–2.7 show every ingredient of the guarantee lattice already
+exists as a citable line of work, but scattered, and never named as one
+family a client can select from. WP1's guarantee calculus becomes
+operational once each combination of guarantees is a named *link
+class*: a declared, checkable claim about what resolving a reference
+actually gives you, the same operational role RFC 8288 link relations
+[Nottingham2017] or HTTP status codes play for lower-stakes claims. The
+classes organize along a small number of largely independent axes rather
+than one
+ladder, in the spirit of the structural-computing argument that
+different domains select different abstractions over one substrate
+[Nurnberg1997] (§2.1).
+
+**The persistence/integrity ladder** (content-reference classes,
+increasing in the strength of what "the target is what it claims to
+be" means):
+
+- **Classic Jumplinks** — the Web default: location-addressed,
+  mutable, no persistence guarantee; the fallback outside any island,
+  and the form a stronger link degrades to on leaving one.
+- **Archived/Resilient Links** — availability through redundancy
+  rather than cryptography: timestamped snapshots and redundant
+  content signatures keep a reference resolvable across edits and
+  removals, in the tradition of LOCKSS's replicated preservation
+  [Maniatis2005], the Memento time-based access vocabulary [RFC7089],
+  and Phelps and Wilensky's robust hyperlinks [Phelps2000a,
+  Phelps2000b], with Perma.cc [Perma] and browser-level Text Fragments
+  as the deployed and the browser-native instances (§2.2). None of
+  these verify integrity; they keep something resolvable, not provably
+  unaltered — the distinction this class makes explicit, and the
+  reason it is a separate rung from Trusted Links rather than a
+  synonym for one.
+- **Trusted Links** — island-registered and bidirectionally tracked:
+  authority-bound (the registrant is known and accountable within the
+  island) but not independently cryptographically checked, the
+  coordination Xanadu wanted globally and the open Web refused, made
+  explicit at island scale (external link services and the
+  Distributed Link Service precedent [Fountain1990, Carr1995], showing
+  bidirectional linking and referential integrity are buildable at
+  workgroup scale, §2.1).
+- **Verified Links** — span-level, version-pinned, content-addressed
+  (Merkle-DAG per Git/IPFS [Benet2014], SWHIDs): resolution either
+  matches the cited bytes exactly or fails visibly. This is Xanadu's
+  own guarantee [Nelson1981, Nelson1999], finally married to a
+  substrate that scales (§2.1, §2.3).
+- **Cryptographic Links** — SMPC/ZK-resolved: a verified derivation
+  from data the client never sees, generalizing our own PEP-LCA
+  protocol and its Solid/WASM integration [Grau2025, Grau2026] from an
+  application protocol into an addressing primitive (§2.5).
+
+**The attribution axis** (orthogonal and non-monotone — neither pole
+is strictly "better," per the trade-off already named in §2.4):
+
+- **Attributed Links** — bind a reference to a verified, accountable
+  author, building on provenance-attestation and integrity-by-design
+  mechanisms already demonstrated in W3C PROV [PROV], C2PA [C2PA], and
+  the team's own tamper-evident physical-to-digital referencing
+  [BekavacQR2024]. This is what makes a fabricated citation in
+  Island L a sanctionable act rather than merely an unattributable one.
+- **Anonymous/Pseudonymous Links** — verify eligibility or membership
+  without revealing identity, via anonymous credentials, group and
+  traceable signatures, and revocable pseudonymity (§2.4), grounded in
+  the partner group's chilling-effects research (Palmieri, supervised
+  by Tamò-Larrieux) on why unlinkable participation is sometimes the
+  guarantee an island needs, not a compromise of it.
+
+**The trust axis** (a guarantee our own review of the field had not
+yet named as an NFP at all):
+
+- **Endorsed/Reputation Links** — resolution returns not only the
+  target but a decay-bounded, Sybil-resistant trust score computed
+  over a decentralized web of retractable endorsements, generalizing
+  the nanopublication ecosystem's IDEBT algorithm [ISWC2026] (§2.3)
+  from a statement-level trust layer into a general link property. No
+  prior island-like architecture prices trust as a chosen guarantee
+  alongside persistence, integrity, and confidentiality; this class is
+  the gap that motivates adding *trust* as an eighth NFP to O1's model.
+
+**The usage axis** (constraints that survive resolution rather than
+gate it):
+
+- **Purpose-Bound Links** — resolution yields a derivation declared
+  valid for a stated recipient, purpose, and window, with those terms
+  travelling as part of the reference rather than as an out-of-band
+  contract; when the window closes the reference is re-resolved rather
+  than reused. The class generalizes the envelope construct proposed
+  for personal-data exchange [Verborgh2025] and the delivery-bound
+  permission of transcopyright [Nelson1997] into a property of the
+  reference layer itself. It is orthogonal to the ladder above, and in
+  particular distinct from its top rung: a Cryptographic Link
+  constrains what a client may *see*, a Purpose-Bound Link constrains
+  what it may *do with what it got*, and a single reference can be
+  both. It is also narrower than two neighbours it might be confused
+  with. Live/Subscription Links notify that a version has been
+  superseded, whereas expiry here is designed in rather than reported;
+  Personalized/Disclosed Links vary resolution by requester with the
+  criteria disclosed, whereas purpose-binding additionally places
+  obligations on the recipient. Enforcement is the honest difficulty:
+  nothing in the substrate stops a recipient from retaining a
+  derivation past its window, which is why this class is priced under
+  the economic argument of §2.6 rather than asserted as a hard
+  guarantee. Its tension with Xanadu-style immutability resolves the
+  same way retraction does below: the derivation expires, while the
+  immutable record that it was issued, to whom, and under which terms
+  does not.
+
+**The modality axis** (reference vs. capability, cutting across all of
+the above):
+
+- **Capability/Affordance Links** — a link whose target is an action,
+  not a document, exposed only when currently valid, generalizing
+  HATEOAS and the PI's own signifier line [Vachtsevanou2023,
+  Vachtsevanou2024, Lemee2024] (§2.7) into O4's agent gateway; any
+  guarantee level above can apply to a capability link exactly as it
+  does to a content link — a Verified Capability Link is an action
+  affordance whose current validity is structurally guaranteed, not
+  merely claimed by the server.
+
+**Two further, narrower classes worth naming rather than folding into
+the above:**
+
+- **Live/Subscription Links** — the guarantee concerns future
+  notification of change rather than present content, generalizing
+  WebSub's `rel="hub"` pattern (§2.7) to arbitrary island resources;
+  necessary once references are version-pinned, since someone has to
+  learn when a new version supersedes the one they hold.
+- **Personalized/Disclosed Links** — resolution deliberately varies by
+  requester, but the personalization criteria are exposed as part of
+  the link's affordance rather than hidden, directly instantiating the
+  team's own engineered, disclosed-filter-bubble proposal [Strecker2025]
+  and its empirical counterpart on undisclosed platform curation
+  [Bekavac2024, BekavacMayer2026] (§2.4, §2.6) — the architectural
+  difference between a platform choosing what you see and an island
+  disclosing why.
+
+**Retraction is a mechanism, not a class.** Xanadu-style immutability
+and legal erasure rights (GDPR Art. 17) pull in opposite directions,
+most visibly in Island L, whose citation corpus will contain personal
+data. We resolve this the way the nanopublication ecosystem resolves
+the same tension for its own signed records [ISWC2026]: the underlying
+content stays immutable in the content-addressed substrate, but a
+superseding *retraction* record changes default resolution behavior
+for future clients, so a Verified or Archived Link can be marked
+retracted without deleting the history that makes it verifiable in the
+first place. We therefore do not add a "Retractable Link" class
+alongside the others; retractability is a state any Verified or
+Archived Link can enter, and WP1's calculus must price it as such.
+
+Read together, sections 2.1–2.7 supply a citable precedent for every
+axis of this taxonomy; no prior work names them as one family a
+reference can declare and a client can enforce, or ties that family to
+a theory of which bundle an island of a given size, stake, and threat
+model can afford. That naming, not any single mechanism in the list,
+is what WP1 contributes.
 
 ---
 
@@ -628,10 +844,16 @@ breaks.
 - [Maniatis2005] Maniatis et al. *The LOCKSS Peer-to-Peer Digital
   Preservation System.* ACM TOCS 2005.
 - [Nelson1981] Nelson. *Literary Machines.* Mindful Press, 1981.
+- [Nelson1997] Nelson. *Transcopyright: A Simple Legal Arrangement for
+  Sharing, Re-use, and Republication of Copyrighted Material on the
+  Net.* In Masuda, Masunaga, Tsukamoto (eds), Worldwide Computing and
+  Its Applications (WWCA '97), LNCS 1274, Springer, 1997; also Educom
+  Review 32(1):32-35, 1997. ✓ verified 2026-09-04.
 - [Nelson1999] Nelson. *Xanalogical Structure, Needed Now More than
   Ever.* ACM Computing Surveys, 1999.
 - [Nurnberg1997] Nürnberg, Leggett, Schneider. *As We Should Have
   Thought.* ACM Hypertext '97, 1997.
+- [Nottingham2017] Nottingham. *Web Linking.* RFC 8288, IETF, 2017.
 - [Nottingham2023] Nottingham. *Centralization, Decentralization, and
   Internet Standards.* RFC 9518, IETF, 2023.
 - [Osterbye1992] Østerbye. *Structural and Cognitive Problems in
@@ -665,6 +887,8 @@ breaks.
   of work.
 - [Verborgh2024] Van Herwegen, Verborgh. *The Community Solid Server.*
   Semantic Web 15, 2024.
+- [Verborgh2025] Verborgh. *Inside the Insight Economy.*
+  ruben.verborgh.org, 12 August 2025. ✓ verified 2026-09-04.
 - [Zittrain2014] Zittrain, Albert, Lessig. *Perma: Scoping and
   Addressing the Problem of Link and Reference Rot in Legal Citations.*
   Harvard Law Review Forum / Legal Information Management, 2014.
@@ -700,7 +924,14 @@ breaks.
    motivation + state of the art; objectives/work packages are the next
    drafting step and, from 2026 rules, all feasibility material goes to
    B2 only).
-5. **Stakeholder analysis** (notes §Open questions) still needs to be
-   developed and woven into §2.6.
+5. **Stakeholder analysis** (notes §Open questions) — **half done
+   2026-09-04.** The economic-enforcement instrument is now developed
+   in §2.6 (guarantees that cannot be technically enforced after
+   resolution can be priced, per [Nelson1997] and [Verborgh2025]),
+   giving O1 a second currency and WP5 a per-actor question. Still
+   open: the actual per-actor-class analysis (hyperscaler, legacy
+   industry, OSS/privacy community, browser vendor, platform), which
+   needs the interview and institutional-analysis work planned in
+   WP5.
 6. **Panel targeting**: likely PE6, cross-panel note in B1 should flag
    the legal/regulatory dimension (SH2?) explicitly.

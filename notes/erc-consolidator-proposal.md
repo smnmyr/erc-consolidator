@@ -601,6 +601,146 @@ needs.
   signifier exposure across agent architectures, WP4); keep as a
   separate candidate idea.
 
+## The insight economy and purpose-bound references
+
+Source: Ruben Verborgh, *Inside the Insight Economy*, 12 August 2025
+(<https://ruben.verborgh.org/blog/2025/08/12/inside-the-insight-economy/>).
+Cited in the drafts as [Verborgh2025]. Reasoning store for the material
+now condensed into §1.3, §1.4, §2.4, §2.6 and §2.9 of
+`draft/motivation-and-prior-work.md`.
+
+**Note on framing (decided 2026-09-04).** The drafts cite this as an
+ordinary prior-work datapoint. They deliberately do *not* build an
+argument out of who wrote it, even though the author's standing in the
+Solid project would make "Solid's own architects concede the point" a
+quotable line. Two reasons: the ODI is a live CoCoDa partner and Solid's
+steward, and the author is a plausible reviewer. The substance carries
+the claim without the rhetoric.
+
+**The argument.** Raw personal data cannot form a market: a copyable
+good spawns unlimited supply and collapses the demand side. Worse, the
+most valuable data is legally toxic (the worked example is a GDPR Art. 9
+health datum that no retailer's DPO will let it hold, however willingly
+offered). The proposal is to trade *purpose-led insights* instead:
+derived, recipient- and context-specific artifacts wrapped in "trust
+envelopes" that constrain shelf life and permitted use. Enforcement is
+explicitly not technical. Misuse is not prevented; it is priced out, by
+making a fresh request cheaper than hoarding a stale answer.
+
+### 1. Architectural mismatch with Solid
+
+Solid solved custody: data at an address the subject controls, with an
+identity and access control over it. The insight economy needs
+transaction, and that needs three layers Solid does not have
+(derivation, obligation, market). Five specific points:
+
+1. **The unit of authorization is wrong.** Solid authorizes a resource
+   URL; WAC and ACP say who may GET what. The insight economy's unit is
+   a *function applied to data* for a named recipient at a moment.
+   There is no standard way to say "evaluate this rule over my pod and
+   return only the result." This also cuts against the link-traversal
+   query line (Comunica, TPF), which works by pulling raw triples to
+   the client and aggregating there, the exact move the insight economy
+   forbids.
+2. **Interoperability presupposes copyability.** Solid's bet is shared
+   vocabularies and reusable data so data outlives apps; RDF is built
+   to be dereferenced, merged, cached and followed. An artifact that
+   loses its value when copied is close to anti-Linked-Data: bespoke,
+   expiring, addressed to one recipient. Give it a URI and store it in
+   a pod and you have recreated raw data. It is a message, not a
+   resource, and Solid has no messaging or negotiation layer, only
+   GET/PUT/PATCH.
+3. **Access control terminates at release.** Shelf life, purpose
+   limitation and no-re-derivation are all *after* the read. That is
+   usage control, and it is unenforceable at the protocol layer. The
+   article concedes this and substitutes a market mechanism, which
+   relocates enforcement out of the protocol entirely. This is the
+   observation that became §2.6's third instrument.
+4. **Derivation has to execute somewhere.** "Safe derivation at a
+   secure location" turns the pod into a trusted execution environment,
+   but Solid pods are deliberately dumb document stores, which is what
+   lets anyone host one and keeps pod providers from becoming app
+   providers. Make them compute-capable and the host sees both the raw
+   data and every derivation, reintroducing the powerful intermediary
+   the design was meant to remove. Run the derivation elsewhere and the
+   raw data moved, violating the premise.
+5. **WebID works against unicity.** A stable, dereferenceable, global
+   identifier is a correlation handle by construction, while the
+   article's own opening anecdote (a parent misspelling their surname
+   differently for each retailer) is per-relationship pseudonymity.
+   This is the same non-monotone attribution trade-off §2.4 and §2.9
+   already price.
+
+### 2. Relation to Xanadu's transcopyright
+
+Transcopyright [Nelson1997] grants blanket advance permission to reuse
+material at any length, on the condition that the bytes are always
+served from the rightsholder, tethered to their original context, so
+each read is a billable, traceable event. The parallels are structural,
+not incidental.
+
+**Shared.**
+
+- *Diagnosis.* The Web is a copying machine: GET hands over a severed
+  duplicate, destroying provenance and any basis for compensating the
+  origin. The insight-economy version is that copyable goods spawn
+  infinite supply. Same root cause, reached from copyright and from
+  data protection respectively.
+- *Solution shape.* Neither ships the asset. Both make each act of use
+  a metered service from an origin that stays structurally
+  irreplaceable, rather than policing copies afterwards.
+- *Enforcement philosophy.* Both reject copy prevention. Transcopyright
+  is permissive and works because the referenced path is easier and
+  legitimate; the insight economy makes freshness cheaper than
+  hoarding. This is the deepest parallel and the one §2.6 uses.
+- *Legal arbitrage by architecture.* Nelson's trick is republishing
+  mostly-quotation without clearing rights, because no copy occurred
+  and the transfer that triggers copyright never happens. The insight
+  economy's trick is never transferring the Art. 9 datum, so the regime
+  attaching to its possession never fires. Both use architecture to
+  avoid triggering a legal regime rather than to comply with one. This
+  is the strongest available support for the SH2 cross-panel case.
+
+**Inverted.**
+
+| | Xanadu | Insight economy |
+|---|---|---|
+| Fidelity | Zero-loss: the quote *is* the original bytes | Deliberately lossy; minimization is the legal point |
+| Provenance | Reversible by design, origin one click back | Must be irreversible or the sensitive datum leaks back |
+| Time | Permanent, versioned, nothing deleted | Perishable; a stored hot insight becomes cold data |
+| Shape | One work, many readers, identical content | One-to-one, non-fungible, per-context derivation |
+| Seller | Author of a work, paid per read | Data subject, who refuses the micropayment ("10 cents per access? worthless") and wants direct causal value |
+
+That last row matters for us: transcopyright is a micropayment scheme,
+the insight economy is barter-for-service. One sells access, the other
+buys alignment. Both are priced; only one is priced in money. O1's
+second currency has to be general enough to cover both.
+
+### 3. What this changed in the drafts
+
+- §1.2 now cites [Nelson1997] for transcopyright (was [Nelson1999],
+  which is the *Xanalogical Structure* retrospective) and names the
+  serve-from-origin mechanism.
+- §1.3 gains a third "why now" strand: the economic case for
+  non-copyable references is being made independently.
+- §1.4 distinguishes confidentiality (may you see the bytes) from
+  purpose binding (what may you do with the result, for how long).
+- §2.4 records the move past raw-resource exchange, neutrally.
+- §2.6 adds economic enforcement as a third instrument beside the
+  architectural and the legal one, giving O1 a second currency and WP5
+  a per-actor question. Closes the economic half of the open TODO.
+- §2.9 adds the **usage axis** with **Purpose-Bound Links**.
+
+### 4. The architectural arc worth stating somewhere
+
+The Web copies on read. Solid still copies on read; it only moves the
+address you copy *from* under the subject's control. The insight
+economy abandons copy-on-read for serve-from-origin, per-use, with
+terms riding along. That trajectory runs from Web semantics back toward
+Xanadu semantics, arriving via GDPR rather than via literary theory,
+and with the fidelity requirement inverted. Candidate framing for a
+talk or the B1 opening; not currently used in the drafts.
+
 ## Open questions / stakeholder analysis (to develop further)
 
 Whether a Xanadu-like system helps or hurts depends heavily on which
@@ -617,6 +757,15 @@ Each has different incentives around coordination cost, control over
 identity/addressing, and monetization of persistent references; the
 proposal should articulate which of these the "islands" are meant to
 serve, and why the trade-off favors them specifically.
+
+**Update 2026-09-04.** The section above now has an instrument it
+lacked. Beyond asking which actors islands serve, the analysis can ask
+whether an island is configurable so that the guarantee-respecting path
+is the *cheapest* path for each actor class, per the economic
+enforcement argument in the insight-economy section above and §2.6 of
+the motivation draft. A guarantee no actor is paid to keep is one the
+theory should decline to promise. The per-actor work itself is still
+open and is WP5's.
 
 ## Team: how it fits together
 
