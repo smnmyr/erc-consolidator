@@ -1,11 +1,16 @@
 # Proposal-Writing Skills
 
-General lessons about writing (research) grant proposals, distilled from two drafting
+General lessons about writing (research) grant proposals, distilled from four drafting
 efforts. Sections 1-8 come from the ERC Consolidator 2027 "islands" proposal (sources:
 SwissNCP CoG webinar, Giacomo Indiveri's CoG-winner retrospective, official ERC
 documentation, and the drafting process itself). Sections 9-12 come from the TANDEM
 Health Forward start-up proposal (HSG/OKS, Aug 2026), which prepares a later Innosuisse
-submission and was drafted directly in Word. Written to be reusable beyond either scheme.
+submission and was drafted directly in Word. Sections 13-16 come from the SoSy 27 event
+funding effort (Sep 2026): three parallel applications for one symposium, to the SNSF,
+the HSG Research Committee and the Swiss Informatics Foundation. Sections 17-18 come from
+the SNSF project funding proposal on cognitive interoperability (Sep 2026), a LaTeX source
+in git that the PI and the assistant edited in turns. Written to be reusable beyond any of
+these schemes.
 
 Section numbers are stable; new material is appended rather than interleaved, so notes
 elsewhere that cite "§7" keep pointing at the same thing.
@@ -13,7 +18,10 @@ elsewhere that cite "§7" keep pointing at the same thing.
 1. Evaluation mechanics · 2. Ambition · 3. Structure and craft · 4. Facts and citations ·
 5. Team and institutions · 6. Process · 7. Writing like a person · 8. Naming ·
 9. Preparatory and two-stage schemes · 10. Verifying the funder's rules ·
-11. Writing for a mixed panel · 12. Editing the document programmatically
+11. Writing for a mixed panel · 12. Editing the document programmatically ·
+13. Splitting one project across several funders · 14. Filling official forms ·
+15. Events, and what the money actually buys · 16. Keeping the source and the submission in step ·
+17. Cutting to a character limit with the author · 18. Co-editing a LaTeX source in turns
 
 ## 1. Know the evaluation mechanics before writing a word
 
@@ -58,9 +66,56 @@ elsewhere that cite "§7" keep pointing at the same thing.
 - **Vision first, competence second.** The primary question at stage one is "is
   this a great idea worth pursuing?", not "can this person do it?". Indiveri's
   structure works: **WHY (vision) → HOW (methods) → WHAT (results) → WOW (impact)**.
-- **Open with a sentence a non-expert remembers.** ("Every reference on today's
-  Web is a bet that someone else will keep a promise they never made.") One
-  crisp, quotable framing beats three paragraphs of context.
+- **Open with the founding trade-off, stated fairly, then the thesis.** The
+  ERC B1 opening the PI settled on (2026-10-29) runs: the original design
+  choice and its rationale, from primary sources (Berners-Lee 1989; Fielding
+  and Taylor on REST) -> what that choice enabled (billions of users and
+  devices within three decades) -> an explicit thesis ("We argue that the
+  Web's trade-offs are however too rigid for today's use cases") -> who needs
+  what -> how the gap was filled meanwhile (platforms responded; the
+  mitigations are unsatisfactory) -> who pays (dated cases, closed by one
+  synthesis sentence) -> the idea. Crediting the existing system before
+  criticizing it keeps reviewers who built it on side; a quotable one-liner
+  does not replace this arc.
+- **State the thesis as a claim of your own.** "We argue that ..." makes the
+  position explicit and attackable; letting the reader infer it from the
+  evidence reads as hedging.
+- **Attach each requirement to the stakeholder that holds it.** "Publishers
+  require traceable dereferencing, supply chain management requires
+  aggregation over confidential data, courts and parliaments require stable,
+  specific citations, users require sovereignty over their data, and society
+  requires trusted content and accountable authorship" beats an abstract list
+  of what "these uses need".
+- **Judge the mitigations you cite.** Say whether the existing remedy works
+  ("yielding unsatisfactory mitigation"; DSA researcher access "shown to be
+  defunct in principle") and source the judgment. Listing remedies without a
+  verdict leaves the gap unproven.
+- **Present the project as an extension, not a replacement.** "We propose to
+  extend the Web's architecture", islands interoperate "through the Web's
+  existing low-coordination mechanisms that permit planetary scaling", and
+  stay backwards-compatible. A clean-slate tone invites a panel to defend the
+  incumbent system.
+- **Let the communities choose; the project supplies the choice.** Frame the
+  contribution as enabling stakeholders to select their own configuration ex
+  ante ("an ex-ante selected architectural trade-off rather than ex-post
+  patching or litigation") instead of prescribing one configuration for all.
+- **Introduce a concept through the need it meets, then name it.** "...
+  communities select their own property configuration, i.e., a set of desired
+  non-functional properties (NFPs). ISLANDS introduces the *island* to capture
+  such configured spaces." Define acronyms again in the main text even when
+  the abstract already did.
+- **In the synopsis, present mechanisms as instances of the design space, and
+  new ones as research.** "Within an island, references can for instance be
+  defined as span-level, version-pinned ...", "Through ISLANDS, we further
+  explore NFPs that have not yet been proposed on an architectural level."
+  Fixing one mechanism in B1 narrows the idea and invites attacks on details;
+  claiming that islands already "provide" new properties overclaims.
+- **Show that a case is a trend.** Extend a single regulatory example to its
+  announced scope in a short parenthesis ("batteries sold in the EU (and, soon
+  after, products from clothes to detergents) must carry a digital passport").
+- **Close a block of cases with one synthesis sentence** that names what they
+  share ("What these cases have in common is that ..."), then stop; drop
+  side remarks such as "courts see only the share that becomes litigation".
 - **Motivate with concrete, recent, verifiable events rather than abstractions.**
   Court sanctions, real dollar amounts, named cases, and dated statistics make an
   infrastructure problem urgent in a way that "link rot is a growing concern"
@@ -125,6 +180,16 @@ elsewhere that cite "§7" keep pointing at the same thing.
 - **Check cited-versus-defined in both directions every pass.** Dangling
   citations are the obvious failure; entries that are defined but never cited
   are the quieter one, and usually mark text that was cut around them.
+- **Keep self-citations out of the idea paragraph.** The PI removed "including
+  in our own system for supply-chain assessment [41, 42]" from "The idea" in
+  B1; the team's own systems belong in the methods and team sections.
+- **`[x]` marks a claim that still needs a source.** The PI writes `[x]`
+  where a citation is missing; find, verify, and insert the source (or report
+  that none supports the claim) before the next build.
+- **Use the field's own term, precisely.** "Uniform interface" (the REST
+  constraint), not "general interfaces"; "when defining the Representational
+  State Transfer (REST) architectural style"; "persistent identifiers through
+  ELI". A paraphrase of an established term reads as unfamiliarity with it.
 - **When a self-citation is unusually load-bearing, say so in the sentence.**
   That the doctoral researcher the grant would fund is first author of a
   directly relevant paper is worth a clause in the text, not burial inside a
@@ -235,7 +300,16 @@ the following:
   section aloud: anything you would not say to a colleague, rewrite.
 - Vocabulary tells ("delve", "landscape", "tapestry", "leverage", "robust")
   were absent from these drafts, but check for them anyway; they are the
-  cheapest to grep for.
+  easiest to grep for.
+- **Use academic, not commercial, vocabulary.** Do not say what an
+  architecture "buys", that a design "wins", or that a guarantee is
+  "priced", "cheap", "affordable", or "paid for". Write *provides* or
+  *induces* (Fielding's term for architectural properties), *attains*,
+  *outperforms*, *quantifies*, *assesses*, *sustainable*, *attainable*,
+  *less costly*, *incentive-compatible*. Literal economic facts stay (a
+  badge that anyone could buy). Grep the body for buy/win/price/cheap/
+  afford/undercut/paid before submission (PI instruction, ERC CoG 2027,
+  2026-10-29).
 
 ## 8. Naming, titles, and framing labels
 
@@ -419,3 +493,251 @@ constraints shape what is safe to attempt.
 - Adding a footnote to a document that has never had one means building the part
   from scratch: content-type override, relationship, `footnotes.xml` with the
   separator entries, and the two footnote styles.
+
+
+## 13. Splitting one project across several funders
+
+One event, three applications, no shared cost line. The split is the work; the
+prose is the easy part.
+
+- **Derive the split from what each scheme forbids, not from what it allows.**
+  The exclusions are sharper than the eligibility lists and rarely overlap. SNSF
+  Scientific Exchanges pays travel and board for participants from abroad and
+  excludes catering, venue, materials and speaker fees; the HSG Research
+  Committee pays catering, occupancy and organisation and excludes honoraria,
+  publication fees and social side events; the Swiss Informatics Foundation pays
+  public outreach. Lay the exclusion lists side by side and the partition falls
+  out with no line claimed twice.
+- **Redefine the event boundary per application, and say so in each.** The SNSF
+  application declares an event of 11-12 May, which keeps the public day of
+  10 May outside its scope; the outreach application declares only 10 May. This
+  is legitimate as long as each document states its own boundary and the
+  boundaries do not overlap. It also protects against the "predominantly
+  knowledge transfer" exclusion, since the hackathon and onboarding sessions sit
+  outside the declared scientific event.
+- **Disclose the parallel applications in every one of them.** Funders expect it,
+  and a form with no field for it is not a reason to omit it: a sentence in the
+  funding section does the job. Check each submitted form for this explicitly;
+  it is the item most easily lost when a form is filled before its siblings
+  exist.
+- **Write the non-overlap rule down once, in a README next to the proposals, as a
+  table of what is *not* requested and why.** During drafting the temptation to
+  move a line into whichever application has headroom is constant, and the table
+  is what stops it. Include the lines nobody funds, so that a rejection has a
+  visible consequence rather than a silent one.
+- **Sequence by decision date, not by deadline.** A foundation with two fixed
+  rounds a year and a 90-day decision can have an earlier effective deadline
+  than a scheme whose formal cut-off is months later, because the next round
+  decides after the event. Compute, for each scheme, the last submission whose
+  *decision* still lands before the money is needed.
+- **A ceiling is a design constraint on the ask, not a target.** Where a scheme
+  caps at CHF 15,000 and offers a separate CHF 500 lump sum for organisation,
+  claiming both puts the total over the cap. Keep the request on one clean
+  category and leave the rest at zero; the arithmetic then needs no explaining.
+- **Ask for a fixed contribution rather than a per-head subsidy** when the
+  headcount is still an estimate. It makes the request immune to the attendance
+  number changing, and it tells the committee that the institution absorbs the
+  variance.
+
+## 14. Filling official forms
+
+Most schemes are won or lost in prose, but the form is what gets rejected.
+
+- **Get the real form before writing anything into a reconstruction of it.** A
+  programme page may link only to a login-gated intranet; ask the applicant for
+  the file rather than rebuilding the form from a sibling programme's version.
+  Two forms in the same house style can differ in the one field that matters,
+  and a form for a related instrument is not the form.
+- **A confusing phrase on the public programme page is often the name of the
+  fund, not a typo.** "max. CHF 15,000 je Forschungsgespräch" on a page about
+  scientific events looked like a copy-paste error; it was the fund the
+  programme is administered through. Resolve such oddities against the form, not
+  against intuition.
+- **Fill AcroForms by writing both the field value and an appearance stream.**
+  Setting `/V` alone relies on the reader honouring `NeedAppearances`; many do
+  not, and the applicant sees an empty form. Render the text into an `/AP` form
+  XObject with the form's own `/Helv`, and set `/WinAnsiEncoding` on it, or
+  every dash and umlaut comes out as the wrong glyph.
+- **Auto-shrinking text to fit a box is a bug, not a feature.** If a field
+  auto-sizes below about 7 pt, the answer is too long for the space the funder
+  allotted; shorten it and move the detail to an attachment. Render the filled
+  form to an image and look at it, because a field that reads fine in the
+  extracted text can be unreadable on the page.
+- **Radio groups are one field with several widgets.** Set `/V` on the field and
+  `/AS` on each widget, using the export value the widget actually declares
+  (`/Yes`, `/On`, or something else). Read the states out of `/AP /N` rather than
+  assuming.
+- **Field names are not the labels.** They may be the label text with spaces and
+  punctuation stripped, truncated at an arbitrary length, or left as `Text1`.
+  Dump the names, the rectangles and the flags before writing the filler, and
+  make the filler report which of its answers it failed to place.
+- **Read-only fields and tooltips masquerade as answerable fields.** A field with
+  the read-only flag set and default text in it is the form's own note to the
+  applicant. Leave it alone.
+- **Do not keep a form-filling script alongside the filled form once the form has
+  been edited by hand.** Two masters diverge silently, and re-running the script
+  overwrites the newer document with older text. Either the script is
+  regenerated from the current answers or it is deleted; the file that gets sent
+  is the master.
+
+## 15. Events, and what the money actually buys
+
+Event schemes are judged on different criteria from research schemes, and the
+persuasive core is usually financial rather than intellectual.
+
+- **Name the thing the grant changes for participants.** A contribution towards
+  catering is dull; the same contribution described as what allows the
+  registration fee to come down, and a reduced-fee category to exist for
+  students and for people from small companies and non-profits, is a decision
+  the committee can feel the point of. Trace the money through to the person who
+  benefits, and keep the chain short and arithmetically checkable (catering is a
+  fixed cost of roughly CHF 100 per head; carried by the fee, it is the largest
+  component of the fee).
+- **Check that the argument is not the thing the scheme forbids.** The SNSF
+  explicitly rejects applications that reduce fees for the participants it
+  supports instead of reimbursing their costs. The same fee argument that wins
+  the catering grant will sink the travel grant. Where the fact still belongs in
+  the text, state it with the qualification attached in the same sentence: the
+  category is funded from the event's own resources, and supported participants
+  pay the ordinary fee.
+- **A track record is worth more than a plan.** For a recurring event, the
+  previous editions are the only evidence that is already fixed and verifiable.
+  Give dates, hosts, submission and acceptance counts, the proceedings volume
+  number, and the keynote speakers by name. This carries the feasibility and
+  qualifications criteria on its own.
+- **Write so the document survives the planning.** Commit only to what will hold
+  (an open reviewed call, workshops in parallel, a published volume); give
+  everything else as the current plan, with approximate counts, themes rather
+  than a fixed line-up, months rather than dates, and partners described by kind
+  until they are committed. The test is whether a changed workshop chair or a
+  renamed track forces a revision.
+- **Distinguish the public character from the scientific programme explicitly**
+  when a scheme rewards the first and another scheme excludes it. Saying which
+  day is which, and which application pays for it, answers two committees at
+  once.
+
+## 16. Keeping the source and the submission in step
+
+- **Declare one master and say so in the file.** When a Markdown source feeds a
+  filled .docx or a generated PDF, put a line at the top of the source naming
+  which file is actually submitted and stating that changes have to be carried
+  both ways. Without it, the version that gets sent is whichever one was touched
+  last.
+- **When you shorten for a page limit, check the sentences that count things.**
+  Merging two of five research questions leaves "five questions" standing in
+  three other places. Grep for the numeral after any structural edit.
+- **Fill the official template rather than pasting into it.** Insert content
+  after each section's answer placeholder, in the template's own paragraph and
+  table styles, and delete the placeholder. Match the placeholder on the exact
+  character the template uses; an en-space (U+2002) mistyped as a normal space
+  matches the heading instead and deletes it, silently and plausibly.
+- **The template's own italic question prompts are instructions, not content.**
+  Deleting them is usually worth about a third of a page and costs nothing,
+  provided the headings stay so the reviewer still sees the structure. Record
+  the decision in the submission notes, with what to cut instead if the author
+  wants them back.
+- **Measure the page count with the template's real metrics.** Font, exact
+  leading, text width and height are all in the file; on Windows or WSL the
+  actual TTFs are usually available, and a wrapping model over them gets within
+  a few percent. Report the number and the headroom, and say plainly that it is
+  an estimate and not a Word render.
+- **Keep a per-scheme submission-notes file** covering eligibility to confirm,
+  the dates in the funder's own vocabulary, what has to be uploaded, the traps,
+  and what is due after a grant. It is the file the applicant actually reads
+  before opening the funder's portal, and it is where a trim order and a
+  "do not cut" list belong.
+
+## 17. Cutting to a character limit with the author
+
+The SNSF limit is 60,000 characters including spaces and footnotes, with the
+bibliography excluded, and 15 pages. The draft stood at about 71,300 characters;
+a series of reviewed cuts brought it to about 61,100.
+
+- **Measure what the funder counts, from the output, with one script.** Extract
+  the PDF text (`pdftotext`), keep everything before the References heading,
+  collapse whitespace, count. Run it after every change. The page limit and the
+  character limit are separate checks: here the pages were met long before the
+  characters.
+- **Footnotes count, references do not.** Moving URL footnotes (protocol specs,
+  product pages, other projects) into the bibliography saves characters at no
+  cost to content. Ask before moving each kind: the author kept links to their
+  own grants as footnotes, where a reviewer sees them on the page.
+- **Check how new bibliography entries render.** Authorless `@misc` entries in
+  the ACM style sort to the front of the list and print "[n. d.]". Decide whether
+  that is acceptable before converting a dozen footnotes.
+- **Repetition across sections is the cheapest cut.** Team roles restated in the
+  team section, the schedule and every work-package intro; the same use-case
+  example told in the introduction, the method and the impact section. Give each
+  fact one home and point to it with a cross-reference.
+- **Merge before you delete.** Two adjacent passages that make the same claim
+  (Semantic Web and Web of Things in the background; two sentences in a section
+  opening that both say "one model serves agents and humans") shrink more, and
+  lose less, as one sentence. When the author asks "can this not be integrated
+  better?", that is the answer they wanted for the next cut too.
+- **Expected results are outputs, one line each.** Prose that re-describes the
+  task under each result duplicates the task text.
+- **Propose each cut separately, with before and after text and an estimated
+  saving, and wait.** The author declined roughly one proposed cut in five and
+  applied several more only in part ("yes, but keep the link to the project",
+  "keep the 'based on WP2 and WP3'"). Batch application would have undone those
+  decisions silently.
+- **Offer options inside a proposal** (a/b/c, full or partial, with or without
+  hedge). The author often picked a middle option that no single "apply?" would
+  have produced.
+- **Estimates run high; report the measured number.** Several savings came in at
+  half the estimate once rebuilt. Say so in the next proposal and move on.
+- **Keep the kept list.** Cuts the author declined are the reservoir for the last
+  few hundred characters. Record each with its estimated saving so the endgame is
+  a choice among known options, not a new search.
+- **Keep deleted text in the source as a comment** (`% [cut: reason] <old text>`).
+  It makes review and restoration trivial and costs nothing in the output.
+- **Re-read the neighbours after a cut.** Removing an example sentence left "it"
+  and "this agent" without an antecedent in the next sentence; removing a clause
+  dropped the only citation of a paper. Check pronouns, cross-references and
+  citation keys around every cut.
+- **Rewrites during cutting are also fact checks.** Re-verify every number in a
+  passage you touch against the primary source (a consortium partner count was
+  wrong and was only caught because the sentence was being shortened).
+- **Hedge statements about other projects' future outputs.** "Our first results
+  should extend AFarEdge's final architecture specification" rather than "will
+  extend": the author asked for the hedge, and the reviewer cannot hold the
+  proposal to another consortium's schedule.
+- **Commit after each tier of cuts**, so each batch can be reverted as a unit.
+
+## 18. Co-editing a LaTeX source in turns
+
+- **Pull before every session and look at what the author changed.** The author
+  edits between sessions, sometimes in the very sentences under discussion.
+- **Mark new text with a colour macro** (`\claude{}` rendering blue) and let the
+  author untag after review. The author also writes instructions to the assistant
+  inside the same macro; resolve and remove those first in each session. The
+  author decides per change whether it is tagged; mechanical cuts were often
+  applied untagged at their request.
+- **Do not name a task or result before it is introduced.** A team section that
+  says "carries T3.2" or "R3.1" makes the reader look ahead. Keep forward
+  pointers at the work-package level, or say in the sentence what the result is.
+- **Define staff shorthands once and use them everywhere** (DOC-COG, PD-TRANS,
+  RA-HUD). Implement them as macros so a rename is one edit; grep for the full
+  names afterwards.
+- **A staffing change moves more than the budget.** Adding a second doctoral
+  student fixed a gap in the schedule but changed the risk argument, the figure,
+  the schedule text and every work-package staff line. List those places before
+  agreeing to the change.
+- **Check what a partner abroad may be paid for.** The author reported that the
+  SNSF funds a research assistant or postdoc at a foreign partner but not a
+  doctoral student; verify against the current regulations before relying on it.
+- **Keep figures reproducible and expect them to lag.** TikZ sources with the
+  render command in their header let the figure be regenerated after a plan
+  change. After every structural change, check whether the figures still match
+  the text; here they predated a whole use case.
+- **Sort citations at package load.** natbib silently ignores `sort` when it is
+  passed through `\setcitestyle`; it must be `\usepackage[numbers,sort&compress]{natbib}`.
+  Check a multi-reference citation in the PDF afterwards.
+- **Tie background sections back to the project goal.** A reviewer reading a long
+  related-work section loses the thread. One sentence at the end of each
+  subsection saying what it gives the project ("For the project's goal, the Web
+  hence already provides...") keeps it, and is cheaper than cutting the section.
+- **Text is also heard.** The author asked to have a section read aloud to judge
+  how it sounded. There is no text-to-speech here; say so and offer a reading for
+  sound (long noun stacks, stacked parentheses, sentences that restate the
+  previous one) rather than improvising with the operating system's speech engine.

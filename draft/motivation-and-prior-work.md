@@ -6,7 +6,7 @@ Requirements
 Chosen Guarantees: Rebalancing the Web/Xanadu Trade-off for High-Stakes
 Information
 
-> **How this draft maps to the ERC 2027 application structure.** From the
+> **Mapping to the ERC 2027 application.** Part B1 carries the idea (abstract, 5-page Part I synopsis, 4-page CV) and is evaluated alone at Step 1; Part II (7 pages) carries the implementation and is read at Step 2. The **Motivation** below is compressed into Part I; the **Prior Work** section feeds Part I's state of knowledge and Part II's positioning. Part I must not cross-reference Part II. Sole criterion: excellence.<!-- was: > **How this draft maps to the ERC 2027 application structure.** From the
 > 2026/2027 Work Programmes onward, Part B1 carries the *idea* (1-page
 > abstract + 5-page extended synopsis + 4-page CV; evaluated alone at
 > Step 1, where feasibility is *not* assessed), and Part B2 carries the
@@ -17,7 +17,7 @@ Information
 > core of B2 section (a). Cross-references from B1 to B2 must be
 > avoided in the final text (Step 1 panels do not see B2).
 > Sole evaluation criterion: excellence — ground-breaking nature,
-> ambition, and (Step 2 only) feasibility.
+> ambition, and (Step 2 only) feasibility. -->
 
 ---
 
@@ -28,31 +28,31 @@ Information
 Every reference on today's Web is a bet that someone else will keep a
 promise they never made. A URL asserts nothing about what it will
 resolve to tomorrow, whether the content behind it has changed, who may
-verify it, or whether the cited passage still exists at all. This is
+verify it, or whether the cited passage still exists at all. This is the founding trade-off of the World Wide Web: its original design<!-- was: This is
 the founding trade-off of the World Wide Web, not an accident of
-implementation: its original design favored simplicity, decentralization, and
+implementation: its original design --> favored simplicity, decentralization, and
 low coordination overhead, which enabled explosive adoption but
 sacrificed stable references, built-in versioning, and native
 bidirectional linking. The Web addresses whole resources by (mutable)
 location; it has no global mechanism for persistent identities of
 document *fragments*, and no coordination layer for link registration or
-back-link tracking. These omissions were features: they are precisely
-what let the Web grow without central coordination [BernersLee1989,
+back-link tracking. These omissions let the Web grow without central coordination<!-- was: These omissions were features: they are precisely
+what let the Web grow without central coordination --> [BernersLee1989,
 Fielding2000].
 
-The road not taken is equally well documented. Project Xanadu
-[Nelson1981, Nelson1999] insisted on the opposite guarantees: immutable
+The road not taken, Project Xanadu [Nelson1981, Nelson1999], insisted<!-- was: The road not taken is equally well documented. Project Xanadu
+[Nelson1981, Nelson1999] insisted --> on the opposite guarantees: immutable
 versioning (a document version, once created, never changes, so
 everything that references it stays valid and verifiable), addressable
-spans (specific ranges of a document are first-class referents, not just
-the document as a whole), and fine-grained *transclusion*: reuse of a
-precise portion of a source that carries a persistent, bidirectional
+spans (specific ranges of a document are first-class referents)<!-- was: (specific ranges of a document are first-class referents, not just
+the document as a whole) -->, and fine-grained *transclusion*: reuse of a portion of a source<!-- was: reuse of a
+precise portion of a source --> that carries a persistent, bidirectional
 reference back to it. Together these yield stable references,
 provenance, and traceable reuse, at the cost of global coordination and
 infrastructure the early Web could not assume and therefore, rationally,
 refused.
 
-This proposal starts from a simple observation: **that refusal was
+**That refusal was correct in 1991 and is increasingly incorrect in 2027, though only in places.** As requirements have shifted toward durability and accountability, Xanadu-style guarantees (persistent citation, traceable reuse, integrity) have become more attractive, at the cost of the coordination overhead the Web originally avoided. That cost remains unaffordable at the scale of the whole Web but is affordable, and worth paying, inside smaller, tightly coordinated *islands*: bounded information spaces (a legal-citation community,<!-- was: This proposal starts from a simple observation: **that refusal was
 correct in 1991 and is increasingly incorrect in 2027 — but only in
 places.** As requirements have shifted toward durability, verifiability,
 and accountability, the case for Xanadu-style guarantees (persistent
@@ -61,7 +61,7 @@ attractive, at the cost of the coordination overhead the Web originally
 avoided. That cost remains unaffordable at planetary scale. It is,
 however, now affordable, and worth paying, inside smaller,
 tightly-coordinated *islands*: bounded information spaces (a legal
-citation ecosystem, a supply chain, a health-data federation, a
+citation ecosystem, --> a supply chain, a health-data federation, a
 scientific-record community) whose members share stakes high enough to
 justify coordination. The research question of this project is what a
 principled architecture for such islands looks like: one that borrows
@@ -76,10 +76,10 @@ architecture anticipated.
 
 The coordination cost the Web avoided in the 1990s was deferred, not
 eliminated, and it is now being re-billed, per incident, to whoever
-happens to stand downstream. Nowhere is this more visible than in law,
+happens to stand downstream. It is most visible in law, where a reference's stability *is* the substance of the claim it supports. Recent developments make the case concrete:<!-- was: Nowhere is this more visible than in law,
 because law is the field where a reference's stability *is* the
 substance of the claim it supports. Four developments from 2025/2026
-make the case concrete:
+make the case concrete: -->
 
 **Link rot is now a documented failure mode of legal citation itself.**
 The foundational study by Zittrain, Albert, and Lessig found that
@@ -87,10 +87,10 @@ roughly half of the URLs cited in U.S. Supreme Court opinions, and more
 than 70% of URLs in the Harvard Law Review and similar journals, no
 longer resolve to the material they cite [Zittrain2014]; parallel
 studies document "reference rot" in about one in five scientific
-articles [Klein2014]. This is not hypothetical risk but measured,
+articles [Klein2014]. The erosion is measured and ongoing, and it affects the record on which courts and scholars build precedent.<!-- was: This is not hypothetical risk but measured,
 ongoing erosion of the record on which courts and scholars build
-precedent. The profession's remedy, Harvard's Perma.cc archiving
-service [Perma], is exactly the coordination infrastructure the Web
+precedent. --> The profession's remedy, Harvard's Perma.cc archiving
+service [Perma], is the coordination infrastructure<!-- was: service [Perma], is exactly the coordination infrastructure --> the Web
 declined to build in 1991, now being reconstructed by hand, one citation
 at a time, because the underlying architecture never gave references a
 stable identity.
@@ -109,14 +109,14 @@ two dozen fake or misrepresented citations in appellate briefing
 ($15,000 each plus opponents' fees and double costs), and a month later
 the Nebraska Supreme Court suspended an Omaha attorney after 57 of 63
 citations in a single brief proved defective. Courts have responded by
-imposing a non-delegable duty to verify every citation regardless of
+imposing a non-delegable duty to verify every citation regardless of source, which regulates *behavior* because the *architecture* offers nothing to regulate.<!-- was: regardless of
 source — that is, by regulating *behavior* because the *architecture*
-offers nothing to regulate. A citation infrastructure with Xanadu-style
+offers nothing to regulate. --> A citation infrastructure with Xanadu-style
 persistent, verifiable transclusion (where a reference either resolves
 to the exact cited passage of an existing, immutable document or fails
-visibly) makes this entire category of filings structurally impossible,
+visibly) makes this category of filings structurally impossible.<!-- was: makes this entire category of filings structurally impossible,
 rather than leaving integrity to individual discipline under
-professional-conduct rules.
+professional-conduct rules. -->
 
 **Content-provenance guarantees are being retrofitted at the hardware
 and statutory layers because the transport layer never provided them.**
@@ -127,9 +127,9 @@ Nikon, and Leica ship C2PA-enabled models, with Canon rolling them out
 [C2PA]); the EU AI Act's Article 50 transparency and provenance
 obligations apply from August 2026 [AIAct]; and a proposed U.S. Federal
 Rule of Evidence 707 would govern AI-generated evidence (public comment
-closed February 2026; effective December 2027 at the earliest). Functionally, this is an attempt to bolt Xanadu's
+closed February 2026; effective December 2027 at the earliest). Functionally, these measures bolt Xanadu's integrity and provenance guarantees onto Web-distributed media after the fact, in silicon and in statute,<!-- was: Functionally, this is an attempt to bolt Xanadu's
 integrity and provenance guarantees onto Web-distributed media after the
-fact — in silicon and in statute, the two most expensive places to put
+fact — in silicon and in statute, --> the two most expensive places to put
 them.
 
 **AI-training copyright litigation is a dispute about traceable reuse
@@ -138,48 +138,48 @@ at the scale of the whole Web.** *The New York Times v. OpenAI*
 order compelling production of 20 million de-identified ChatGPT logs,
 affirmed in January 2026) is one
 of more than fifty active AI-copyright suits as of late 2025, and all of
-them turn on the same unanswered architectural question: which sources
-were actually consumed, in what form, and with what attribution trail.
+them turn on the same unanswered architectural question: which sources were consumed,<!-- was: which sources
+were actually consumed, --> in what form, and with what attribution trail.
 That question is only this expensive to litigate because nothing in the
 original act of reuse (scraping Web pages) carried a persistent,
 traceable reference back to its source. Discovery is reconstructing,
-after the fact and at extraordinary cost, exactly what fine-grained
-transclusion would have recorded natively. Nelson's original design made
+after the fact and at extraordinary cost, what fine-grained transclusion<!-- was: at extraordinary cost, exactly what fine-grained
+transclusion --> would have recorded natively. In Nelson's original design, transclusion carried a basis for compensating the source as well as a link back to it, and transcopyright<!-- was: Nelson's original design made
 the point sharper: transclusion was to carry not only a link back to a
-source but a basis for compensating it, and transcopyright
+source but a basis for compensating it, and transcopyright -->
 [Nelson1997] specified how. Reuse of any length was permitted in
 advance, on the condition that the bytes be delivered from the
-rightsholder's own server, so every act of reuse remained a metered,
+rightsholder's own server, so every act of reuse remained a metered, traceable event.<!-- was: so every act of reuse remained a metered,
 traceable event instead of an untracked copy. Traceable and payable
 reuse was a designed-in property of the road not taken rather than an
-afterthought.
+afterthought. -->
 
-Across all four cases the pattern is identical. The Web's avoided
-coordination cost has been reassigned: to archivists maintaining
+In each case the Web's avoided coordination cost has been reassigned:<!-- was: Across all four cases the pattern is identical. The Web's avoided
+coordination cost has been reassigned: --> to archivists maintaining
 Perma.cc by hand, to bar disciplinary committees, to camera makers and
 legislators drafting provenance mandates, and to courts running
 years-long discovery disputes. **The architectural bet of this proposal
 is that paying part of that cost upfront, by design, inside bounded
-islands, is decisively cheaper than continuing to pay it downstream, per
+islands, is cheaper than continuing<!-- was: is decisively cheaper than continuing --> to pay it downstream, per
 incident, through litigation and disciplinary process.**
 
-### 1.3 Why now: the requirements have inverted and the substrate exists
+### 1.3 Timing: the requirements have inverted and the substrate exists<!-- was: ### 1.3 Why now: the requirements have inverted and the substrate exists
 
 Two things have changed since the trade-off was struck, and both are
-necessary for this project to be timely rather than merely nostalgic.
+necessary for this project to be timely rather than merely nostalgic. -->
 
 *The non-functional requirements have inverted.* The Web now carries
 legally and societally consequential information for which ephemeral,
-mutable references are a liability, not a convenience; attribution,
-content monetization, and copyright enforcement (exactly what
-fine-grained persistent transclusion was designed to support) have
+mutable references are a liability;<!-- was: mutable references are a liability, not a convenience; --> attribution,
+content monetization, and copyright enforcement (what fine-grained persistent transclusion was designed to support)<!-- was: (exactly what
+fine-grained persistent transclusion was designed to support) --> have
 moved from fringe concerns to regulatory mandates (CSRD-style
 sustainability reporting, DSA data-access obligations, AI Act
 provenance duties).
 
 *The enabling substrate Xanadu lacked now exists.* Distributed version
 control (Git) provides immutable, content-addressed versions, complete
-history, and replication without central control — satisfying Xanadu's
+history, and replication without central control, which satisfies Xanadu's<!-- was: replication without central control — satisfying Xanadu's -->
 immutability requirement with commodity tooling. Content-delivery
 networks remove the performance and availability objections that made
 frequent transclusion impractical in the 1990s. Content-addressed
@@ -190,8 +190,8 @@ pods) are running in production as civic infrastructure. And practical
 secure multi-party computation, the piece neither Nelson nor
 Berners-Lee could have assumed, now makes it possible for a reference to
 resolve to a *verifiable computation over data its holder never
-discloses* (Section 1.4). None of these components is ours to invent;
-the ground-breaking step is the architecture that composes them into a
+discloses* (Section 1.4). The components exist; the ground-breaking step<!-- was: None of these components is ours to invent;
+the ground-breaking step --> is the architecture that composes them into a
 coherent reference layer with explicitly chosen guarantees, and the
 theory of which guarantees an island can afford at which coordination
 cost.
@@ -201,23 +201,23 @@ independently.* Work on personal-data exchange now argues that raw data
 cannot sustain a marketplace at all, because a copyable good spawns
 unlimited supply, and proposes trading purpose-specific derivations
 carried in envelopes that constrain their shelf life and permitted use
-[Verborgh2025]. The argument arrives from data protection rather than
-from copyright, but it reaches Nelson's conclusion: value survives when
+[Verborgh2025]. The argument comes from data protection and reaches Nelson's conclusion:<!-- was: The argument arrives from data protection rather than
+from copyright, but it reaches Nelson's conclusion: --> value survives when
 a reference is resolved fresh from its origin under stated terms, and
-collapses when the underlying asset is handed over. What that literature
+collapses when the underlying asset is handed over. That literature supplies no reference layer able to carry such terms.<!-- was: What that literature
 does not supply is a reference layer able to carry such terms, which is
-the gap this project addresses.
+the gap this project addresses. -->
 
 ### 1.4 Beyond Xanadu: references into data that must stay confidential
 
-Durability guarantees (persistence, integrity, provenance) are only
+Beyond durability (persistence, integrity, provenance), high-stakes islands need a guarantee neither the open Web nor Xanadu ever contemplated:<!-- was: Durability guarantees (persistence, integrity, provenance) are only
 half of what high-stakes islands need. The other half is a guarantee
-neither the open Web nor Xanadu ever contemplated: **confidentiality of
+neither the open Web nor Xanadu ever contemplated: --> **confidentiality of
 the data behind a reference, even while the reference is shared,
 resolved, and computed over.** In any island spanning more than one
 organization, two requirements pull against each other: the island has
 value only if members can reference and reuse each other's data
-(transparency, the entire point of a transclusion layer), yet members
+(transparency, the purpose of a transclusion layer)<!-- was: (transparency, the entire point of a transclusion layer) -->, yet members
 will not expose that data because it carries competitive or legal value
 (confidentiality). On the open Web this is a hard either/or: you publish
 a resource or you don't.
@@ -231,8 +231,8 @@ secret-shared values, with Solid pods as the confidentiality boundary
 and share disclosure enforced at the access-control layer itself. No
 participant's raw data is ever revealed, yet the derived result is
 jointly computed and, with verifiable-secret-sharing and zero-knowledge
-extensions, provably correct. The reference layer stops being "a pointer
-to bytes you may read" and becomes "a pointer to a value you can verify
+extensions, provably correct. A reference becomes "a pointer<!-- was: The reference layer stops being "a pointer
+to bytes you may read" and becomes "a pointer --> to a value you can verify
 was correctly derived from bytes you may not read." This is the
 confidentiality-preserving analogue of Xanadu's traceable transclusion,
 and it addresses the cases the plain-persistence framing cannot:
@@ -249,8 +249,8 @@ bytes; it says nothing about what the recipient may do with the result
 once resolution has succeeded. High-stakes islands need both, because
 the terms that make a party willing to answer a reference at all
 (this derivation is for this recipient, for this purpose, for this
-window) are constraints that must survive release rather than gate
-access to it. Access control ends at the moment of disclosure, and the
+window) are constraints that must survive release.<!-- was: are constraints that must survive release rather than gate
+access to it. --> Access control ends at the moment of disclosure, and the
 open Web offers nothing after it. An island can do better, because a
 reference resolved inside one can carry its own terms and be resolved
 again when they lapse. Section 2.9 develops this as a distinct class of
@@ -258,37 +258,37 @@ reference.
 
 ### 1.5 A new client class forces the architectural question again
 
-The Web's access pattern is shifting massively: from
+The Web's access pattern is shifting from read-navigate-read to ask-and-respond, with AI intermediaries increasingly controlling the front door to the Web's content, a new centralization vector<!-- was: The Web's access pattern is shifting massively: from
 Read→Navigate→Read to Ask→Response, with AI intermediaries
 increasingly controlling the front door to the Web's content: a new
-centralization vector (in RFC 9518's vocabulary: intermediation) that
+centralization vector --> (in RFC 9518's vocabulary: intermediation) that
 neither the Web's original design nor today's re-decentralization
 efforts address. The current contest over AI agents makes the vector
 concrete: AI vendors are racing to own the user agent itself
 (Perplexity's Comet, OpenAI's Atlas) as the monetizable front door to
-the Web [Zard2025]. And the same era adds an archival failure the 1990s
+the Web [Zard2025]. The same period adds an archival failure<!-- was: And the same era adds an archival failure --> the 1990s
 could not have foreseen: even where old AI models are preserved, the
 Web they were trained on is unversioned and has since drifted, so
-"what did this model actually see?" is unanswerable by construction;
+"what did this model see?"<!-- was: "what did this model actually see?" --> is unanswerable by construction;
 a versioned, Xanadu-style substrate would answer it natively.
-Both developments converge on the same architectural question: the
-Web-vs-Xanadu choice (hard-coded, out-of-band knowledge versus
-dynamically discovered structure) is currently being answered
-*wrongly* a second time, one abstraction level up, in how LLM-based
+The Web-vs-Xanadu choice<!-- was: Both developments converge on the same architectural question: the
+Web-vs-Xanadu choice --> (hard-coded, out-of-band knowledge versus
+dynamically discovered structure) is being answered *wrongly* a second time<!-- was: is currently being answered
+*wrongly* a second time -->, one abstraction level up, in how LLM-based
 agents are wired to services. Handing an agent a static tool catalogue (a full
 OpenAPI spec, a fixed MCP tool list) repeats the CRUD-over-HTTP
 hard-coding mistake: the agent cannot discover what it can do next
-except from a list baked into its context, regardless of what the
-current state of the world actually permits. The hypermedia answer
+except from a list baked into its context, regardless of what the current state permits.<!-- was: regardless of what the
+current state of the world actually permits. --> The hypermedia answer
 (HATEOAS, where the server exposes only the currently valid affordances,
 annotated with machine-interpretable relations [Fielding2000,
 Ciortea2019]) transfers directly: after each interaction, an
 agent-facing gateway would expose only the next *valid* actions,
-shaped by state and by the island's business rules. The islands
+shaped by state and by the island's business rules. The islands architecture therefore governs how *capabilities* are exposed to agents as well as how *documents* are addressed, and the same loose-coupling argument applies to both.<!-- was: The islands
 architecture we propose is therefore not only about how *documents* are
 addressed but about how *capabilities* are exposed to an increasingly
 important new client class, and the same loose-coupling argument
-governs both. An island whose reference layer offers stable,
+governs both. --> An island whose reference layer offers stable,
 verifiable, span-level addressing *and* whose action layer offers
 state-dependent affordance discovery is, we argue, the natural habitat
 for trustworthy autonomous agents; no such environment exists
@@ -305,7 +305,7 @@ multi-party computation; (iii) exposes capabilities to human and agent
 clients through state-dependent, hypermedia-style affordance discovery;
 and (iv) interoperates with other islands and with the open Web through
 the Web's own proven, low-coordination mechanisms. The scientific core
-is a *theory of chosen guarantees*: a rigorous account of which
+is a *theory of chosen guarantees*: an account<!-- was: is a *theory of chosen guarantees*: a rigorous account --> of which
 guarantee bundles an island can provide at which coordination cost,
 under which threat model, and for which stakeholders, validated in at
 least two high-stakes domains where our team has documented experience
@@ -316,9 +316,9 @@ The risk is real: the project bets that a coordination cost two
 generations of architects deemed prohibitive can be made affordable at
 island scale, that cryptographic reference resolution can be made fast
 enough for interactive use, and that stakeholders whose incentives
-diverge (Section 2.6) will adopt shared guarantees at all. The gain is
+diverge (Section 2.6) will adopt shared guarantees at all. The gain is commensurate: a validated architectural alternative for those parts of the information space<!-- was: The gain is
 commensurate: a validated architectural alternative for exactly those
-parts of the information ecosystem (the legal record, the scientific
+parts of the information ecosystem --> (the legal record, the scientific
 record, regulated industrial data) where the Web's founding trade-off
 now demonstrably fails, with per-incident costs measured in sanctions,
 suspended licenses, statutory retrofits, and years-long litigation.
@@ -329,10 +329,10 @@ suspended licenses, statutory retrofits, and years-long litigation.
 
 ### 2.1 Hypertext's two lineages and the Web's constraint set
 
-The intellectual history is well charted: from Bush's Memex [Bush1945]
+From Bush's Memex<!-- was: The intellectual history is well charted: from Bush's Memex --> [Bush1945]
 through Engelbart's NLS [Engelbart1968] to Nelson's Xanadu [Nelson1981],
-hypertext research assumed rich links — typed, bidirectional, versioned,
-span-anchored. Pre-Web systems (NoteCards, Intermedia, Microcosm,
+hypertext research assumed rich links: typed, bidirectional, versioned, span-anchored.<!-- was: hypertext research assumed rich links — typed, bidirectional, versioned,
+span-anchored. --> Pre-Web systems (NoteCards, Intermedia, Microcosm,
 HyperCard) and the open hypermedia community implemented many of these
 guarantees at workgroup scale, and the field stated its own agenda
 early. Halasz's "seven issues" [Halasz1988] identified versioning,
@@ -342,8 +342,8 @@ to omit; Bieber et al. later inventoried the same omissions from the
 Web's side as the "missing links for the World Wide Web," listing typed
 and bidirectional links, transclusion, computed structure, external link
 databases, and (anticipating this project's confidentiality dimension)
-private links and access permissions [Bieber1997]. Open hypermedia
-systems did not only name these guarantees but built them: external link
+private links and access permissions [Bieber1997]. Open hypermedia systems also built these guarantees:<!-- was: Open hypermedia
+systems did not only name these guarantees but built them: --> external link
 services stored links separately from content and maintained them
 (Microcosm and its Distributed Link Service [Fountain1990, Carr1995]),
 providing bidirectional linking and referential integrity, with Davis
@@ -356,15 +356,15 @@ first-class substrate over which different domains select different
 abstractions, a conceptual ancestor of this project's theory of chosen
 guarantees. None of it operated at the open Web's scale. These
 guarantees were demonstrated within bounded, coordinated settings and
-set aside only when the target became the whole Web, which is exactly
-the boundary this project's islands reintroduce. The Web [BernersLee1989] discarded them
+set aside only when the target became the whole Web, which is the boundary this project's islands reintroduce.<!-- was: which is exactly
+the boundary this project's islands reintroduce. --> The Web [BernersLee1989] discarded them
 deliberately, and Fielding's REST [Fielding2000] later formalized the
 constraint set that made planetary scale possible: statelessness,
 uniform interface, hypermedia as the engine of application state.
 Nelson's own retrospective argument that "xanalogical structure" is
 "needed now more than ever" [Nelson1999] anticipated our motivation but
-proposed no path that preserves the Web's scaling properties. The gap
-this project addresses is precisely the *composition*: no prior work
+proposed no path that preserves the Web's scaling properties. The gap is the *composition*:<!-- was: The gap
+this project addresses is precisely the *composition*: --> no prior work
 provides an architecture in which Xanadu-grade guarantees hold locally
 while Web-grade scaling holds globally, with a principled boundary
 between the two.
@@ -384,14 +384,14 @@ addressing, but they bind to mutable content, so anchors decay. This
 mainstream re-invention has a direct ancestor: Phelps and Wilensky's
 robust intra-document locations and robust hyperlinks [Phelps2000a,
 Phelps2000b] made such anchors survive edits two decades earlier, using
-redundant content signatures and structural paths, though again as a
+redundant content signatures and structural paths, though again as a mechanism layered over a mutable substrate, outside the addressing layer.<!-- was: though again as a
 mechanism layered over a mutable substrate rather than a guarantee in
-the addressing layer. All of
+the addressing layer. --> All of
 these are *remedial*: they accept the mutable, location-addressed
 substrate and build compensating archives beside it. They neither
 prevent drift nor provide verifiable integrity, bidirectional links, or
-transclusion; and each adds exactly the kind of centralized
-coordination point (a registrar, an archive) whose risks RFC 9518
+transclusion; and each adds the kind of centralized coordination point<!-- was: and each adds exactly the kind of centralized
+coordination point --> (a registrar, an archive) whose risks RFC 9518
 catalogues (Section 2.6). We build on their lessons, particularly
 Memento's versioned-access vocabulary, but relocate the guarantees
 into the addressing layer itself.
@@ -409,7 +409,7 @@ systems add decentralized timestamping and ordering where needed.
 W3C PROV [PROV] standardizes provenance vocabularies, and C2PA [C2PA]
 binds signed provenance manifests to media assets, increasingly rooted
 in capture hardware. The most complete existing composition is the
-**nanopublication ecosystem** [ISWC2026]: knowledge shared as small,
+**nanopublication network** [ISWC2026]<!-- was: **nanopublication ecosystem** [ISWC2026] -->: knowledge shared as small,
 immutable, signed RDF records whose Trusty-URI identifiers embed a
 content hash (every reference self-verifying), served by a federated,
 deployed network of registries and query services, with a
@@ -423,11 +423,11 @@ components for our reference layer. Yet none of these systems provide
 (i) span-level addressing and transclusion semantics over arbitrary
 (non-RDF) content, (ii) a bidirectional link layer, (iii)
 confidentiality-preserving resolution, or (iv) a theory of which
-guarantee bundles an island can afford. They are storage,
+guarantee bundles an island can afford. They are storage, attestation, and statement-publishing primitives.<!-- was: They are storage,
 attestation, and statement-publishing primitives, not general
-reference architectures. We treat them as components deliberately (per
-RFC 9518's advice to reuse proven decentralized mechanisms rather than
-invent new coordination points).
+reference architectures. --> We treat them as components deliberately (per
+RFC 9518's advice to reuse proven decentralized mechanisms)<!-- was: to reuse proven decentralized mechanisms rather than
+invent new coordination points) -->.
 
 ### 2.4 Re-decentralization efforts: Solid, data spaces, federations
 
@@ -436,24 +436,27 @@ attempt to carve stronger guarantees out of the existing Web: personal
 or institutional pods, WebID identity, Linked Data interfaces, and
 fine-grained access control, standardized through a W3C Community Group
 and stewarded by the Open Data Institute since 2024, with
-production civic deployments (Flanders' Athumi). Solid is an "islands"
+production civic deployments (Flanders' Athumi). Solid is an "islands" strategy for *control and access*; it retains<!-- was: Solid is an "islands"
 strategy for *control and access*, not for *addressability*: it
-retains location-addressed, mutable resources, so link rot, content
+retains --> location-addressed, mutable resources, so link rot, content
 drift, and provenance remain out of scope. Recent work in the same
 line has moved past raw-resource exchange altogether, arguing that
 transferring raw data cannot sustain a market and proposing instead
 that parties trade purpose-specific derivations wrapped in envelopes
-that bound their shelf life and permitted use [Verborgh2025]. This
+that bound their shelf life and permitted use [Verborgh2025]. It accepts that handing over the resource is the wrong primitive, but a location-addressed store lacks the semantics needed to name a derivation, pin it to a version, and carry its terms.<!-- was: This
 sharpens rather than displaces the positioning above: it accepts that
 handing over the resource is the wrong primitive, while the semantics
 needed to name a derivation, pin it to a version, and carry its terms
-are precisely what a location-addressed store does not provide.
+are precisely what a location-addressed store does not provide. -->
 European data-space
 initiatives (Gaia-X, iSHARE, sectoral spaces under the Data Act) and
-exchange frameworks such as WBCSD PACT similarly relocate governance
-and contracts, not reference semantics; federated social protocols
+exchange frameworks such as WBCSD PACT similarly relocate governance and contracts and leave reference semantics unchanged;<!-- was: similarly relocate governance
+and contracts, not reference semantics; --> federated social protocols
 (ActivityPub) demonstrate island-to-island interoperation but with
-ephemeral, unverifiable content. Our architecture is complementary and
+ephemeral, unverifiable content. Team work applies Solid to the data-portability obligations of EU law,
+for individual data control [Bekavac2026Solid] and for research
+infrastructure built on DMA portability [Seiling2026]; it, too,
+relocates control over data and leaves references location-addressed. Our architecture is complementary and
 composes with these: Solid-style pods as the trust and confidentiality
 boundary, data-space governance as the institutional wrapper,
 Xanadu-style addressing and versioning as the missing reference layer
@@ -470,13 +473,13 @@ accountable actor. The regime governs a real trade-off, since
 anonymity checks chilling effects and surveillance while inviting
 unaccountable behavior, and cryptographic constructions (anonymous
 credentials, group and traceable signatures) already let an island be
-anonymous by default yet accountable under defined conditions, which is
-exactly the kind of chosen guarantee the theory must price. The
+anonymous by default yet accountable under defined conditions, which is the kind of chosen guarantee<!-- was: which is
+exactly the kind of chosen guarantee --> the theory must price. The
 chilling-effect side of that trade-off is an active legal-research
 topic in the partner group: the doctoral work of Alice Palmieri (supervised by
 Tamò-Larrieux) studies chilling effects directly, grounding the
-anonymity pole of the attribution NFP in current scholarship rather
-than intuition.
+anonymity pole of the attribution NFP in current scholarship.<!-- was: in current scholarship rather
+than intuition. -->
 
 ### 2.5 Confidential collaboration: secure computation across organizations
 
@@ -491,18 +494,52 @@ Solid pods and WebAssembly Component-Model plugins, enforcing the
 no-single-server-sees-the-data guarantee at the access-control layer
 itself and confining data-transformation code to capability-scoped
 sandboxes. Related verifiable-computation work shows how participants
-can prove input correctness without disclosure. What is missing, and
-what this project contributes, is the elevation of these mechanisms
+can prove input correctness without disclosure. This project contributes the elevation<!-- was: What is missing, and
+what this project contributes, is the elevation --> of these mechanisms
 from bespoke application protocols to an *addressing primitive*: a
 reference type whose resolution is a verifiable computation over
 undisclosed sources, with explicit threat-model semantics
 (honest-but-curious versus malicious-secure) chosen per island. The
-open problems our own prior work honestly documents (availability
+open problems our own prior work documents<!-- was: open problems our own prior work honestly documents --> (availability
 coupling across N participants, trust in input honesty, the
-privacy-performance frontier) become research objectives here rather
-than limitations.
+privacy-performance frontier) become research objectives here.<!-- was: become research objectives here rather
+than limitations. -->
 
-### 2.6 Centralization, incentives, and why open specs are not enough
+A second lineage reaches the same problem from programming languages
+and systems instead of from cryptography. Information-flow control
+formalizes confidentiality and integrity as labels drawn from a
+lattice [Denning1976]; the decentralized label model made those labels
+the property of mutually distrusting principals, each owner naming its
+own readers and declassifying its own data on its own terms, with no
+central authority in the loop [MyersLiskov1997]. Fabric carried the
+model into a platform: a federation of mutually distrusting nodes
+sharing persistent objects, with labels enforced by static checking
+plus run-time placement of data and computation only on nodes the
+label's principals trust, and with nested transactions and a
+dissemination layer supplying consistency and availability [Liu2009].
+Later theory showed that declassification (releasing confidential
+data) and endorsement (elevating untrusted input) are duals that must
+be constrained together, because an attacker who can influence either
+can launder data across a trust boundary [Cecchetti2017]; and
+compilers such as Viaduct now derive, from a label-annotated program,
+which cryptographic mechanism (multi-party computation, zero-knowledge
+proofs, commitments) each part of it needs [Acay2021]. This lineage supplies what the island architecture would otherwise have to invent:<!-- was: This lineage
+supplies the island architecture with three things it would otherwise
+have to invent: --> a lattice formalism for guarantee bundles that already
+comes with proof techniques; a precise statement of what a trust
+boundary must satisfy, which is what the island border is, a
+declassification point for references leaving and an endorsement point
+for clients entering; and evidence that selecting cryptographic
+enforcement from a declared policy can be automated. It never took the *reference* as its unit.<!-- was: What it did not
+do is take the *reference* as its unit. --> Fabric's objects are mutable
+and identified by the store that holds them, so persistence,
+versioning, span addressing, and transclusion lie outside its model;
+its enforcement rests on some node holding cleartext under a label the
+owner trusts, whereas a Cryptographic Link lets no node hold the
+bytes; and none of this work prices what sustaining a policy costs an
+island of a given size, which is the question O1 asks.
+
+### 2.6 Centralization, incentives, and the limits of open specifications<!-- was: ### 2.6 Centralization, incentives, and why open specs are not enough -->
 
 RFC 9518 [Nottingham2023] provides the standards-level frame: a
 function can be nominally decentralized (open protocol, many
@@ -512,8 +549,8 @@ Solid/Inrupt patterns). Recent policy analysis makes the same point
 from the browser layer, arguing that standards bodies without legal
 accountability cannot by themselves prevent capture of the
 intermediation layer and reading the emerging AI "second browser war" as
-its latest instance [Zard2025]; this project answers that diagnosis with
-an architectural instrument rather than a governance one, complementary
+its latest instance [Zard2025]; this project answers that diagnosis with an architectural instrument, complementary<!-- was: with
+an architectural instrument rather than a governance one, complementary -->
 to the regulatory remedies such analyses propose. Its design-level
 mitigations (standardize what
 would stay proprietary; design for switching; constrain intermediaries
@@ -523,9 +560,9 @@ our architecture, and its central lesson, that "open" and
 stakeholder-incentive analysis as a first-class research task: for each
 actor class (hyperscaler, legacy industry, OSS/privacy community,
 browser vendor, platform), does an island change the *incentive* to
-centralize, not merely the license of the spec? Empirical grounding
+centralize, beyond the license of the spec?<!-- was: centralize, not merely the license of the spec? --> Empirical grounding
 comes from team members' published work on platform information control
-[Bekavac2024, Strecker2025] and on integrity-by-design reference
+[BekavacTORS2026, BekavacMayerWebSci2026, Strecker2025] and on integrity-by-design reference<!-- was: [Bekavac2024, Strecker2025] and on integrity-by-design reference -->
 mechanisms [BekavacQR2024]; from the PI's decade-long law/technology
 co-design line (automatically processable regulation; the Routledge
 book *AI and Law* [Guitton2025]; a computational-science
@@ -540,8 +577,8 @@ piggybacking, Wikipedia's non-commercial model, public-sector Solid
 hosting, data cooperatives) supply the comparative cases for which
 institutional homes can sustain islands without platformization.
 
-A third instrument belongs beside the architectural and the legal one.
-Some guarantees cannot be technically enforced once a reference has
+Pricing is an instrument of its own. Some guarantees<!-- was: A third instrument belongs beside the architectural and the legal one.
+Some guarantees --> cannot be technically enforced once a reference has
 resolved, yet they can be priced: an island that makes requesting a
 fresh, purpose-bound derivation cheaper than storing and reusing a
 stale one obtains in practice a constraint it cannot obtain by
@@ -551,21 +588,30 @@ settlement, at the origin [Nelson1997]; the insight-economy argument
 reaches the same design from data protection three decades later,
 explicitly declining to prevent misuse and instead making freshness the
 cheaper path [Verborgh2025]. Both accept that the compliant path has to
-be the least expensive one for the party who might defect. This gives
+be the least expensive one for the party who might defect. Usage
+control is the security field's name for the same problem. UCON
+formalized obligations and conditions that persist after access has
+been granted [Park2004], distributed usage control extended them to
+data that has already left its provider [Pretschner2006], and sticky
+policies bind the terms to the data itself [Pearson2011]. Preventive
+enforcement after release presumes a trusted monitor on the
+recipient's side; without one, the literature falls back on detecting
+violations after the fact [Pretschner2006]. Pricing needs neither,
+which is why ISLANDS treats the usage axis economically. O1 therefore prices guarantee bundles in the margin by which compliance undercuts defection as well as in coordination cost, and that margin varies by actor. For each actor class, WP5 asks whether an island changes the incentive to centralize and whether the island can be configured<!-- was: This gives
 O1 a second currency: guarantee bundles are priced not only in
 coordination cost but in the margin by which compliance undercuts
 defection, and that margin varies by actor. It also sharpens the WP5
 question. For each actor class the analysis asks not merely whether an
 island changes the incentive to centralize, but whether the island can
-be configured so that the guarantee-respecting path is the cheapest one
+be configured --> so that the guarantee-respecting path is the cheapest one
 available to that actor. Where it cannot, the guarantee is aspirational
 and the theory should say so.
 
 ### 2.7 Agents as hypermedia clients
 
 Research on Web-based multi-agent systems has long argued that agents
-should inhabit hypermedia environments and discover affordances at
-runtime rather than be hard-coded against APIs [Ciortea2019], and
+should inhabit hypermedia environments and discover affordances at runtime [Ciortea2019]<!-- was: discover affordances at
+runtime rather than be hard-coded against APIs [Ciortea2019] -->, and
 W3C Web of Things work, which the PI's own research helped ground and
 standardize, supplies machine-interpretable interaction descriptions.
 The PI's group has made this concrete: signifiers as first-class
@@ -575,43 +621,43 @@ run-time adaptation of an agent's exposed action repertoire
 across agent architectures (BDI, RL, Soar, LLM-based) [Lemee2024],
 with the W3C Web Agents Community Group (PI: founding member) as the
 standardization channel. Current LLM-agent practice runs opposite to this: static
-tool catalogues (OpenAPI dumps, fixed MCP tool lists) recreate the
+tool catalogues (OpenAPI dumps, fixed MCP tool lists) recreate the tight coupling REST was designed to avoid.<!-- was: recreate the
 tight coupling REST was designed to avoid, and early evidence on
 tool-count confusion ("paradox of choice" in large tool sets) shows the
-practical cost. Protocol precedents for runtime discovery exist
+practical cost. --> Protocol precedents for runtime discovery exist
 (WebSub's `rel="hub"` advertisement is a deployed example of link-driven
-dynamic binding), but no existing agent framework offers
+dynamic binding), but no existing agent platform offers<!-- was: but no existing agent framework offers -->
 state-dependent affordance exposure with hypermedia semantics, and none
 connects capability discovery to a verifiable reference layer. The
 transport-layer literature (e.g., HTTP/2's abandonment of FIFO
 ordering) cautions that hybrid layerings shift correctness obligations
 upward; our design treats ordering and consistency for agent-issued,
-state-changing actions as an explicit architectural concern rather than
-an afterthought.
+state-changing actions as an explicit architectural concern.<!-- was: as an explicit architectural concern rather than
+an afterthought. -->
 
 ### 2.8 Synthesis: the gap
 
 Each guarantee this project needs exists somewhere: immutability and
-versioning in content-addressed storage; archival persistence in the
-Memento/Perma ecosystem; provenance attestation in C2PA/PROV; access
+versioning in content-addressed storage; archival persistence in Memento and Perma.cc;<!-- was: archival persistence in the
+Memento/Perma ecosystem; --> provenance attestation in C2PA/PROV; access
 sovereignty in Solid and data spaces; confidential joint computation in
 SMPC systems including our own; affordance-driven interaction in
-hypermedia MAS research. Read together, these are not merely isolated
-research results: they are the non-functional-property profiles that
+hypermedia MAS research. Read together, they are the non-functional-property profiles<!-- was: Read together, these are not merely isolated
+research results: they are the non-functional-property profiles --> that
 services and platforms already build for themselves, one silo at a
 time, each assembling the guarantees it cannot operate without on top
 of Web architecture, treating its own symptom locally while the
 architectural principles that generate the symptom stay in place. Some
 of these profiles would be subsumed outright by Xanadu-style
-constraints made selectable per island rather than re-implemented per
-service. **No existing system composes them into a
+constraints made selectable per island.<!-- was: constraints made selectable per island rather than re-implemented per
+service. --> **No existing system composes them into a
 reference architecture; no existing theory says which bundle of
 guarantees an island of a given size, stake, and threat model can
 afford; and no existing infrastructure offers span-level,
 version-pinned, verifiable (and, where required,
 confidentiality-preserving) references as the default addressing
-primitive, for human and agent clients alike.** That composition and that theory are the ground this proposal
-breaks.
+primitive, for human and agent clients alike.**<!-- was: for human and agent clients alike.** That composition and that theory are the ground this proposal
+breaks. -->
 
 ### 2.9 A taxonomy of link classes: naming the chosen-guarantee lattice
 
@@ -619,12 +665,12 @@ Sections 2.1–2.7 show every ingredient of the guarantee lattice already
 exists as a citable line of work, but scattered, and never named as one
 family a client can select from. WP1's guarantee calculus becomes
 operational once each combination of guarantees is a named *link
-class*: a declared, checkable claim about what resolving a reference
-actually gives you, the same operational role RFC 8288 link relations
-[Nottingham2017] or HTTP status codes play for lower-stakes claims. The
+class*: a declared, checkable claim about what resolving a reference gives you,<!-- was: what resolving a reference
+actually gives you, --> the same operational role RFC 8288 link relations
+[Nottingham2017] or HTTP status codes play for lower-stakes claims. The classes organize along largely independent axes, in the spirit<!-- was: The
 classes organize along a small number of largely independent axes rather
 than one
-ladder, in the spirit of the structural-computing argument that
+ladder, in the spirit --> of the structural-computing argument that
 different domains select different abstractions over one substrate
 [Nurnberg1997] (§2.1).
 
@@ -632,22 +678,22 @@ different domains select different abstractions over one substrate
 increasing in the strength of what "the target is what it claims to
 be" means):
 
-- **Classic Jumplinks** — the Web default: location-addressed,
+- **Classic Jumplinks**: the Web default,<!-- was: - **Classic Jumplinks** — the Web default: --> location-addressed,
   mutable, no persistence guarantee; the fallback outside any island,
   and the form a stronger link degrades to on leaving one.
-- **Archived/Resilient Links** — availability through redundancy
-  rather than cryptography: timestamped snapshots and redundant
+- **Archived/Resilient Links**: availability through redundancy;<!-- was: - **Archived/Resilient Links** — availability through redundancy
+  rather than cryptography: --> timestamped snapshots and redundant
   content signatures keep a reference resolvable across edits and
   removals, in the tradition of LOCKSS's replicated preservation
   [Maniatis2005], the Memento time-based access vocabulary [RFC7089],
   and Phelps and Wilensky's robust hyperlinks [Phelps2000a,
   Phelps2000b], with Perma.cc [Perma] and browser-level Text Fragments
   as the deployed and the browser-native instances (§2.2). None of
-  these verify integrity; they keep something resolvable, not provably
+  these verify integrity; they keep something resolvable without proving it unaltered, which is why this class is a separate rung from Trusted Links.<!-- was: they keep something resolvable, not provably
   unaltered — the distinction this class makes explicit, and the
   reason it is a separate rung from Trusted Links rather than a
-  synonym for one.
-- **Trusted Links** — island-registered and bidirectionally tracked:
+  synonym for one. -->
+- **Trusted Links**: island-registered<!-- was: - **Trusted Links** — island-registered --> and bidirectionally tracked:
   authority-bound (the registrant is known and accountable within the
   island) but not independently cryptographically checked, the
   coordination Xanadu wanted globally and the open Web refused, made
@@ -655,52 +701,55 @@ be" means):
   Distributed Link Service precedent [Fountain1990, Carr1995], showing
   bidirectional linking and referential integrity are buildable at
   workgroup scale, §2.1).
-- **Verified Links** — span-level, version-pinned, content-addressed
+- **Verified Links**: span-level,<!-- was: - **Verified Links** — span-level, --> version-pinned, content-addressed
   (Merkle-DAG per Git/IPFS [Benet2014], SWHIDs): resolution either
   matches the cited bytes exactly or fails visibly. This is Xanadu's
   own guarantee [Nelson1981, Nelson1999], finally married to a
   substrate that scales (§2.1, §2.3).
-- **Cryptographic Links** — SMPC/ZK-resolved: a verified derivation
+- **Cryptographic Links**: SMPC/ZK-resolved,<!-- was: - **Cryptographic Links** — SMPC/ZK-resolved: --> a verified derivation
   from data the client never sees, generalizing our own PEP-LCA
   protocol and its Solid/WASM integration [Grau2025, Grau2026] from an
-  application protocol into an addressing primitive (§2.5).
+  application protocol into an addressing primitive (§2.5). The step
+  from a declared label to the cryptographic mechanism that enforces it
+  is one the Viaduct compiler has shown to be automatable for programs
+  [Acay2021]; here it is taken at the granularity of a single reference.
 
-**The attribution axis** (orthogonal and non-monotone — neither pole
-is strictly "better," per the trade-off already named in §2.4):
+**The attribution axis** (orthogonal and non-monotone: neither pole is strictly "better", per<!-- was: (orthogonal and non-monotone — neither pole
+is strictly "better," per --> the trade-off already named in §2.4):
 
-- **Attributed Links** — bind a reference to a verified, accountable
+- **Attributed Links**: bind<!-- was: - **Attributed Links** — bind --> a reference to a verified, accountable
   author, building on provenance-attestation and integrity-by-design
   mechanisms already demonstrated in W3C PROV [PROV], C2PA [C2PA], and
   the team's own tamper-evident physical-to-digital referencing
   [BekavacQR2024]. This is what makes a fabricated citation in
-  Island L a sanctionable act rather than merely an unattributable one.
-- **Anonymous/Pseudonymous Links** — verify eligibility or membership
+  Island L sanctionable.<!-- was: a sanctionable act rather than merely an unattributable one. -->
+- **Anonymous/Pseudonymous Links**: verify<!-- was: - **Anonymous/Pseudonymous Links** — verify --> eligibility or membership
   without revealing identity, via anonymous credentials, group and
   traceable signatures, and revocable pseudonymity (§2.4), grounded in
   the partner group's chilling-effects research (Palmieri, supervised
-  by Tamò-Larrieux) on why unlinkable participation is sometimes the
-  guarantee an island needs, not a compromise of it.
+  by Tamò-Larrieux) on why unlinkable participation is sometimes the guarantee an island needs.<!-- was: is sometimes the
+  guarantee an island needs, not a compromise of it. -->
 
 **The trust axis** (a guarantee our own review of the field had not
 yet named as an NFP at all):
 
-- **Endorsed/Reputation Links** — resolution returns not only the
-  target but a decay-bounded, Sybil-resistant trust score computed
+- **Endorsed/Reputation Links**: resolution returns the target with a decay-bounded,<!-- was: - **Endorsed/Reputation Links** — resolution returns not only the
+  target but a decay-bounded, --> Sybil-resistant trust score computed
   over a decentralized web of retractable endorsements, generalizing
-  the nanopublication ecosystem's IDEBT algorithm [ISWC2026] (§2.3)
+  the nanopublication network's IDEBT algorithm<!-- was: the nanopublication ecosystem's IDEBT algorithm --> [ISWC2026] (§2.3)
   from a statement-level trust layer into a general link property. No
   prior island-like architecture prices trust as a chosen guarantee
   alongside persistence, integrity, and confidentiality; this class is
   the gap that motivates adding *trust* as an eighth NFP to O1's model.
 
-**The usage axis** (constraints that survive resolution rather than
-gate it):
+**The usage axis** (constraints that survive resolution):<!-- was: (constraints that survive resolution rather than
+gate it): -->
 
-- **Purpose-Bound Links** — resolution yields a derivation declared
+- **Purpose-Bound Links**: resolution yields<!-- was: - **Purpose-Bound Links** — resolution yields --> a derivation declared
   valid for a stated recipient, purpose, and window, with those terms
-  travelling as part of the reference rather than as an out-of-band
+  travelling as part of the reference; when the window closes the reference is re-resolved.<!-- was: travelling as part of the reference rather than as an out-of-band
   contract; when the window closes the reference is re-resolved rather
-  than reused. The class generalizes the envelope construct proposed
+  than reused. --> The class generalizes the envelope construct proposed
   for personal-data exchange [Verborgh2025] and the delivery-bound
   permission of transcopyright [Nelson1997] into a property of the
   reference layer itself. It is orthogonal to the ladder above, and in
@@ -709,14 +758,14 @@ gate it):
   what it may *do with what it got*, and a single reference can be
   both. It is also narrower than two neighbours it might be confused
   with. Live/Subscription Links notify that a version has been
-  superseded, whereas expiry here is designed in rather than reported;
+  superseded, whereas expiry here is designed in;<!-- was: whereas expiry here is designed in rather than reported; -->
   Personalized/Disclosed Links vary resolution by requester with the
   criteria disclosed, whereas purpose-binding additionally places
-  obligations on the recipient. Enforcement is the honest difficulty:
+  obligations on the recipient. Enforcement is the difficulty:<!-- was: Enforcement is the honest difficulty: -->
   nothing in the substrate stops a recipient from retaining a
-  derivation past its window, which is why this class is priced under
+  derivation past its window, which is why this class is priced under the economic argument of §2.6.<!-- was: priced under
   the economic argument of §2.6 rather than asserted as a hard
-  guarantee. Its tension with Xanadu-style immutability resolves the
+  guarantee. --> Its tension with Xanadu-style immutability resolves the
   same way retraction does below: the derivation expires, while the
   immutable record that it was issued, to whom, and under which terms
   does not.
@@ -724,69 +773,87 @@ gate it):
 **The modality axis** (reference vs. capability, cutting across all of
 the above):
 
-- **Capability/Affordance Links** — a link whose target is an action,
-  not a document, exposed only when currently valid, generalizing
+- **Capability/Affordance Links**: a link whose target is an action, exposed<!-- was: - **Capability/Affordance Links** — a link whose target is an action,
+  not a document, exposed --> only when currently valid, generalizing
   HATEOAS and the PI's own signifier line [Vachtsevanou2023,
   Vachtsevanou2024, Lemee2024] (§2.7) into O4's agent gateway; any
-  guarantee level above can apply to a capability link exactly as it
+  guarantee level above can apply to a capability link as it does to a content link: a Verified Capability Link is an action affordance whose current validity is structurally guaranteed.<!-- was: exactly as it
   does to a content link — a Verified Capability Link is an action
   affordance whose current validity is structurally guaranteed, not
-  merely claimed by the server.
+  merely claimed by the server. -->
 
-**Two further, narrower classes worth naming rather than folding into
-the above:**
+**Narrower classes:**<!-- was: **Two further, narrower classes worth naming rather than folding into
+the above:** -->
 
-- **Live/Subscription Links** — the guarantee concerns future
-  notification of change rather than present content, generalizing
+- **Live/Subscription Links**: the guarantee concerns future notification of change,<!-- was: - **Live/Subscription Links** — the guarantee concerns future
+  notification of change rather than present content, --> generalizing
   WebSub's `rel="hub"` pattern (§2.7) to arbitrary island resources;
   necessary once references are version-pinned, since someone has to
   learn when a new version supersedes the one they hold.
-- **Personalized/Disclosed Links** — resolution deliberately varies by
+- **Personalized/Disclosed Links**: resolution deliberately varies by requester, with the personalization criteria exposed as part of the link's affordance,<!-- was: - **Personalized/Disclosed Links** — resolution deliberately varies by
   requester, but the personalization criteria are exposed as part of
-  the link's affordance rather than hidden, directly instantiating the
+  the link's affordance rather than hidden, --> directly instantiating the
   team's own engineered, disclosed-filter-bubble proposal [Strecker2025]
   and its empirical counterpart on undisclosed platform curation
-  [Bekavac2024, BekavacMayer2026] (§2.4, §2.6) — the architectural
+  [BekavacTORS2026, BekavacMayer2026] (§2.4, §2.6).<!-- was: [Bekavac2024, BekavacMayer2026] (§2.4, §2.6). --><!-- was: (§2.4, §2.6) — the architectural
   difference between a platform choosing what you see and an island
-  disclosing why.
+  disclosing why. -->
 
-**Retraction is a mechanism, not a class.** Xanadu-style immutability
+**Retraction is a state.**<!-- was: **Retraction is a mechanism, not a class.** --> Xanadu-style immutability
 and legal erasure rights (GDPR Art. 17) pull in opposite directions,
 most visibly in Island L, whose citation corpus will contain personal
-data. We resolve this the way the nanopublication ecosystem resolves
+data. We resolve this the way the nanopublication network resolves<!-- was: the way the nanopublication ecosystem resolves -->
 the same tension for its own signed records [ISWC2026]: the underlying
 content stays immutable in the content-addressed substrate, but a
 superseding *retraction* record changes default resolution behavior
 for future clients, so a Verified or Archived Link can be marked
 retracted without deleting the history that makes it verifiable in the
-first place. We therefore do not add a "Retractable Link" class
-alongside the others; retractability is a state any Verified or
+first place. We therefore add no "Retractable Link" class;<!-- was: We therefore do not add a "Retractable Link" class
+alongside the others; --> retractability is a state any Verified or
 Archived Link can enter, and WP1's calculus must price it as such.
 
-Read together, sections 2.1–2.7 supply a citable precedent for every
+<!-- was: Read together, sections 2.1–2.7 supply a citable precedent for every
 axis of this taxonomy; no prior work names them as one family a
 reference can declare and a client can enforce, or ties that family to
 a theory of which bundle an island of a given size, stake, and threat
 model can afford. That naming, not any single mechanism in the list,
-is what WP1 contributes.
+is what WP1 contributes. -->
 
 ---
 
 ## References (draft keys — to be completed)
 
+- [Acay2021] Acay, Recto, Gancher, Myers, Shi. *Viaduct: An Extensible,
+  Optimizing Compiler for Secure Distributed Programs.* PLDI 2021.
+  PLDI 2021, 740–755, doi:10.1145/3453483.3454074. ✓ verified
+  2026-10-04.
 - [AIAct] Regulation (EU) 2024/1689 (AI Act), transparency/provenance
   obligations applicable from August 2026.
 - [Ashman1999] Ashman. *Hypertext link integrity.* ACM Computing
   Surveys 31(4es), 1999.
-- [Bekavac2024] Bekavac, Garcia, Strecker, Mayer, Tamo-Larrieux. *From
-  Walls to Windows…* CEUR-WS Vol. 3898, 2024.
+- [BekavacTORS2026] Bekavac, Strecker-Bischoff, Garcia, Mayer, Tamò-Larrieux.
+  *Scrutinizing Systemic Risks in Personalized Recommender Systems
+  Through Sock-Puppet Auditing of VLOPs.* ACM Transactions on
+  Recommender Systems 5(1):1–47, 2026. doi:10.1145/3795516. Extended
+  version of the NORMalize@RecSys 2024 workshop paper. ✓ verified
+  2026-10-04.<!-- was: - [Bekavac2024] Bekavac, Garcia, Strecker, Mayer, Tamo-Larrieux. *From
+  Walls to Windows…* CEUR-WS Vol. 3898, 2024. -->
 - [BekavacMayer2026] Bekavac, Mayer. *Platforms' Research API Data
   Access: What Users See vs. What Researchers can Retrieve.* ACM FAccT
   2026 (doi:10.1145/3805689.3812237); preprint: *Auditing Meta and
   TikTok Research API Data Access under Article 40(12) of the DSA*,
   arXiv:2601.12390. ✓ verified 2026-07-09.
+- [Bekavac2026Solid] Bekavac. *From Data Portability to Data Control:
+  Making Regulation Technically Real.* 4th Solid Symposium, London,
+  2026. (From the author's Google Scholar profile, 2026-10-04.)
+- [BekavacMayerWebSci2026] Bekavac, Mayer. *Broken Links and Fading
+  Stories: How Dominant Online Platforms Subvert the Hypermedia
+  Foundation of the Web.* ACM WebSci 2026, 221–226.
+  doi:10.1145/3795766.3799767. ✓ verified 2026-10-04.
 - [BekavacQR2024] Bekavac, Mayer, Strecker. *QR-Code Integrity by
-  Design.* CHI EA 2024.
+  Design.* CHI EA 2024, 1–9. doi:10.1145/3613905.3651006. ✓ verified
+  2026-10-04.<!-- was: - [BekavacQR2024] Bekavac, Mayer, Strecker. *QR-Code Integrity by
+  Design.* CHI EA 2024. -->
 - [Benet2014] Benet. *IPFS — Content Addressed, Versioned, P2P File
   System.* 2014.
 - [Bieber1997] Bieber, Vitali, Ashman, Balasubramanian, Oinas-Kukkonen.
@@ -800,6 +867,9 @@ is what WP1 contributes.
 - [Carr1995] Carr, De Roure, Hall, Hill. *The Distributed Link Service:
   A Tool for Publishers, Authors and Readers.* World Wide Web Journal /
   4th Int. WWW Conference, 1995.
+- [Cecchetti2017] Cecchetti, Myers, Arden. *Nonmalleable Information
+  Flow Control.* ACM CCS 2017, doi:10.1145/3133956.3134054. ✓ resolved
+  via Crossref 2026-09-14.
 - [Charlotin2026] Charlotin. *AI Hallucination Cases* database
   (damiencharlotin.com/hallucinations). ✓ verified 2026-07-09:
   ~1,227 cases by early 2026 (up from ~200 a year earlier), ~1,490 by
@@ -812,6 +882,8 @@ is what WP1 contributes.
   and the World Wide Web.* AAMAS 2019.
 - [Davis1998] Davis. *Referential Integrity of Links in Open Hypermedia
   Systems.* ACM Hypertext '98, 207–216, 1998.
+- [Denning1976] Denning. *A Lattice Model of Secure Information Flow.*
+  Communications of the ACM 19(5), 1976.
 - [Engelbart1968] Engelbart, English. *A Research Center for Augmenting
   Human Intellect.* AFIPS 1968.
 - [Fielding2000] Fielding. *Architectural Styles and the Design of
@@ -834,15 +906,22 @@ is what WP1 contributes.
   Applications.* European Conference on Hypertext (ECHT '92), 1992.
 - [Halasz1988] Halasz. *Reflections on NoteCards: Seven Issues for the
   Next Generation of Hypermedia Systems.* Communications of the ACM
-  31(12):836–852, 1988 (presented at Hypertext '87).
+  31(7):836–852, 1988, doi:10.1145/48511.48514 (presented at Hypertext '87). ✓ verified 2026-10-04.
 - [Klein2014] Klein, Van de Sompel, et al. *Scholarly Context Not Found:
   One in Five Articles Suffers from Reference Rot.* PLOS ONE 2014.
 - [Lemee2024] Lemée, Vachtsevanou, Mayer, Ciortea. *Signifiers for
   Conveying and Exploiting Affordances: From Human-Computer
   Interaction to Multi-Agent Systems.* Annals of Mathematics and
   Artificial Intelligence 92, 2024.
+- [Liu2009] Liu, George, Vikram, Qi, Waye, Myers. *Fabric: A Platform
+  for Secure Distributed Computation and Storage.* SOSP 2009. ✓ verified
+  2026-09-14.
 - [Maniatis2005] Maniatis et al. *The LOCKSS Peer-to-Peer Digital
   Preservation System.* ACM TOCS 2005.
+- [MyersLiskov1997] Myers, Liskov. *A Decentralized Model for
+  Information Flow Control.* SOSP 1997 (journal version: *Protecting
+  Privacy Using the Decentralized Label Model*, ACM TOSEM 9(4), 2000).
+  ✓ verified 2026-09-14.
 - [Nelson1981] Nelson. *Literary Machines.* Mindful Press, 1981.
 - [Nelson1997] Nelson. *Transcopyright: A Simple Legal Arrangement for
   Sharing, Re-use, and Republication of Copyrighted Material on the
@@ -859,21 +938,36 @@ is what WP1 contributes.
 - [Osterbye1992] Østerbye. *Structural and Cognitive Problems in
   Providing Version Control for Hypertext.* European Conference on
   Hypertext (ECHT '92), 1992.
+- [Park2004] Park, Sandhu. *The UCON_ABC Usage Control Model.* ACM
+  Transactions on Information and System Security 7(1):128–174, 2004.
+  doi:10.1145/984334.984339. ✓ verified 2026-09-28.
+- [Pearson2011] Pearson, Casassa-Mont. *Sticky Policies: An Approach
+  for Managing Privacy across Multiple Parties.* IEEE Computer
+  44(9):60–68, 2011. doi:10.1109/MC.2011.225. ✓ verified 2026-09-28.
 - [Perma] Harvard Library Innovation Lab, Perma.cc.
 - [Phelps2000a] Phelps, Wilensky. *Robust Intra-Document Locations.*
   Computer Networks 33(1–6):105–118 (9th Int. WWW Conference), 2000.
 - [Phelps2000b] Phelps, Wilensky. *Robust Hyperlinks: Cheap, Everywhere,
   Now.* Digital Documents and Electronic Publishing (DDEP), LNCS, 2000.
+- [Pretschner2006] Pretschner, Hilty, Basin. *Distributed Usage
+  Control.* Communications of the ACM 49(9):39–44, 2006.
+  doi:10.1145/1151030.1151053. ✓ verified 2026-09-28.
 - [PROV] W3C PROV family of specifications, 2013.
 - [RFC7089] Van de Sompel, Nelson, Sanderson. *HTTP Framework for
   Time-Based Access to Resource States — Memento.* RFC 7089, 2013.
+- [Seiling2026] Seiling, Stein, Mayer, Bekavac. *A Solid Research
+  Infrastructure Leveraging DMA Data Portability.* 2026. **[TODO:
+  venue]** (From Google Scholar, 2026-10-04.)
 - [Sambra2016] Sambra, Mansour, Hawke, Zereba, Greco, Ghanem, Zagidulin,
   Aboulnaga, Berners-Lee. *Solid: A Platform for Decentralized Social
   Applications Based on Linked Data.* 2016.
 - [SolidProtocol] Capadisli, Berners-Lee, et al. *Solid Protocol.* W3C
   Solid CG.
 - [Strecker2025] Strecker, Bekavac, Bektaş, Mayer. *Change Your
-  Perspective, Widen Your Worldview!…* arXiv:2504.10271, 2025.
+  Perspective, Widen Your Worldview! Societally Beneficial Perceptual
+  Filter Bubbles in Personalized Reality.* Purposeful XR Workshop at
+  CHI 2025; arXiv:2504.10271, 2025. ✓ verified 2026-10-04.<!-- was: - [Strecker2025] Strecker, Bekavac, Bektaş, Mayer. *Change Your
+  Perspective, Widen Your Worldview!…* arXiv:2504.10271, 2025. -->
 - [TamoLarrieux2025] Tamò-Larrieux, Guitton, Mayer. *A Computational
   Science Perspective on the Legal System.* Nature Computational
   Science, 2025.

@@ -349,6 +349,49 @@ are *honest* (addressed only partially, via verifiable-computation
 extensions) — both are open problems the islands design inherits, not
 ones it has solved.
 
+## Information-flow control lineage: DLM, Fabric, NMIF, Viaduct (added 2026-09-14)
+
+Sources (pointers from Simon, 2026-09-14): Myers & Liskov, *A
+Decentralized Model for Information Flow Control*, SOSP 1997 (the
+annotated Jif/DLM paper); Liu, George, Vikram, Qi, Waye, Myers,
+*Fabric: A Platform for Secure Distributed Computation and Storage*,
+SOSP 2009; Cecchetti, Myers, Arden, *Nonmalleable Information Flow
+Control*, CCS 2017 (DOI 10.1145/3133956.3134054, resolved via
+Crossref). Added by the assistant as the natural next node in the same
+line: Acay, Recto, Gancher, Myers, Shi, *Viaduct*, PLDI 2021 (verify).
+
+What each contributes to ISLANDS:
+- **DLM**: labels of the form {owner: readers} on a lattice; owners
+  declassify their own data; static checking. A ready-made lattice
+  formalism for O1's guarantee bundles (resolves B2 TODO 7 as a
+  candidate: link class = label with confidentiality, integrity,
+  persistence, attribution components).
+- **Fabric**: federation of mutually distrusting nodes (stores,
+  workers, dissemination nodes) sharing persistent objects under
+  DLM-style labels; enforcement = compile-time checking + run-time
+  placement on trusted nodes; nested transactions; mobile code. The
+  nearest *system* precedent to an island. Differences that define our
+  gap: objects mutable and identified by store + object number (no
+  content addressing, versions, spans, transclusion); cleartext always
+  lives on some trusted node (a Cryptographic Link needs none); no
+  cost model for sustaining a policy.
+- **NMIF**: robust declassification + transparent endorsement =
+  nonmalleable information flow. Maps exactly onto the border
+  crossing: outbound degradation is declassification, inbound
+  admission is endorsement; the boundary becomes a proof obligation of
+  the WP1 model. Admission under an anonymous credential is the
+  "endorse what you cannot read" case the theory says must be handled
+  explicitly (ties the attribution axis to the boundary design).
+- **Viaduct**: compiles label-annotated programs to MPC / ZK /
+  commitments, so "the label selects the protocol"; WP3 adopts that
+  stance per reference.
+
+Where it landed (2026-09-14): motivation §2.5 (new paragraph, funnel
+to gap) and §2.9 Cryptographic Links; B1 b.2 (one sentence, inline
+author-year, +55 words against an already-overrun synopsis); B2 §2.1
+formalization, §2.2 boundary nonmalleability, §2.3 positioning against
+Fabric and Viaduct (about +200 words, B2 margin now thin).
+
 ## Scaling Solid without hyperfinancialization
 
 A concrete risk case study for the proposal's stakeholder-incentive
@@ -796,10 +839,21 @@ architectural argument above — evidence for how platform control over
 information actually manifests, rather than treating it as a purely
 theoretical concern:
 
-- Bekavac, Garcia, Strecker, Mayer, Tamo-Larrieux, *From Walls to
+- Bekavac, Strecker-Bischoff, Garcia, Mayer, Tamò-Larrieux, *Scrutinizing
+  Systemic Risks in Personalized Recommender Systems Through Sock-Puppet
+  Auditing of VLOPs* (ACM Transactions on Recommender Systems 5(1):1–47,
+  2026; extended version of the NORMalize 2024 workshop paper): SOAP, a
+  sock-puppet auditing system showing how platform recommenders narrow
+  the information people are exposed to.
+- Bekavac, Mayer, *Broken Links and Fading Stories: How Dominant Online
+  Platforms Subvert the Hypermedia Foundation of the Web* (WebSci 2026,
+  221–226): platforms exploit the Web's NFPs while constraining linking
+  and normalizing ephemerality; users rebuild continuity through
+  reposts, screenshots, and off-platform link hubs. Cited in the Part I
+  opening narrative.<!-- was: - Bekavac, Garcia, Strecker, Mayer, Tamo-Larrieux, *From Walls to
   Windows: Creating Transparency to Understand Filter Bubbles in Social
   Media* (CEUR-WS Vol. 3898, Oct 2024) — measures how platform
-  algorithms narrow the information people are exposed to. Direct
+  algorithms narrow the information people are exposed to. --> Direct
   empirical grounding for the "social media platform" and "hyperscaler"
   stakeholder cases above.
 - Bekavac, Mayer, *Auditing Meta and TikTok Research API Data Access
