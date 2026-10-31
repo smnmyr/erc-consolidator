@@ -38,14 +38,14 @@ Justice* (to 2030) **[TODO: PI time share on each]**.
 
 | Role | Person | Period | WP anchor |
 |---|---|---|---|
-| PI (salary host-funded) | Simon Mayer | M1–M60 | all, WP1 lead |
-| Senior researcher, empirical/regulatory | **Luka Bekavac** | M1–M20 (to end 2029) | WP5 (legal island, incentives) |
-| Senior researcher, SMPC systems | **Jan Grau** | M1–M20 (to end 2029) | WP3, Island S |
-| Postdoc A, applied cryptography | **hire, M1** | M1–M60 | WP3 lead |
-| PhD 1, systems/reference layer | **hire, M1** | M1–M48 | WP2 |
-| PhD 2, hypermedia agents | **hire, ~M6** | M6–M54 | WP4 |
-| Postdoc B, socio-technical/governance | **hire, ~M17** | M17–M60 | WP5 lead after Bekavac |
-| PhD 3, legal-island informatics | **hire, ~M21**, co-supervised with Tamò-Larrieux | M21–M60 | WP5/Island L |
+| PI (salary host-funded) | Simon Mayer | M1–M60 | all; WP1 and WP2 lead |
+| Senior researcher, empirical/regulatory | **Luka Bekavac** | M1–M20 (to end 2029) | WP1 (stakeholder analysis), WP5 (Islands L, M) |
+| Senior researcher, SMPC systems | **Jan Grau** | M1–M20 (to end 2029) | WP4 (T4.2), Island S |
+| Postdoc A, applied cryptography | **hire, M1** | M1–M60 | WP4 T4.2 lead; WP3 formal border conditions |
+| PhD 1, systems/reference layer | **hire, M1** | M1–M48 | WP3 (border checks), WP4 (T4.1) |
+| PhD 2, hypermedia agents | **hire, ~M6** | M6–M54 | WP4 (T4.3), Island F |
+| Postdoc B, socio-technical/governance | **hire, ~M17** | M17–M60 | WP1 and WP5 lead after Bekavac |
+| PhD 3, legal-island informatics | **hire, ~M21**, co-supervised with Tamò-Larrieux | M21–M60 | WP1 (copyright requirements), WP5/Island L |
 | Research engineer (50–80%) | **hire, ~M6** | M6–M60 | shared prototype, artifacts |
 | Student assistants | ongoing | — | evaluation support |
 
@@ -53,7 +53,7 @@ Justice* (to 2030) **[TODO: PI time share on each]**.
 through the first 20 months and hand over to Postdoc B and Postdoc A
 respectively. Postdoc B starts at about M17, which gives a four-month
 overlap with Bekavac before the end of 2029. Postdoc A works alongside
-Grau from M1, so the WP3 handover is a continuous collaboration. If either stays beyond 2029, Postdoc B's position
+Grau from M1, so the T4.2 handover is a continuous collaboration. If either stays beyond 2029, Postdoc B's position
 converts to a PhD position and the freed budget strengthens the WP5
 pilots.
 
@@ -121,7 +121,7 @@ additional request are assessed in evaluation.
 
 Personnel dominates because the project's cost is people-time on
 protocol design, proofs, and two long-running field deployments. The
-infrastructure line is modest by design: WP3's benchmarking needs real multi-party topologies and little compute, and both islands run
+infrastructure line is modest by design: T4.2's benchmarking needs real multi-party topologies and little compute, and the islands run
 on partner infrastructure that already exists.
 
 ---

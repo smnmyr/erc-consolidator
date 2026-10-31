@@ -174,3 +174,156 @@ a low-coordination boundary.
 O2–O4 over a content-addressed substrate; O1 is the cross-cutting theory
 that decides which layers a given island can sustain;<!-- was: which layers a given island can afford; --> O5 validates the
 whole in three domains.<!-- was: whole in two domains. --> To be redrawn as a vector figure in the template.*
+
+
+# b.2 paragraphs 1-2 before the PI comments of 2026-10-30
+
+Hypertext research assumed rich, versioned, span-anchored links from
+the start [36, 51, 52], and its agenda included versioning and
+computed structure [53]. Open-hypermedia systems implemented
+bidirectional links and referential integrity at workgroup scale
+[54, 55]; link rot had hence been addressed before the Web made it
+endemic. The Web dropped these guarantees in order to scale
+[1, 45]. Remedial infrastructure (e.g., persistent identifiers,
+Web archives, Memento [56], Perma.cc [28], and robust hyperlinks
+[57]) keeps the mutable substrate and builds compensating archives
+beside it. It thereby neither prevents drift nor verifies integrity,
+and it reintroduces central coordination points. W3C specifications
+address passages and backlinks on the open Web: Web Annotation
+selectors [58] and text fragments [59] identify a passage
+of a page, and Webmention [60] and Linked Data Notifications
+[61], which the W3C Social Web Working Group maintains together with
+ActivityPub [62], deliver opt-in backlinks. None of them pins
+a version or verifies what it points to. Services assemble
+bespoke NFP profiles in the same way, e.g., persistence via Perma.cc,
+provenance via C2PA [31], and identity and notarization via DOIs or
+blockchains. We read these profiles as evidence of demand for chosen
+guarantees, but each serves one silo and none can be shared or
+composed. Content-addressed and versioned storage (Git; IPFS [63];
+Software Heritage identifiers [64]) and provenance attestation
+[31, 65] supply the substrate that Xanadu lacked. They are,
+however, storage and signing primitives without span semantics, a
+link layer, or a governance model. Nanopublications come closest
+[66, 67]. They form a deployed, federated network of immutable,
+signed semantic statements with self-verifying identifiers, i.e., an
+island at statement granularity, and may become a component of ours;
+they do not, however, offer span addressing over arbitrary content,
+transclusion, or confidentiality-preserving resolution.
+
+
+
+# b.2 before the PI restructuring saved in B1.docx at 11:25 on 2026-10-30
+
+<!-- was: b.2 paragraphs 1-2 before the PI's edits and comments of 2026-10-30; full text in draft/archive/B1-b1-before-PI-edit-2026-10-29.md -->
+Hypertext research in its beginnings assumed rich, versioned,
+span-anchored links (e.g., [38, 53, 54]), and its agenda included
+versioning and computed structure (e.g., [55]). Open-hypermedia
+systems implemented bidirectional links and referential integrity at
+workgroup scale [56, 57]; link rot had thus been addressed even before
+the Web made it endemic. The Web dropped these guarantees in order to
+scale [1, 47], and this was a sensible and pragmatic choice at the
+time. Since the 1990s, remedial infrastructure (e.g., persistent
+identifiers, Web archives, Memento [58], Perma.cc [30], and robust
+hyperlinks [59]) has kept the *mutable architecture* and compensated
+for its drawbacks, such as link rot and misattribution, e.g., through
+Web archives with permanent links such as the Internet Archive's
+Wayback Machine. In research, we know the problem well, since link rot
+undermines reproducibility [25], and it gave rise to repositories such
+as Zenodo [60]. Such compensation did not touch the architectural
+principles of the Web, since changing them might fragment what the
+W3C's Ethical Web Principles call "one web" [15]. W3C specifications
+address passages and backlinks on the open Web: Web Annotation
+selectors [61] and text fragments [62] identify a passage of a page,
+and Webmention [63] and Linked Data Notifications [64], which the W3C
+Social Web Working Group maintains together with ActivityPub [65],
+deliver opt-in backlinks. None of them, however, pins a version or
+verifies what it points to. Dedicated services assemble specific NFP
+profiles as well, e.g., persistence via Perma.cc or Zenodo, provenance
+via C2PA [33], and identity and notarization via DOIs or blockchains.
+Solid [66] assembles a profile around the individual: *data
+sovereignty*, since users keep their data in personal stores of their
+choice; *privacy and access control*, since each application reads
+only what the user grants it; and *portability*, since the data
+outlives the application that wrote it. These developments are
+evidence of the demand for chosen guarantees that extend beyond those
+of the basic Web architecture, but each provides one fixed profile,
+and none can be shared or composed with another.
+
+A widely applicable architectural shift is possible today, which it
+was not when the Web emerged in the 1990s. Content-addressed and
+versioned storage (Git; IPFS [67]; Software Heritage identifiers [68])
+and provenance attestation [33, 69] now supply, at Web scale, the
+substrate that Xanadu lacked. They are, however, storage and signing
+primitives without span semantics, a link layer, or a governance
+model. Nanopublications come closest [70, 71]. They form a deployed,
+federated network of immutable, signed semantic statements with
+self-verifying identifiers, i.e., an *island* at statement granularity,
+and may become a component of ours; they do not, however, offer span
+addressing over arbitrary content, *transclusion*, or
+confidentiality-preserving resolution.
+
+Re-decentralization efforts relocate *control* and leave
+*addressability* as it was. Solid's pods keep location-addressed,
+mutable resources [66], and data spaces relocate contracts and
+governance [72]. Federated social media follows the same line:
+ActivityPub distributes servers but keeps posts location-addressed and
+mutable [65], and Bluesky's AT Protocol signs and
+content-addresses each user's repository [73] but leaves
+references between posts unverified and offers one fixed set of
+guarantees to all communities. EU data law follows the same line: the Data Act and
+the portability rights of the GDPR and the DMA move copies of data
+between holders [74], and the Solid deployments that implement them
+(cf. our own [75, 76]) leave references location-addressed.
+Verborgh argues that raw-data transfer cannot sustain a market and
+proposes trading purpose-bound derivations whose terms limit their
+shelf life and use [42]. No reference layer can yet name such a
+derivation, pin it to a version, or carry its terms. Usage control
+formalized such terms [77, 78], and sticky policies bind them to
+the data [79]. Enforcement after release, however, requires a
+trusted monitor at the recipient or falls back on detection after the
+fact [78]. RFC 9518 explains why open specifications alone do not
+prevent centralization, and we adopt the design-level mitigations it
+lists [9]. Network architecture faced the same question one layer
+below. Clark et al. argued that an Internet embedded in society must
+leave room for the *tussle* between stakeholders with conflicting
+interests, and proposed design for change and controlled transparency
+as its tenets [80, 81]. Plutarch argued for heterogeneous
+network contexts joined by translating functions at their borders
+[82]. These positions state principles but predict no outcome,
+and they concern packets and addresses, not references.
+
+SMPC has run in production since the Danish sugar-beet auction of
+2008 [40] and in Estonian government statistics [41], and
+general-purpose protocols and implementations such as SPDZ [83] and
+MP-SPDZ [84] make arbitrary computations practical. Our PEP-LCA
+protocol computes joint supply-chain assessments across up to 50,000
+participants without a trusted third party [85], and a follow-on
+system anchors share disclosure in Solid's access-control layer
+[86]. Each of these deployments is, however, a bespoke application,
+and none exposes its result as a reference that others can cite and
+re-resolve. <!-- moved to B2 §2.1 on 2026-10-30 (PI request): Information-flow control approached the problem from
+programming languages. The decentralized label model [92] and
+Fabric [removed: n88] let mutually distrusting principals share persistent
+objects under confidentiality and integrity labels. They enforce these
+labels by placing cleartext only on trusted nodes, over mutable,
+store-identified objects, and they do not quantify what sustaining a
+policy costs. -->Verifiable credentials address a further part of the
+problem: the W3C data model [14], selective-disclosure formats such
+as SD-JWT [87], and the European Digital Identity Wallet [45] let
+a holder prove an issuer's claim (e.g., a professional licence)
+without revealing more than needed [46, 88]. They are,
+however, presented to one verifier within one session, and they are
+not bound to the references that the claim concerns. Hypermedia multi-agent systems research argues for
+run-time *affordance* discovery [48, 89]. Current LLM-agent
+practice, in contrast, uses statically linked tool lists
+[51, 52], which<!-- was: uses static tool lists [51, 52], which -->
+indirect prompt injection turns into an attack surface [90], and no
+existing design connects *capability discovery* to a verifiable
+reference layer.
+
+**The gap.** We are not aware of any system that composes
+immutability, span-level verifiable addressing, transclusion,
+confidentiality-preserving resolution, and agent-facing affordance
+discovery into one reference architecture. We are also not aware of
+a theory that predicts which of these guarantees an island of a given size, stake, and threat model can sustain.<!-- was: an island of a given size, stake, and threat model can afford. -->
+

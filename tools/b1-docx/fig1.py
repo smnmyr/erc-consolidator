@@ -14,7 +14,7 @@ ISLANDS = [
     ('Island S', 'supply chain', {'persistence', 'attribution', 'credentials', 'confidential refs',
                                   'purpose binding', 'capability discovery'}),
     ('Island M', 'social media', {'persistence', 'attribution', 'credentials', 'confidential refs'}),
-    ('Fixed installation', 'e.g., building automation', {'static binding'}),
+    ('Island F', 'fixed installations', {'static binding'}),
 ]
 W, H = 900, 400
 IW, GAP, X0, Y0, IH = 190, 40, 10, 8, 302
@@ -49,6 +49,6 @@ for k, (name, sub, sel) in enumerate(ISLANDS):
 o.append(f'<text x="{X0 + IW / 2 + 8}" y="{Y0 + IH + 28}" font-size="12" fill="#4A6B82">admission / degradation</text>')
 o.append(f'<rect x="{X0}" y="356" width="{W - 2 * X0}" height="36" rx="8" fill="{BAND}" stroke="#4A6B82" stroke-width="1"/>')
 o.append(f'<text x="{W / 2}" y="379" text-anchor="middle" font-size="15" fill="{INK}"><tspan font-weight="bold">Open Web:</tspan>'
-         ' Classic Jumplinks, no guarantees, low coordination, planetary scale</text>')
+         ' classic Web links, no guarantees, low coordination, planetary scale</text>')
 o.append('</svg>')
 open(sys.argv[1], 'w').write('\n'.join(o))
