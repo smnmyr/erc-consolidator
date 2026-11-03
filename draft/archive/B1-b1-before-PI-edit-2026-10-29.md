@@ -327,3 +327,145 @@ confidentiality-preserving resolution, and agent-facing affordance
 discovery into one reference architecture. We are also not aware of
 a theory that predicts which of these guarantees an island of a given size, stake, and threat model can sustain.<!-- was: an island of a given size, stake, and threat model can afford. -->
 
+
+
+# b.2 before the PI reordering saved in B1.docx on 2026-10-31
+### b.2 State of knowledge and the gap (~0.75 page)
+
+<!-- was: b.2 before the PI restructuring of 2026-10-30 (11:25 save); full text in draft/archive/B1-b1-before-PI-edit-2026-10-29.md. PI notes resolved: date (mid-1990s, Kahle 1997), Xanadu ref, three transitions, gap paragraph. -->
+Hypertext research traditionally assumed rich, span-anchored links
+(e.g., [39, 54, 55]), and its agenda included versioning and computed
+structure (e.g., [56]): a link would persist; it would point at a
+specific range of bytes rather than a full page; and modifications of
+the link would lead to the creation of a new version rather than the
+replacement of the link. Open-hypermedia systems in addition
+implemented *bidirectional* links and *referential integrity* at
+workgroup scale [57, 58]; link rot had thus been addressed even before
+the Web made it endemic. The Web dropped these guarantees in order to
+scale [1, 48], and this was a sensible and pragmatic choice at the
+time.
+
+Since the mid-1990s, when the Internet Archive began to archive the
+Web [59], remedial infrastructure (e.g., persistent identifier
+overlays, Web archives, Memento [60], Perma.cc [31], and robust
+hyperlinks [61]) has kept this architecture and compensated for its
+drawbacks, such as link rot and misattribution, e.g., through Web
+archives with permanent links such as the *Internet Archive's Wayback
+Machine* or, in the research space, *Zenodo* [62] (since link rot
+undermines reproducibility [26]). Such compensation did not touch the
+architectural principles of the Web, since changing them might
+fragment what the W3C's Ethical Web Principles call "one web" [15].
+W3C specifications address passages and backlinks on the open Web:
+*Web Annotation* selectors [63] and *text fragments* [64] identify a
+passage of a page, and *Webmention* [65] and *Linked Data
+Notifications* [66], which the W3C *Social Web Working Group*
+maintains together with *ActivityPub* [67], deliver opt-in backlinks.
+None of them, however, pins a version or verifies what it points to,
+since this would induce architectural change with undesired side
+effects (e.g., it would undermine scalability of the Web). Dedicated
+services assemble specific NFP profiles as well, e.g., persistence via
+*Perma.cc* or *Zenodo*, provenance via *C2PA* [34], and identity and
+notarization via *DOIs* or *blockchains*. *Solid* [68] brings *data
+sovereignty*, since users keep their data in personal stores of their
+choice; *privacy and access control*, since each application reads
+only what the user grants it; and *portability*, since the data is
+decoupled from individual applications. These developments are
+evidence of the demand for chosen guarantees that extend beyond those
+of the basic Web architecture. However, each is an individual remedy
+that provides one fixed profile, and they do not touch the
+architectural foundation of the Web.
+
+Today, a widely applicable architectural shift is possible, based on
+methods that were not available in the early days of the Web:
+*Content-addressed* and *versioned storage* (Git; IPFS [69]; Software
+Heritage identifiers [70]) and *provenance attestation* [34, 71] now
+supply, at Web scale, the substrate that Xanadu [39, 40] lacked. They
+are, however, storage and signing primitives without span semantics, a
+link layer, or a governance model. *Nanopublications* [72, 73] form a
+deployed, federated network of immutable, signed semantic statements
+with self-verifying identifiers; they do not, however, offer span
+addressing over arbitrary content, *transclusion*, or
+confidentiality-preserving resolution; from the perspective of this
+proposal, nanopublications may become an *island* at statement granularity (Island N in Figure 1).<!-- was: proposal, nanopublications may become an *island* at statement granularity. -->
+
+Today’s re-decentralization efforts relocate *control* and leave
+*addressability* as it was. Solid's pods keep location-addressed,
+mutable resources [68], and data spaces relocate contracts and
+governance [74]. Federated social media behaves similarly:
+*ActivityPub* distributes servers but keeps posts location-addressed
+and mutable [67], and Bluesky's *AT Protocol* signs and
+content-addresses each user's repository [75] but leaves references
+between posts unverified and offers one fixed set of guarantees to all
+communities. Switching into the regulatory space, EU data law follows
+the same line as well: the *Data Act* and the portability rights of
+the *GDPR* and the *DMA* move *copies of data* between holders [76],
+and the Solid deployments that implement them (cf. our own [77, 78])
+leave references location-addressed. However, raw-data transfer cannot
+sustain a market, hence we have recently seen proposals of trading
+*purpose-bound data derivations* whose terms limit their shelf life
+and use [43]. There is today no reference layer that could name such a
+derivation, pin it to a version, or carry its terms. *Usage control*
+formalized such terms [79, 80], and *sticky policies* bind them to the
+data [81]. Enforcement after release, however, requires a trusted
+monitor at the recipient or falls back on detection after the fact
+[80]. RFC 9518 explains why open specifications alone do not prevent
+centralization, and we adopt the design-level mitigations it lists
+[9]. It is relevant to note that network architecture faced the same
+question one layer below. Clark et al. argued that an Internet
+embedded in society must leave room for the *tussle* between
+stakeholders with conflicting interests, and proposed design for
+change and controlled transparency as its tenets [82, 83]. Plutarch
+argued for heterogeneous network contexts joined by translating
+functions at their borders [84]. These positions state principles on
+the network layer that mirror the issues we highlight on the
+application layer of the World Wide Web, but they concern packets and
+addresses, not references.
+
+The NFPs discussed so far concern what a reference points to. A second
+group concerns who may see, trust, and act on it, and here, too, the
+building blocks exist but are not part of the Web's architecture.
+Confidentiality comes first: communities need results computed over
+data that no single member may disclose. Secure multi-party
+computation (SMPC) has run in production since the Danish sugar-beet
+auction of 2008 [41] and in Estonian government statistics [42], and
+general-purpose protocols and implementations such as SPDZ [85] and
+MP-SPDZ [86] make arbitrary computations practical. Our PEP-LCA
+protocol computes joint supply-chain assessments across up to 50,000
+participants without a trusted third party [87], and a follow-on
+system anchors share disclosure in Solid's access-control layer [88].
+Again, each of these deployments is, however, an individual
+application, and none exposes its result as a reference that others
+can cite and re-resolve. Confidentiality keeps data from the parties
+that use it; trust needs the converse, a verifiable statement about
+who stands behind the data. Verifiable credentials address this part
+of the problem: the W3C data model [14], selective-disclosure formats
+such as SD-JWT [89], and the European Digital Identity Wallet [46] let
+a holder prove an issuer's claim (e.g., a professional license)
+without revealing more than needed [47, 90]. They are, however,
+presented to one verifier within one session, and they are not bound
+to the references that the claim concerns. Credentials tell a client
+whom it deals with; autonomous agents also need to know what they may
+do. Hypermedia multi-agent systems research argues for run-time
+*affordance* discovery [49, 91]. Current LLM-agent practice, in
+contrast, uses statically linked tool lists [52, 53], which indirect
+prompt injection turns into an attack surface [92], and no existing
+design connects *capability discovery* to a verifiable reference
+layer.
+
+As a community, we have thus built imperfect remedies instead of an
+architected approach. The reason is that an architected approach is
+hard: it requires consolidating fields that have so far advanced
+separately, namely hypertext, distributed systems, cryptography,
+multi-agent systems, and law.
+
+**The gap.** We are not aware of any system that composes
+immutability, span-level verifiable addressing, transclusion,
+confidentiality-preserving resolution, and agent-facing affordance
+discovery at the architectural level. Closing this gap requires an
+understanding of each of these domains, spanning distributed
+computing, decentralization, and the societal demands behind them. It
+must also be done in a backwards-compatible way that reuses the Web's
+architecture, and its NFPs, as deployed today. Finally, any such
+architecture needs a theory that predicts which NFP bundles fit a
+given deployment context and community.
+
