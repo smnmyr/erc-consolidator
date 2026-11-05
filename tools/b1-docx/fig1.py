@@ -14,7 +14,7 @@ ISLANDS = [  # (name, two-line description, selected NFPs)
     ('Island S', ('supply-chain', 'disclosure'), {'persistence', 'attribution', 'credentials', 'confidential refs',
                                                   'purpose binding', 'capability discovery'}),
     ('Island M', ('public-interest', 'social media'), {'persistence', 'attribution', 'credentials', 'confidential refs'}),
-    ('Island N', ('scientific claims', '(nanopublications)'), {'persistence', 'attribution'}),
+    ('Island N', ('signed research claims', '(nanopublications)'), {'persistence', 'span addressing', 'attribution'}),
     ('Island F', ('fixed industrial', 'installations'), {'static binding'}),
 ]
 W, H = 1130, 416
