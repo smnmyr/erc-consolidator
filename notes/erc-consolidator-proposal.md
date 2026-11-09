@@ -986,6 +986,10 @@ of the "Scaling Solid without hyperfinancialization" section above).
 - Study the panel: learn panel members' research areas; choose the
   panel deliberately (primary clearly CS/PE6; secondary panel
   possible).
+- Decision (2026-11-09): primary PE6, SH2 the only secondary panel;
+  present the proposal as interdisciplinary (legal, business, and
+  economic analysis of the islands through HSG and FuSo) without
+  moving it to a social sciences panel. See B1 TODO 4 for the reasons.
 - Look at funded projects in the field (ERC website search tool).
 - Indiveri's structure worth mirroring in the B1 synopsis:
   **Vision (WHY) → Methods (HOW) → Results (WHAT) → Impact (WOW)**;

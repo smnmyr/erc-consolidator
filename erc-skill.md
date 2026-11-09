@@ -60,6 +60,12 @@ grantees found decisive.
   diverse disciplines and methodological expertise.
 - **An advisory board of experts** adds credibility and impact, and can serve
   as the project's ethics board.
+- **Collaborators carry little weight.** Name a collaborator only where a
+  minor part of the project needs specific expertise, or where the PI is not
+  credible in a subject. Say explicitly that the project is not a
+  collaborative one: the PI's team leads and conducts every work package.
+- **Describe what each person does.** State concrete tasks for named team
+  members instead of saying that someone "carries" a work package.
 
 ## The panel
 

@@ -25,3 +25,14 @@ stand-in for the vector figure.
 - `mark.py built.docx out.docx --diff pi-version.docx` highlights in yellow every
   word that is new relative to the PI's last saved docx; yellow still present in
   the PI's version carries over. Never use tracked changes.
+
+## B2 (Part II of the Scientific Proposal)
+
+    python3 md2blocks_b2.py ../../draft/B2.md work/b2-blocks.json
+    node build_b2.js work/b2-blocks.json ../../draft/B2.docx
+
+Same ERC 2027 layout as B1 (A4, Times New Roman 11 pt everywhere including
+tables, single spacing, 2 cm side and 1.5 cm top/bottom margins; header
+"Mayer | Part B2 | ISLANDS"). Part II (max 7 pages) is followed by the
+references and the ongoing-grants annex, each on a new page; neither counts
+towards the limit. Markdown pipe tables become Word tables.

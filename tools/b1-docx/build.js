@@ -26,7 +26,7 @@ function render(blocks,opts={}){
   for(const b of blocks){
     if(b.t!=='ol'&&prev==='ol') olInstance++;
     if(b.t==='h'){
-      const txt=b.text.replace(/\s*\((~|max)[^)]*\)\s*$/,'').replace(/\s*\(½ page\)/,'');
+      const txt=b.text.replace(/\s*\((~|max)[^)]*\)\s*$/,'').replace(/\s*\(½ page\)/,'').replace(/^b\.(\d)\s/,'$1. ');
       ps.push(new Paragraph({heading:b.level<=3?HeadingLevel.HEADING_2:HeadingLevel.HEADING_3,children:runs(txt),keepNext:true}));
     } else if(b.t==='p'){
       const isCaption=/^\*Figure \d/.test(b.text);
