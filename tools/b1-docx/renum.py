@@ -10,9 +10,10 @@ L = open(p).read().split('\n')
 start = next(i for i, l in enumerate(L) if l.startswith('## Section b'))
 refs = next(i for i, l in enumerate(L) if l.startswith('### References (not counted'))
 end = next(i for i, l in enumerate(L) if l.startswith('## Section c'))
-for i in range(start, refs):
-    L[i] = re.sub(r'\[(\d+(?:,\s*\d+)*)\]',
-                  lambda m: '[' + ', '.join('@n' + n.strip() for n in m.group(1).split(',')) + ']', L[i])
+# convert on the joined body so that citations wrapped across lines are caught
+_b = re.sub(r'\[(\d+(?:,\s*\d+)*)\]',
+            lambda m: '[' + ', '.join('@n' + n.strip() for n in m.group(1).split(',')) + ']', '\n'.join(L[start:refs]))
+L[start:refs] = _b.split('\n')
 for i in range(refs, end):
     L[i] = re.sub(r'^\[(\d+)\] ', lambda m: '[@n' + m.group(1) + '] ', L[i])
 body = '\n'.join(L[start:refs])

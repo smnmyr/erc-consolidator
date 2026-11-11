@@ -1,0 +1,19 @@
+[
+ {"start": "Through ISLANDS, we further explore", "end": "current LLM agents instead receive statically linked tool catalogues", "why": "NFP catalogue repeats Figure 1, O4, WP2"},
+ {"start": "Islands can also move away", "end": "when it builds the program", "why": "Island F covered by figure and island sentence"},
+ {"start": "Entering an island is an explicit admission step", "end": "applies its attribution regime", "why": "admission covered by WP3"},
+ {"start": "The Web itself authenticates domains", "end": "to recognize trustworthy web publishers and content", "why": "weaker platform cases"},
+ {"start": "The W3C Technical Architecture Group (TAG), in contrast", "end": "sources it relied on", "why": "weaker platform cases"},
+ {"start": "Legal scholarship treats", "end": "regulation in their own right", "why": "weaker platform cases"},
+ {"start": "Berners-Lee warned in 2010", "end_exact": "posted [10], and ", "why": "weaker platform cases"},
+ {"start": "Engagement-optimized ranking", "end": "political content over other content", "why": "weaker platform cases"},
+ {"start": "This obligation remains hard to operationalize", "end": "whose existence they cannot observe", "why": "weaker platform cases"},
+ {"start": "Secure multi-party computation (SMPC) has run in production since 2008", "end": "make computation practical", "why": "deployment detail, repeats Why now"},
+ {"start": "Our PEP-LCA protocol computes joint supply-chain assessments", "end": "Solid's access-control layer", "para": "follow-on system", "why": "deployment detail"},
+ {"start": "The W3C data model", "end": "without revealing more than needed", "why": "deployment detail, repeats Why now"},
+ {"start": "It is relevant to note that network architecture", "end": "rather than references and information resources", "why": "analogy, move to B2"},
+ {"start": "W3C specifications address passages and backlinks", "end": "undermine scalability of the Web", "why": "expert detail, move to B2 2.3"},
+ {"start": "Usage control formalized such terms", "end": "detection after the fact", "why": "supports only purpose binding"},
+ {"start": "We foresee this taxonomy to include", "end": "modality, link time)", "why": "repeats WP2 overview"},
+ {"start": "Ubiquitous computing extends islands", "end": "when they cross an island's border", "why": "team detail, CV shows it"}
+]
