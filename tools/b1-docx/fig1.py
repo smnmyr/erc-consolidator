@@ -26,7 +26,7 @@ W = 1130
 IW, GAP = 186, 34
 ix0 = (W - (5 * IW + 4 * GAP)) / 2
 TOP, IH = 112, 300
-H = TOP + IH + 150
+H = TOP + IH + 230
 
 o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">',
      f'<rect x="10" y="10" width="{W - 20}" height="{H - 20}" rx="14" fill="{WEB}" stroke="{WEBCHIP}" stroke-width="2"/>',
@@ -47,21 +47,44 @@ for k, (name, sub, added, traded) in enumerate(ISLANDS):
     ny = TOP + IH - 46
     pts = [(x + 40, ny + 14), (x + IW / 2, ny - 22), (x + IW - 40, ny + 14)]
     island_nodes.append(pts)
-# outside nodes: between islands, above the row, and below it
-out_mid = [(ix0 + k * (IW + GAP) + IW + GAP / 2, TOP + IH - 120 + (25 if k % 2 else -15)) for k in range(4)]
-out_low = [(ix0 + 40 + j * ((5 * IW + 4 * GAP - 80) / 8), TOP + IH + 62 + (14 if j % 2 else 0)) for j in range(9)]
-# Web links among outside nodes
-for a, b in zip(out_low, out_low[1:]): links.append(('out', a, b))
-for k, m in enumerate(out_mid):  # link each gap node to the bottom node nearest below it
-    nb = min(out_low, key=lambda q: abs(q[0] - m[0]))
-    links.append(('out', m, nb))
+# outside nodes: a dense mesh below the islands and in the gaps between them, with links
+# running off both edges, so that the Web reads as much larger than the islands
+import random
+rng = random.Random(7)
+out_mid = []
+for k in range(4):
+    gx = ix0 + k * (IW + GAP) + IW + GAP / 2
+    out_mid += [(gx + rng.uniform(-4, 4), TOP + 40 + j * (IH - 40) / 3 + rng.uniform(-10, 10)) for j in range(4)]
+out_low = []
+ROWS, COLS = 4, 24
+for r in range(ROWS):
+    for c in range(COLS):
+        out_low.append((30 + (c + 0.5 * (r % 2)) * (W - 60) / (COLS - 0.5) + rng.uniform(-9, 9),
+                        TOP + IH + 26 + r * 30 + rng.uniform(-7, 7)))
+def near(p, pool, n):
+    return sorted((q for q in pool if q != p), key=lambda q: (q[0] - p[0]) ** 2 + (q[1] - p[1]) ** 2)[:n]
+seen = set()
+def add(kind, a, b):
+    key = (kind,) + tuple(sorted([a, b]))
+    if key not in seen:
+        seen.add(key); links.append((kind, a, b))
+for p in out_low:
+    for q in near(p, out_low, 3): add('out', p, q)
+for k in range(4):
+    col = out_mid[4 * k:4 * k + 4]
+    for a, b in zip(col, col[1:]): add('out', a, b)
+    add('out', col[-1], near(col[-1], out_low, 1)[0])
+# links that leave the frame: the Web continues beyond the figure
+edge = [p for p in out_low if p[0] < 70 or p[0] > W - 70]
+for p in edge:
+    add('out', p, (12 if p[0] < W / 2 else W - 12, p[1] + rng.uniform(-14, 14)))
 # border-crossing links from island nodes to outside nodes
 for k, pts in enumerate(island_nodes):
-    links.append(('cross', pts[0], min(out_low, key=lambda q: abs(q[0] - pts[0][0]))))
-    links.append(('cross', pts[2], min(out_low, key=lambda q: abs(q[0] - pts[2][0]))))
-    if k < 4: links.append(('cross', pts[2], out_mid[k]))
-    if k > 0: links.append(('cross', pts[0], out_mid[k - 1]))
-style = {'out': f'stroke="{LINK_OUT}" stroke-width="1.6"',
+    add('cross', pts[0], near(pts[0], out_low, 1)[0])
+    add('cross', pts[2], near(pts[2], out_low, 1)[0])
+    if k < 4: add('cross', pts[2], out_mid[4 * k + 3])
+    if k > 0: add('cross', pts[0], out_mid[4 * (k - 1) + 3])
+style = {'out': f'stroke="{LINK_OUT}" stroke-width="1.3"',
          'cross': f'stroke="{LINK_OUT}" stroke-width="1.6" stroke-dasharray="5 4"'}
 for kind, a, b in links:
     if kind == 'out':
@@ -91,7 +114,7 @@ for k, (name, sub, added, traded) in enumerate(ISLANDS):
     for (px, py) in pts:
         o.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="8" fill="{NODE_IN}" stroke="white" stroke-width="2"/>')
 for (px, py) in out_mid + out_low:
-    o.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="7" fill="{NODE_OUT}" stroke="white" stroke-width="2"/>')
+    o.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="5" fill="{NODE_OUT}" stroke="white" stroke-width="1.5"/>')
 # legend
 ly = H - 34
 o.append(f'<line x1="40" y1="{ly}" x2="80" y2="{ly}" stroke="{LINK_OUT}" stroke-width="1.6"/>')
